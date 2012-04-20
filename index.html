@@ -1,20 +1,88 @@
 <!doctype html>
-<html lang=en>
+<html lang="en">
     <head>
-        <meta charset=utf-8>
-        <meta name=viewport content="width=device-width,initial-scale=1.0">
-        <title>Lab for the Recently Possible</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Lab for the Recently Possible ~ l4rp.com</title>
+        
+        <style>
+            body {
+                font-family: monospace;
+            }
+            dt {
+                font-weight: bold;
+            }
+        </style>
+        
+        <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.css" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.ie.css" /><![endif]-->
     </head>
-    <body>
-        <h1>Lab for the Recently Possible</h1>
+    
+    <body class="vcard">
+        <h1 class="fn org url"><a href="http://l4rp.com">Lab for the Recently Possible</a></h1>
         
         <h2>About</h2>
-        ...
+        <p class="note"><strong>Lab for the Recently Possible</strong> (L4RP) is a space to learn, experiment, collaborate and incubate. Blending the edge of tech with social innovation, art and culture. If there's something you're working on that you don't quite know how to achieve, perhaps the Lab can help out.</p>
         
-        <h2>Location</h2>
-        ...
+        <p class="note">We're an initiative set up by <a href="http://dharmafly.com">Dharmafly</a>, a local web apps design and development company. We're in a collaborative workspace building called "The Dock", a sister project of <a href="http://thewerks.org.uk">The Werks</a>.</p>
         
-        <h2>Contact</h2>
-        ...
+        <hr>
+        
+        <h2>We are here</h2>
+	    <p>We're in <a href="https://en.wikipedia.org/wiki/Brighton">Brighton & Hove</a>, on the south coast of England - a few minutes walk from the beautiful seaside, right by the <a href="https://en.wikipedia.org/wiki/Sussex_County_Cricket_Club">Sussex County Cricket Ground</a>, and just an hour away from London.</p>
+	    
+	    <p>Our entrance is on <strong>Wilbury Villas, Hove, BN3 3EL</strong>. (See below for directions)</p>
+	    <div id="map" style="height: 309px; margin:0 1em;">
+	        <noscript><a href="http://www.openstreetmap.org/?lat=50.83318&amp;lon=-0.163545&amp;zoom=16&amp;layers=M&amp;mlat=50.83337&amp;mlon=-0.16400"><img src="http://maps.google.com/maps/api/staticmap?center=50.833293,-0.163680&zoom=16&markers=color:blue|50.833293,-0.163680&size=500x309&sensor=false"></a></noscript>
+	    </div>
+	    
+	    <!--
+	    <div class="map">
+	        <iframe style="width:100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=-0.16663,50.83154,-0.16046,50.83482&amp;layer=mapnik&amp;marker=50.83337,-0.16400" style="border: 1px solid black"></iframe><br /><small><a href="http://www.openstreetmap.org/?lat=50.83318&amp;lon=-0.163545&amp;zoom=16&amp;layers=M&amp;mlat=50.83337&amp;mlon=-0.16400">View Larger Map</a></small>
+	    </div>
+	    -->
+	    
+	    <hr>
+        
+        <h2>Keep in touch</h2>
+        <dl
+            <dt>Twitter</dt>
+            <dd class="twitter"><a href="https://twitter.com/l4rp">@l4rp</a> (hashtag <a href="https://twitter.com/search/%23l4rp">#l4rp</a>)</dd>
+		    
+		    <dt>Email</dt>
+		    <dd class="email"><a href="mailto:hello@l4rp.com">hello@l4rp.com</a></dd>
+	
+		    <dt>Phone</dt>
+		    <dd class="tel">07941 192398</dd>
+		    
+            <dt>Snail mail</dt>
+            <dd class="adr">
+			    <a class="extended-address org url" href="http://dharmafly.com">Dharmafly</a>, 
+			    <span class="extended-address">The Dock</span>, 
+			    <span class="street-address">103 Lorna Road</span>, 
+			    <span class="locality">Hove</span>, 
+			    <span class="postal-code">BN3 3EL</span>, 
+			    <abbr class="country-name" title="United Kingdom">UK</abbr>
+		    </dd>
+	    </dl>
+	    
+	    <hr>
+	    
+	    <h2>Get here</h2>
+	    <h3>Trains</h3>
+	    <dl>
+	        <dt>Hove station</dt>
+	        <dd>7 minutes walk away (<a href="http://g.co/maps/bjhbg">walking directions</a>). Trains to London Victoria leave regularly and take 1 hour.</dd>
+	        <dt>Brighton station</dt>
+	        <dd>25 minutes walk away (<a href="http://g.co/maps/zy4z4">directions</a>), with trains all over. Bus #7 from the station goes straight to Wilbury Villas.</dd>
+	    </dl>
+	    
+	    <h3>Local buses</h3>
+	    <p>The closest buses stop nearby on Cromwell Road, at the bottom of Wilbury Villas. <strong><a href="http://buses.co.uk/travel/service.aspx?serviceid=1156">Bus #7</a></strong> travels between both train stations and the city centre. <strong><a href="http://buses.co.uk/travel/service.aspx?serviceid=1202">Bus #81</a></strong>(<a href="http://buses.co.uk/travel/service.aspx?serviceid=1203">A</a>/<a href="http://buses.co.uk/travel/service.aspx?serviceid=1204">B</a>/<a href="http://buses.co.uk/travel/service.aspx?serviceid=1205">C</a>/<a href="http://buses.co.uk/travel/service.aspx?serviceid=1206">E</a>) goes from London Road to Brighton centre to Hove.</p>
+	    <p>Many more buses stop at Palmeira Square, a few minutes walk away: 1, 1A, 2, 2A, 5, 5A, 5B, 6, 20X, 25, 26, 46, 49, 49A, 71.</p> 
+
+
+        <script src="http://code.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
+        <script src="js/map.js"></script>
     </body>
 </html>
