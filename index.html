@@ -5,30 +5,79 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Lab for the Recently Possible ~ l4rp.com</title>
         
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        
         <style>
+            html {
+                background-color: #cddac3;
+            }
             body {
+                margin: 0 auto;
+                max-width: 30em;
                 font-family: georgia, serif;
+                color: #31442e;
+                background-color: #dce5d6;
+                padding: 1em 3em;
+            }
+            a {
+                color: #31442e;
+            }
+            h1 {
+                background-color: #31442e;
+                margin-top:0;
+            }
+            h1 a {   
+                color: #fff;
+                text-decoration:none;
+                display:block;
+                padding:0.38em 0.618em
             }
             dt {
                 font-weight: bold;
             }
+            #map {
+                height: 309px;
+            }
+            section.intro {
+                font-size:1.2em;
+            }
+            section.intro p:first-child.note {
+                color: #31442e;
+                font-weight:bold;
+            }
+            section.stoppress {
+                background-color:#f33;
+                color: #fff;
+                padding:0.16em 1em 0.38em;
+                font-weight: bold;
+            }
+            section.stoppress a {
+                color: #ff3;
+            }
         </style>
         
-        <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.css" />
-        <!--[if lte IE 8]><link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.ie.css" /><![endif]-->
+        <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.css">
+        <!--[if lte IE 8]><link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.ie.css"><![endif]-->
     </head>
     
     <body class="vcard">
         <h1 class="fn org url"><a href="http://l4rp.com">Lab for the Recently Possible</a></h1>
         
-        <p class="note">A space to learn, experiment, collaborate and incubate projects at the edges of technology, social movements, art and culture. If you're working on something that you don't quite know how to achieve, perhaps the <em>Lab for the Recently Possible</em> can help out.</p>
-        
-        <p class="note"><strong><abbr title="Lab for the Recently Possible">L4RP</abbr></strong> is a social project by <a href="http://dharmafly.com">Dharmafly</a>, a Brighton-based company who specialise in the creation of web apps. We're within a collaborative workspace called "The Dock", a sister project of <a href="http://thewerks.org.uk">The Werks</a> (with plenty of new offices and freelancer coworking space for the creative industries).</p>
+        <section class="intro">
+            <p class="note">A space to learn, experiment, collaborate and incubate projects at the edges of technology, social movements, art and culture. If you're working on something that you don't quite know how to achieve, perhaps the <em>Lab for the Recently Possible</em> can help out.</p>
+            
+            <p class="note"><em><abbr title="Lab for the Recently Possible">L4RP</abbr></em> is a social project by <a href="http://dharmafly.com">Dharmafly</a>, a Brighton-based company who specialise in the creation of web apps. We're within a collaborative workspace called "The Dock", a sister project of <a href="http://thewerks.org.uk">The Werks</a> (with plenty of new offices and freelancer coworking space for the creative industries).</p>
+        </section>
         
         <hr>
         
-        <h2>STOPPRESS: Node.js Lab Day</h2>
-        <p><strong>Friday 27th April 2012</strong>. Free entry. <a href="http://lanyrd.com/2012/nodejs-lab-day/">&raquo; Read more & sign up on Lanyrd</a></p>
+        <section class="stoppress">
+            <h2>STOPPRESS: Node.js Lab Day</h2>
+            <p><strong>Friday 27th April 2012</strong>.<br>
+            Free entry.</p>
+            
+            <p><a href="http://lanyrd.com/2012/nodejs-lab-day/">&raquo; Read more & sign up on Lanyrd</a></p>
+        </section>
         
         <hr>
         
@@ -37,7 +86,7 @@
 	    
 	    <p>Find us on the top floor of "<strong>The Dock</strong>". The entrance is on <strong>Wilbury Villas, Hove, BN3 3EL</strong> (directions below):</p>
 	    
-	    <div id="map" style="height: 309px; margin:0 1em;">
+	    <div id="map">
 	        <noscript><a href="http://www.openstreetmap.org/?lat=50.83318&amp;lon=-0.163545&amp;zoom=16&amp;layers=M&amp;mlat=50.83337&amp;mlon=-0.16400"><img src="http://maps.google.com/maps/api/staticmap?center=50.833293,-0.163680&zoom=16&markers=color:blue|50.833293,-0.163680&size=500x309&sensor=false"></a></noscript>
 	    </div>
 	    
