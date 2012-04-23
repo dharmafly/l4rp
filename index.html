@@ -22,6 +22,9 @@
             a {
                 color: #31442e;
             }
+            a img {
+                border: none;
+            }
             h1 {
                 background-color: #31442e;
                 margin-top:0;
@@ -58,11 +61,22 @@
             section.stoppress {
                 background-color:#f33;
                 color: #fff;
-                padding:0.16em 1em 0.38em;
+                padding:0.16em 1em 1em;
                 font-weight: bold;
             }
             section.stoppress a {
                 color: #ff3;
+            }
+            .lanyrd-widget h2 {
+                margin:0.618em 0 0.38em;
+            }
+            .lanyrd-widget .lanyrd-people a img {
+                width: 48px;
+                border: 2px solid #fff;
+            }
+            .lanyrd-widget .lanyrd-trackers a img {
+                border: 1px solid #fff;
+                width: 32px;
             }
         </style>
         
@@ -81,12 +95,12 @@
         
         <hr>
         
-        <section class="stoppress">
+        <section class="stoppress" id="next-event">
             <h2>STOP PRESS: Node.js Lab Day</h2>
             <p><strong>Friday 27th April 2012</strong>.<br>
             Free entry.</p>
             
-            <p><a href="http://lanyrd.com/2012/nodejs-lab-day/">&raquo; Read more & sign up on Lanyrd</a></p>
+            <p><a id="next-event-url" href="http://lanyrd.com/2012/nodejs-lab-day/">&raquo; Read more & sign up on Lanyrd</a></p>
         </section>
         
         <hr>
@@ -144,7 +158,7 @@
 	    
 	    <h3>Local buses</h3>
 	    <dl>
-	        <dt>To Wilbury Villas, on Cromwell Road</dt>
+	        <dt>To Wilbury Villas, on Cromwell Rd</dt>
 	        <dd><strong><a href="http://buses.co.uk/travel/service.aspx?serviceid=1156">#7</a></strong>: from Brighton and Hove train stations and Brighton centre.</dd>
 	        <dd><strong><a href="http://buses.co.uk/travel/service.aspx?serviceid=1202">#81</a></strong>(<a href="http://buses.co.uk/travel/service.aspx?serviceid=1203">A</a>/<a href="http://buses.co.uk/travel/service.aspx?serviceid=1204">B</a>/<a href="http://buses.co.uk/travel/service.aspx?serviceid=1205">C</a>/<a href="http://buses.co.uk/travel/service.aspx?serviceid=1206">E</a>): from London Road to Brighton centre to Hove.</dd>
 	        
@@ -152,9 +166,28 @@
 	        <dd>A few mins walk away. Buses 1, 1A, 2, 2A, 5, 5A, 5B, 6, 20X, 25, 26, 46, 49, 49A, 71.</dd>
 	    </dl>
 
+
+        <!-- Map -->
         <script src="http://code.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
         <script src="js/map.js"></script>
         
+	    
+	    <!-- Lanyrd -->
+        <script src="js/vendor/lanyrd/lanyrd.min.js"></script>
+        <script src="js/vendor/lanyrd/lanyrd-widget.min.js"></script>
+        <script>
+        (function(){
+            var nextEvent = document.getElementById('next-event'),
+                eventLink = document.getElementById('next-event-url');
+            
+            if (window.lanyrd && nextEvent && eventLink){
+                lanyrd.widget.people(eventLink.href, nextEvent, {append: true});
+            }
+        }());
+        </script>
+        
+        
+        <!-- Analytics -->
         <script>
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-2150808-20']);
