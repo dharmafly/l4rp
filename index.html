@@ -25,22 +25,22 @@
             a img {
                 border: none;
             }
-            h1 {
+            body > h1 {
                 background-color: #31442e;
                 margin-top:0;
                 color: #fff;
                 font-size:2.4em;
             }
-            h1 a {
+            body > h1 a {
                 color: #fff;
                 text-decoration:none;
                 display:block;
                 padding:0.38em 0.618em
             }
-            h2 {
+            body > h2 {
                 font-size:1.8em;
             }
-            h3 {
+            body > h3 {
                 font-size:1.4em;
             }
             dt {
@@ -57,14 +57,23 @@
                 color: #31442e;
                 font-weight:bold;
             }
-            section.stoppress {
-                background-color:#f33;
+            section.callout {
+                background-color:rgb(255, 136, 51); /* #f83 */
+                background-color:rgba(255, 90, 0, 0.62);
+                
                 color: #fff;
                 padding:0.16em 1em 1em;
                 font-weight: bold;
+                -webkit-transform: rotate(2deg); 
+                -moz-transform: rotate(2deg); 
+                -o-transform: rotate(2deg);
+                -ms-transform: rotate(2deg); 
             }
-            section.stoppress a {
-                color: #ff3;
+            section.callout h1 {
+                font-size: 1.8em;
+            }
+            section.callout a {
+                color: #000;
             }
             .lanyrd-widget h2 {
                 margin:0.618em 0 0.38em;
@@ -76,6 +85,9 @@
             .lanyrd-widget .lanyrd-trackers a img {
                 border: 1px solid #fff;
                 width: 32px;
+            }
+            .lanyrd-widget p {
+                margin-top:0.38em;
             }
             body > footer {
                 margin-top: 2em;
@@ -116,8 +128,8 @@
         
         <hr>
         
-        <section class="stoppress" id="next-event">
-            <h2>STOP PRESS: Node.js Lab Day</h2>
+        <section class="callout" id="next-event">
+            <h1>Node.js Lab Day</h1>
             <p><strong>Friday 27th April 2012</strong>.<br>
             Free entry.</p>
             
@@ -203,10 +215,22 @@
         <script>
         (function(){
             var nextEvent = document.getElementById('next-event'),
-                eventLink = document.getElementById('next-event-url');
+                eventLink = document.getElementById('next-event-url'),
+                intervalDelay = 162,
+                intervalRef;
             
             if (window.lanyrd && nextEvent && eventLink){
-                lanyrd.widget.people(eventLink.href, nextEvent, {append: true});
+                intervalRef = window.setInterval(function(){
+                    eventLink.textContent += ".";
+                }, intervalDelay);
+                lanyrd.widget.people(eventLink.href, nextEvent, {append: true})
+                    .always(function(){
+                        window.clearInterval(intervalRef);
+                        intervalRef = null;
+                    })
+                    .fail(function(){
+                        eventLink.textContent += "!";
+                    });
             }
         }());
         </script>
