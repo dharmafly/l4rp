@@ -58,22 +58,27 @@
                 font-weight:bold;
             }
             section.callout {
+                font-family: monospace;
                 background-color:rgb(255, 136, 51); /* #f83 */
                 background-color:rgba(255, 90, 0, 0.62);
                 
                 color: #fff;
                 padding:0.16em 1em 1em;
                 font-weight: bold;
-                -webkit-transform: rotate(2deg); 
-                -moz-transform: rotate(2deg); 
-                -o-transform: rotate(2deg);
-                -ms-transform: rotate(2deg); 
+                
+                -webkit-transform: rotate(1deg); 
+                -moz-transform: rotate(1deg); 
+                -o-transform: rotate(1deg);
+                -ms-transform: rotate(1deg);
             }
             section.callout h1 {
                 font-size: 1.8em;
             }
             section.callout a {
                 color: #000;
+            }
+            section.callout p {
+                margin-top:0.38em;
             }
             .lanyrd-widget h2 {
                 margin:0.618em 0 0.38em;
@@ -86,8 +91,28 @@
                 border: 1px solid #fff;
                 width: 32px;
             }
-            .lanyrd-widget p {
-                margin-top:0.38em;
+            .flickr-wrapper {
+                overflow-y: hidden;
+            }
+            #flickr-widget {
+                height: 250px;
+                overflow-x: scroll;
+                width: 2400px;
+            }
+            .flickr_badge_image {
+                float:left;
+                margin:0 5px 5px 0;
+                
+                -webkit-transform: rotate(-1deg); 
+                -moz-transform: rotate(-1deg); 
+                -o-transform: rotate(-1deg);
+                -ms-transform: rotate(-1deg);
+            }
+            .flickr_badge_image:nth-child(even) {
+                -webkit-transform: rotate(1deg); 
+                -moz-transform: rotate(1deg); 
+                -o-transform: rotate(1deg);
+                -ms-transform: rotate(1deg);
             }
             body > footer {
                 margin-top: 2em;
@@ -137,6 +162,19 @@
         </section>
         
         <hr>
+        
+        <!-- Flickr -->
+        <!--
+        <p>
+            <a href="http://www.flickr.com/photos/tags/L4RP/">#L4RP</a>
+        </p>
+            
+        <div class="flickr-wrapper">
+            <div id="flickr-widget"></div>
+        </div>
+        
+        <hr>
+        -->
         
         <h2>We are here</h2>
 	    <p>We're in <a href="https://en.wikipedia.org/wiki/Brighton">Brighton & Hove</a>, on the south coast of England - a few minutes walk from the beautiful seaside, near the <a href="https://en.wikipedia.org/wiki/Sussex_County_Cricket_Club">Sussex County Cricket Ground</a> and just an hour from London.</p>
@@ -219,7 +257,7 @@
         (function(){
             var nextEvent = document.getElementById('next-event'),
                 eventLink = document.getElementById('next-event-url'),
-                intervalDelay = 162,
+                intervalDelay = 618,
                 intervalRef;
             
             if (window.lanyrd && nextEvent && eventLink){
@@ -237,6 +275,23 @@
             }
         }());
         </script>
+        
+        
+        <!-- Flickr -->
+        <!--
+        <div id="flickr-loader">
+            <script id="flickr-script" src="http://www.flickr.com/badge_code_v2.gne?count=10&size=m&layout=x&source=all_tag&tag=L4RP"></script>
+        </div>
+        <script>
+        var source = document.getElementById('flickr-loader'),
+            target = document.getElementById('flickr-widget'),
+            script = document.getElementById('flickr-script');
+        
+        source.removeChild(script);
+        target.innerHTML = source.innerHTML;
+        source.parentNode.removeChild(source);
+        </script>
+        -->
         
         
         <!-- Analytics -->
