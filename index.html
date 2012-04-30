@@ -7,148 +7,7 @@
         
         <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
         
-        <style>
-            html {
-                background-color: #cddac3;
-            }
-            body {
-                margin: 0 auto;
-                max-width: 40em;
-                font-family: georgia, serif;
-                color: #31442e;
-                background-color: #dce5d6;
-                padding: 3% 4% 1%;
-            }
-            a {
-                color: #31442e;
-            }
-            a img {
-                border: none;
-            }
-            body > h1 {
-                background-color: #31442e;
-                margin-top:0;
-                color: #fff;
-                font-size:2.4em;
-            }
-            body > h1 a {
-                color: #fff;
-                text-decoration:none;
-                display:block;
-                padding:0.38em 0.618em
-            }
-            body > h2 {
-                font-size:1.8em;
-            }
-            body > h3 {
-                font-size:1.4em;
-            }
-            dt {
-                margin-top:1em;
-                font-weight: bold;
-            }
-            section.intro {
-                font-size:1.2em;
-            }
-            section.intro p:first-child.note {
-                color: #31442e;
-                font-weight:bold;
-            }
-            section.callout {
-                font-family: monospace;
-                font-size:1.2em;
-                
-                /*
-                background-color:#f83;
-                background-color:rgba(255, 90, 0, 0.62);
-                */
-
-                background-color: #31442e;
-                
-                color: #fff;
-                padding:0.16em 1em 1em;
-                font-weight: bold;
-                
-                -webkit-transform: rotate(1deg); 
-                -moz-transform: rotate(1deg); 
-                -o-transform: rotate(1deg);
-                -ms-transform: rotate(1deg);
-            }
-            section.callout h1 {
-                margin-top:0.38em;
-                font-size: 2em;
-            }
-            section.callout a {
-                color: #fff;
-            }
-            section.callout p {
-                margin-top:0.38em;
-            }
-            .lanyrd-widget h2 {
-                margin:0.618em 0 0.38em;
-            }
-            .lanyrd-widget .lanyrd-people a img {
-                width: 48px;
-                border: 2px solid #fff;
-            }
-            .lanyrd-widget .lanyrd-trackers a img {
-                border: 1px solid #fff;
-                width: 32px;
-            }
-            .flickr-wrapper {
-                overflow-y: hidden;
-            }
-            #flickr-widget {
-                height: 250px;
-                overflow:hidden;
-                width: 2500px;
-            }
-            .flickr_badge_image {
-                float:left;
-                margin:0 5px 5px 0;
-                
-                -webkit-transform: rotate(-1deg); 
-                -moz-transform: rotate(-1deg); 
-                -o-transform: rotate(-1deg);
-                -ms-transform: rotate(-1deg);
-            }
-            .flickr_badge_image:nth-child(even) {
-                -webkit-transform: rotate(1deg); 
-                -moz-transform: rotate(1deg); 
-                -o-transform: rotate(1deg);
-                -ms-transform: rotate(1deg);
-            }
-            .location-photo {
-                overflow:hidden;
-            }
-            #map {
-                height: 309px;
-                clear:both;
-            }
-            body > footer {
-                margin-top: 2em;
-                overflow: auto;
-            }
-            footer .credit {
-                font-style: italic;
-                float:right;
-                font-size:0.9em;
-            }
-            footer .credit .df:hover {
-                color: #DCE5D6;
-                background-color: #75921b;
-            }
-            footer .credit .df {
-                color: #75921b;
-                font-family: Calibri,Helvetica,Arial,sans-serif;
-                text-decoration: none;
-                text-transform: uppercase;
-                font-weight: bold;
-                padding: 1px;
-                font-style: normal;
-            }
-        </style>
-        
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.css">
         <!--[if lte IE 8]><link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.ie.css"><![endif]-->
     </head>
@@ -162,8 +21,6 @@
             <p class="note"><em><abbr title="Lab for the Recently Possible">L4RP</abbr></em> is a social project by <a href="http://dharmafly.com">Dharmafly</a>, a Brighton-based company who design and develop web apps. We're based at a new collaborative workspace called "The Dock" (a sister project of <a href="http://thewerks.org.uk">The Werks</a>), which provides offices and freelancer coworking space for the collaborative,  creative industries.</p>
         </section>
         
-        <hr>
-        
         <section class="callout" id="next-event">
             <h1>Node.js Lab Day</h1>
             <p><strong>Friday 27th April 2012</strong>, 10am - 6pm.<br>
@@ -171,8 +28,6 @@
             
             <p><a id="next-event-url" href="http://lanyrd.com/2012/nodejs-lab-day/">&raquo; Read more & sign up on Lanyrd</a></p>
         </section>
-        
-        <hr>
         
         <!-- Flickr -->
         
@@ -183,6 +38,7 @@
         <div class="flickr-wrapper">
             <div id="flickr-widget"></div>
         </div>
+        
         
         <hr>
         
@@ -206,10 +62,17 @@
 	        <iframe style="width:100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=-0.16663,50.83154,-0.16046,50.83482&amp;layer=mapnik&amp;marker=50.83337,-0.16400" style="border: 1px solid black"></iframe><br /><small><a href="http://www.openstreetmap.org/?lat=50.83318&amp;lon=-0.163545&amp;zoom=16&amp;layers=M&amp;mlat=50.83337&amp;mlon=-0.16400">View Larger Map</a></small>
 	    </div>
 	    -->
-	    
-	    <hr>
         
         <h2>Keep in touch</h2>
+        
+        <!--
+        <p class="avatar">
+            <a href="http://www.flickr.com/photos/estherase/13553883/" title="tips by estherase, on Flickr"><img src="http://farm1.staticflickr.com/9/13553883_1f97989a2d_q.jpg" width="150" height="150" alt="tips"></a>
+            
+            <a href="http://www.flickr.com/photos/estherase/13553883/" title="tips by estherase, on Flickr"><img src="http://farm1.staticflickr.com/9/13553883_1f97989a2d_s.jpg" width="75" height="75" alt="tips"></a>
+        </p>
+        -->
+        
         <dl>
             <dt>Twitter</dt>
             <dd class="twitter"><a href="https://twitter.com/l4rp">@l4rp</a> (hashtag <a href="https://twitter.com/search/%23l4rp">#l4rp</a>)</dd>
@@ -261,50 +124,19 @@
         </footer>
 
 
-        <!-- Map -->
-        <script src="http://code.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
-        <script src="js/map.js?v1.1"></script>
-        
-	    
-	    <!-- Lanyrd -->
-        <script src="js/vendor/lanyrd/lanyrd.min.js"></script>
-        <script src="js/vendor/lanyrd/lanyrd-widget.min.js"></script>
-        <script>
-        (function(){
-            var nextEvent = document.getElementById('next-event'),
-                eventLink = document.getElementById('next-event-url'),
-                intervalDelay = 618,
-                intervalRef;
-            
-            if (window.lanyrd && nextEvent && eventLink){
-                intervalRef = window.setInterval(function(){
-                    eventLink.textContent += ".";
-                }, intervalDelay);
-                lanyrd.widget.people(eventLink.href, nextEvent, {append: true})
-                    .always(function(){
-                        window.clearInterval(intervalRef);
-                        intervalRef = null;
-                    })
-                    .fail(function(){
-                        eventLink.textContent += "!";
-                    });
-            }
-        }());
-        </script>
-        
-        
-        <!-- Flickr -->
+        <!-- JavaScriptage -->
+        <script src="js/vendor/cmd.js"></script>
+        <script src="js/site.js"></script>
 
+        <!-- Flickr - temporary -->
         <script>
             var flickrTarget = document.getElementById('flickr-widget');
             
             flickrTarget.innerHTML = "<img alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
         </script>
-        
-        <div id="flickr-loader">
+        <div id="flickr-loader" style="display:none;">
             <script id="flickr-script" src="http://www.flickr.com/badge_code_v2.gne?count=10&size=m&layout=x&source=all_tag&tag=L4RP"></script>
         </div>
-        
         <script>
             // Move into place
             var flickrSource = document.getElementById('flickr-loader'),
@@ -313,20 +145,6 @@
             flickrSource.removeChild(flickrScript);
             flickrTarget.innerHTML = flickrSource.innerHTML;
             flickrSource.parentNode.removeChild(flickrSource);
-        </script>
-        
-        
-        <!-- Analytics -->
-        <script>
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-2150808-20']);
-            _gaq.push(['_trackPageview']);
-
-            (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
         </script>
     </body>
 </html>

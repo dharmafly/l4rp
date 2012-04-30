@@ -1,0 +1,144 @@
+html {
+    background-color: #cddac3;
+}
+body {
+    margin: 0 auto;
+    max-width: 40em;
+    font-family: georgia, serif;
+    color: #31442e;
+    background-color: #dce5d6;
+    padding: 3% 4% 1%;
+}
+a {
+    color: #31442e;
+}
+a img {
+    border: none;
+}
+body > h1 {
+    background-color: #31442e;
+    margin-top:0;
+    color: #fff;
+    font-size:2.4em;
+                
+    -webkit-transform: rotate(-1deg); 
+    -moz-transform: rotate(-1deg); 
+    -o-transform: rotate(-1deg);
+    -ms-transform: rotate(-1deg);
+}
+body > h1 a {
+    color: #fff;
+    text-decoration:none;
+    display:block;
+    padding:0.38em 0.618em
+}
+body > h2 {
+    font-size:1.8em;
+}
+body > h3 {
+    font-size:1.4em;
+}
+dt {
+    margin-top:1em;
+    font-weight: bold;
+}
+section.intro {
+    font-size:1.2em;
+}
+section.intro p:first-child.note {
+    color: #31442e;
+    font-weight:bold;
+}
+section.callout {
+    font-family: monospace;
+    font-size:1.2em;
+                
+    /*
+    background-color:#f83;
+    background-color:rgba(255, 90, 0, 0.62);
+    */
+
+    background-color: #31442e;
+                
+    color: #fff;
+    padding:0.16em 1em 1em;
+    font-weight: bold;
+                
+    -webkit-transform: rotate(1deg); 
+    -moz-transform: rotate(1deg); 
+    -o-transform: rotate(1deg);
+    -ms-transform: rotate(1deg);
+}
+section.callout h1 {
+    margin-top:0.38em;
+    font-size: 2em;
+}
+section.callout a {
+    color: #fff;
+}
+section.callout p {
+    margin-top:0.38em;
+}
+.lanyrd-widget h2 {
+    margin:0.618em 0 0.38em;
+}
+.lanyrd-widget .lanyrd-people a img {
+    width: 48px;
+    border: 2px solid #fff;
+}
+.lanyrd-widget .lanyrd-trackers a img {
+    border: 1px solid #fff;
+    width: 32px;
+}
+.flickr-wrapper {
+    overflow-y: hidden;
+}
+#flickr-widget {
+    height: 250px;
+    overflow:hidden;
+    width: 2400px;
+}
+.flickr_badge_image {
+    float:left;
+    margin:0 5px 5px 0;
+                
+    -webkit-transform: rotate(-1deg); 
+    -moz-transform: rotate(-1deg); 
+    -o-transform: rotate(-1deg);
+    -ms-transform: rotate(-1deg);
+}
+.flickr_badge_image:nth-child(even) {
+    -webkit-transform: rotate(1deg); 
+    -moz-transform: rotate(1deg); 
+    -o-transform: rotate(1deg);
+    -ms-transform: rotate(1deg);
+}
+.location-photo {
+    overflow:hidden;
+}
+#map {
+    height: 309px;
+    clear:both;
+}
+body > footer {
+    margin-top: 2em;
+    overflow: auto;
+}
+footer .credit {
+    font-style: italic;
+    float:right;
+    font-size:0.9em;
+}
+footer .credit .df:hover {
+    color: #DCE5D6;
+    background-color: #75921b;
+}
+footer .credit .df {
+    color: #75921b;
+    font-family: Calibri,Helvetica,Arial,sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 1px;
+    font-style: normal;
+}
