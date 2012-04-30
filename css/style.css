@@ -119,6 +119,9 @@ section.callout p {
 #map {
     height: 309px;
     clear:both;
+    
+    /* Gutter for smartphone scrolling */
+    margin-right: 1em;
 }
 body > footer {
     margin-top: 2em;
