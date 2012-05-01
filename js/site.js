@@ -122,6 +122,10 @@
             source.parentNode.removeChild(source);
         }
     }
+    function setupFlickrTemp(){
+        var target = document.getElementById('flickr-widget');
+        target.innerHTML = "<img alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
+    }
     
     /////
     
@@ -145,6 +149,7 @@
     setupLocationMap();
     setupLanyrd();
     //setupFlickr();
+    setupFlickrTemp();
     setupAnalytics();
 
 }(window, document));
