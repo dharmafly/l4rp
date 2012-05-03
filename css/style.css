@@ -73,6 +73,12 @@ section.callout h1 {
     margin-top:0.38em;
     font-size: 2em;
 }
+section.callout h1 a {
+    text-decoration:none;
+}
+section.callout h1 a:hover {
+    text-decoration:underline;
+}
 section.callout a {
     color: #fff;
 }
