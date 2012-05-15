@@ -50,7 +50,6 @@ section.intro p:first-child.note {
     font-weight:bold;
 }
 section.callout {
-    font-family: monospace;
     font-size:1.2em;
                 
     /*
@@ -62,13 +61,20 @@ section.callout {
                 
     color: #fff;
     padding:0.16em 1em 1em;
-    font-weight: bold;
+    margin: 2.2em 0;
                 
     -webkit-transform: rotate(1deg); 
     -moz-transform: rotate(1deg); 
     -o-transform: rotate(1deg);
     -ms-transform: rotate(1deg);
 }
+section.callout.alt {
+    -webkit-transform: rotate(-1deg); 
+    -moz-transform: rotate(-1deg); 
+    -o-transform: rotate(-1deg);
+    -ms-transform: rotate(-1deg);
+}
+
 section.callout h1 {
     margin-top:0.38em;
     font-size: 2em;
