@@ -102,6 +102,11 @@ section.callout p {
     border: 1px solid #fff;
     width: 32px;
 }
+.section-link {
+    position: relative;
+    margin: -0.16em 0 1.6em;
+    font-size: 2em;
+}
 .flickr-wrapper {
     overflow-y: hidden;
 }
