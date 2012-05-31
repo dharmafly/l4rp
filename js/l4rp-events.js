@@ -109,10 +109,6 @@
             windowSearch = window.location.search,
             devMode = /^\?dev[\W\/]?/.test(windowSearch);
 
-        cmd(
-            devMode ? 'jquery.js' : 'jquery.min.js'
-        );
-
         cmd(rootDir + (devMode ? 'lanyrd-jquery-v0.0.1.js' : 'lanyrd-jquery-v0.0.1.min.js'),
             rootDir + 'series.js', 
             rootDir + 'merge.js',
