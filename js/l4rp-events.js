@@ -107,13 +107,14 @@
     function setupLanyrd(){
         var rootDir = '../js/vendor/lanyrd/',
             windowSearch = window.location.search,
-            devMode = /^\?dev[\W\/]?/.test(windowSearch);
+            devMode = /^\?dev[\W\/]?/.test(windowSearch),
+            ext = devMode ? '.js' : '.min.js';
 
-        cmd(rootDir + (devMode ? 'lanyrd-jquery-v0.0.1.js' : 'lanyrd-jquery-v0.0.1.min.js'),
-            rootDir + 'series.js', 
-            rootDir + 'merge.js',
-            rootDir + 'topics.js',
-            rootDir + 'widgets.js',
+        cmd(rootDir + 'lanyrd-jquery-v0.0.1' + ext,
+            rootDir + 'series' + ext, 
+            rootDir + 'merge' + ext,
+            rootDir + 'topics' + ext,
+            rootDir + 'widgets' + ext,
             createSeriesWidget
         );
     }
