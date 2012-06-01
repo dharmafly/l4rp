@@ -17,15 +17,18 @@
             options = {
                 templates: {
                     wrapper:'<div class="lanyrd-series">{{content}}</div>',
-                    upcoming:'<section class="lanyrd-series-upcoming"><h3>Upcoming Events</h3><dl>{{conferences}}</dl></section>',
-                    past:'<div class="lanyrd-series-past"><h3>Past Events</h3>{{conferences}}</div>',
+                    upcoming:'<section class="lanyrd-series-upcoming"><h3>Upcoming Events</h3>' +
+                    '<div>{{conferences}}</div></section>',
                     upcomingConference:'<section class="lanyrd-series-upcoming-conference callout"><h1>' + 
                     '<a href="{{web_url}}">{{name}}</a></h1>' +
                     '<p class="lanyrd-series-date"><time datetime="{{end_date}}"><strong>{{dates}}</strong></time></p>' +
                     '<p>{{tagline}}</p><p><a href="{{web_url}}">&raquo; Read more & sign up on Lanyrd</a>' +
                     '</p><ul class="lanyrd-series-topics"></ul>' +
                     '<div class="lanyrd-series-attending"></div></section>',
-                    pastConference:'<li class="lanyrd-series-past-conference"><a href="{{web_url}}">{{name}}</a></li>'
+                    past:'<div class="lanyrd-series-past"><h3>Past Events</h3><dl>{{conferences}}</dl></div>',
+                    pastConference:'<dt class="lanyrd-series-past-conference">' +
+                    '<a title="{{tagline}}" href="{{web_url}}">{{name}}</a></dt>' +
+                    '<dd>{{dates}}</dd>'
                 }
             };
 
