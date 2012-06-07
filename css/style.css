@@ -162,3 +162,77 @@ footer .credit .df {
     padding: 1px;
     font-style: normal;
 }
+/* events */
+.lanyrd-series-topics {
+    list-style:none;
+    padding:0;
+}
+.lanyrd-series-topics li {
+    font-size:0.85em;
+    display:inline-block;
+    margin:0 0.25em 0.25em 0;
+}
+.lanyrd-series-topics li a {
+    text-decoration:none;
+    color: #31442e;
+    padding:0.35em;
+    background-color: #dce5d6;
+    display:block;
+}
+.lanyrd-series-topics li a:hover {
+    background:rgba(220, 229, 214, 0.715);
+}
+.lanyrd-series-upcoming section:nth-child(even) {
+    -webkit-transform: rotate(-1deg); 
+    -moz-transform: rotate(-1deg); 
+    -o-transform: rotate(-1deg);
+    -ms-transform: rotate(-1deg);
+}
+section.lanyrd-series-upcoming-conference h1 {
+    font-size:1.8em;
+}
+.lanyrd-attendees-title a {
+    text-decoration:none;
+}
+.lanyrd-attendees-title a:hover {
+    text-decoration:underline;
+}
+.event-start-date {
+    float:right;
+    display:inline-block;
+    margin:0.75em 0 0.75em 0.5em;
+    position:relative;
+    text-align:center;
+    font-family:Helvetica, Arial, sans-serif;
+    font-size:1.5em;
+    width:1.85em;
+    border-radius:0.2em;
+    border:#aaa 1px solid;
+    background:#fff;
+}
+.event-start-date .month {
+    background:#940000;
+    color:#fff;
+    font-size:0.4em;
+    border-top-left-radius:0.4em;
+    border-top-right-radius:0.4em;
+}
+.event-start-date .day {
+    color:#000;
+    font-size:1.25em;
+    background:#fff;
+    height:1em;
+    line-height:1.1em;
+}
+.event-start-date .year {
+    background:#fff;
+    color:#aaa;
+    font-size:0.35em;
+    border-bottom-left-radius:0.4em;
+    border-bottom-right-radius:0.4em;
+    position:relative;
+    top:-0.1em;
+}
+time.event-start-date > * {
+    display:block;
+}

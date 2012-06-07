@@ -19,9 +19,9 @@
                     wrapper:'<div class="lanyrd-series">{{content}}</div>',
                     upcoming:'<section class="lanyrd-series-upcoming"><h3>Upcoming Events</h3>' +
                     '<div>{{conferences}}</div></section>',
-                    upcomingConference:'<section class="lanyrd-series-upcoming-conference callout"><h1>' + 
-                    '<a href="{{web_url}}">{{name}}</a></h1><div class="date-icon"></div>' +
-                    '<p class="lanyrd-series-date"><time datetime="{{end_date}}"><strong>{{dates}}</strong></time></p>' +
+                    upcomingConference:'<section class="lanyrd-series-upcoming-conference callout">' + 
+                    '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
+                    '<h1><a href="{{web_url}}">{{name}}</a></h1>' +
                     '<p>{{tagline}}</p><p><a href="{{web_url}}">&raquo; Read more & sign up on Lanyrd</a>' +
                     '</p><ul class="lanyrd-series-topics"></ul>' +
                     '<div class="lanyrd-series-attending"></div></section>',
@@ -40,14 +40,6 @@
 
             }).done(function (html, conferences) {
 
-                var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-
-                // prepend the day of the week to the date
-                $('.lanyrd-series-date').find('time').each(function (i, val) {
-                    var d = new Date($(this).attr('datetime'));
-                    $(this).html('<strong>' + days[d.getDay()] + ' ' + $(this).text() + '</strong>');
-                });
-
                 // Load the people widgets
                 $('.lanyrd-series-attending').each(function (i, val) {
                     var $link   = $(this).siblings('p').children('a'),
@@ -64,8 +56,8 @@
                     });
                 });
 
-                $('.date-icon').each(function (i, val) {
-                    var datetime = $(this).siblings('.lanyrd-series-date').find('time').attr('datetime');
+                $('.event-start-date').each(function (i, val) {
+                    var datetime = $(this).attr('datetime');
                     dateIcon(datetime, this);
                 });
 
@@ -95,14 +87,17 @@
     function dateIcon(datetime, element) {
         var date = new Date(datetime),
             months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
-            icon = document.createElement('div');
+            days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+            icon = document.createElement('time');
 
-        icon.className = 'date-icon';
+        icon.datetime = datetime;
+        icon.className = 'event-start-date';
+        icon.title = days[date.getDay()] + ', ' + element.textContent;
 
-        icon.innerHTML = '<div>' + months[date.getMonth()] + 
-        '</div><div>' + date.getDate() + 
-        '</div><div>' + date.getFullYear() + 
-        '</div>';
+        icon.innerHTML = 
+        '<abbr class="month">' + months[date.getMonth()] + '</abbr>' +
+        '<span class="day">' + date.getDate() + '</span>' +
+        '<span class="year">' + date.getFullYear() + '</span>';
         
         element.parentNode.replaceChild(icon, element);
 
