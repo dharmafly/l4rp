@@ -29,19 +29,31 @@
     /////
     
     // LANYRD
-    
-    function createNextEventWidget(){
+
+    function createWidgets() {
         var nextEvent = document.getElementById('next-event'),
-            eventLink = document.getElementById('next-event-url'),
-            intervalDelay = 618,
+            nextEventLink = document.getElementById('next-event-url'),
+            dataVis = document.getElementById('data-vis-attendees'),
+            dataVisEvents = [
+                'http://lanyrd.com/2012/l4rp-dv1/',
+                'http://lanyrd.com/2012/l4rp-dv2/',
+                'http://lanyrd.com/2012/l4rp-dv3/'
+            ];
+
+        createEventWidget(nextEvent, nextEventLink, nextEventLink.href, true);
+        createEventWidget(dataVis, dataVis, dataVisEvents, false);
+    }
+
+    function createEventWidget(element, loadingElement, eventHref, append) {
+        var intervalDelay = 618,
             intervalRef, lanyrdWidget;
-            
-        if (window.lanyrd && nextEvent && eventLink){
+
+        if (window.lanyrd && element && loadingElement) {
             intervalRef = window.setInterval(function(){
-                eventLink.textContent += ".";
+                loadingElement.textContent += ".";
             }, intervalDelay);
-                
-            lanyrdWidget = lanyrd.widget.people(eventLink.href, nextEvent, {append: true});
+
+            lanyrdWidget = lanyrd.widgets.people(eventHref, element, {append: append});
                 
             lanyrdWidget
                 .always(function(){
@@ -49,10 +61,10 @@
                     intervalRef = null;
                 })
                 .fail(function(){
-                    eventLink.textContent += "!";
+                    loadingElement.textContent += "!";
                 });
         }
-        
+
         return lanyrdWidget;
     }
     
@@ -97,7 +109,8 @@
     }
     
     function setupLanyrd(){
-        cmd('js/vendor/lanyrd/lanyrd.min.js', 'js/vendor/lanyrd/lanyrd-widget.min.js', createNextEventWidget);
+        //cmd('js/vendor/lanyrd/lanyrd.min.js', 'js/vendor/lanyrd/lanyrd-widget.min.js', createWidgets);
+        cmd('js/vendor/lanyrd/lanyrd-jquery-ext-v0.0.1.min.js', createWidgets);
     }
     
     
