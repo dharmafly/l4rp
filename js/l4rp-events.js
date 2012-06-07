@@ -135,13 +135,7 @@
             devMode = /^\?dev[\W\/]?/.test(windowSearch),
             ext = devMode ? '.js' : '.min.js';
 
-        cmd(rootDir + 'lanyrd-jquery-v0.0.1' + ext,
-            rootDir + 'series' + ext, 
-            rootDir + 'merge' + ext,
-            rootDir + 'topics' + ext,
-            rootDir + 'widgets' + ext,
-            createSeriesWidget
-        );
+        cmd(rootDir + 'lanyrd-jquery-ext-v0.0.1' + ext, createSeriesWidget);
     }
     
     /////
