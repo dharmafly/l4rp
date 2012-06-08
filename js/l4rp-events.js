@@ -24,6 +24,8 @@
 
         if (window.lanyrd && eventsWrapper) {
 
+            eventsWrapper.textContent = "Loading Events";
+
             loadingIndicator = loadingDots(eventsWrapper);
 
             options = {
@@ -135,7 +137,7 @@
             element.textContent += ".";
             
             if (dotCount > dotLimit) {
-                element.textContent = ".";
+                element.textContent = original + ".";
                 dotCount = 1;
             } else {
                 dotCount++;
