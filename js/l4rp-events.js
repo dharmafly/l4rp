@@ -1,6 +1,18 @@
 (function(window, document){
 
     /////
+
+    // ATOM DATE
+
+
+    function atomdate(a){return typeof a=="string"?function(b){var c,d,e;return b=b.replace(/z$/i,"+00:00"),c=b.split(/[\-T:+]/),
+    d=Number,c.length!==8?!1:(e=b.substr(19,1),new Date(Date.UTC(d(c[0]),d(c[1]-1),d(c[2]),d(c[3]-d(e+c[6])),d(c[4]-d(e+c[7])),
+    d(c[5]))))}(a):function(b){function c(a){return String(a).length>1?a:"0"+a}function d(a){var b=0-a.getTimezoneOffset(),
+    d=b<0?"-":"+",e=Math.abs(b);return e?d+c(Math.floor(e/60))+":"+c(e%60):"z"}return b.getFullYear()+"-"+c(b.getMonth()+1)+
+    "-"+c(b.getDate())+"T"+c(b.getHours())+":"+c(b.getMinutes())+":"+c(b.getSeconds())+d(b)}(a)};
+
+
+    /////
     
     // LANYRD
     
@@ -25,10 +37,16 @@
                     '<p>{{tagline}}</p><p><a href="{{web_url}}">&raquo; Read more & sign up on Lanyrd</a>' +
                     '</p><ul class="lanyrd-series-topics"></ul>' +
                     '<div class="lanyrd-series-attending"></div></section>',
-                    past:'<div class="lanyrd-series-past"><h3>Past Events</h3><dl>{{conferences}}</dl></div>',
+                    past:'<div class="lanyrd-series-past"><h3>Past Events</h3><div>{{conferences}}</div></div>',
+                    pastConference:'<section class="lanyrd-series-past-conference callout">' +
+                    '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
+                    '<h2><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h2>' +
+                    '<p><a href="#">More Info</a></p>' +
+                    '<div class="lanyrd-series-more-info"></div></section>'
+                    /*past:'<div class="lanyrd-series-past"><h3>Past Events</h3><dl>{{conferences}}</dl></div>',
                     pastConference:'<dt class="lanyrd-series-past-conference">' +
                     '<a title="{{tagline}}" href="{{web_url}}">{{name}}</a></dt>' +
-                    '<dd><em>{{dates}}</em> &mdash; {{tagline}}</dd>'
+                    '<dd><em>{{dates}}</em> &mdash; {{tagline}}</dd>'*/
                 }
             };
 
@@ -85,7 +103,7 @@
     }
 
     function dateIcon(datetime, element) {
-        var date = new Date(datetime),
+        var date = atomdate(datetime + "T23:59:59.000Z"),
             months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
             days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
             icon = document.createElement('time');

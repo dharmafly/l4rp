@@ -163,6 +163,12 @@ footer .credit .df {
     font-style: normal;
 }
 /* events */
+.lanyrd-series-past .lanyrd-series-past-conference {
+    background:rgb(84, 99, 81);
+}
+.lanyrd-series-past-conference .event-start-date .month {
+    background:rgb(107, 50, 50);
+}
 .lanyrd-series-topics {
     list-style:none;
     padding:0;
@@ -182,7 +188,7 @@ footer .credit .df {
 .lanyrd-series-topics li a:hover {
     background:rgba(220, 229, 214, 0.715);
 }
-.lanyrd-series-upcoming section:nth-child(even) {
+.lanyrd-series-upcoming section:nth-child(even), .lanyrd-series-past section:nth-child(even) {
     -webkit-transform: rotate(-1deg); 
     -moz-transform: rotate(-1deg); 
     -o-transform: rotate(-1deg);
