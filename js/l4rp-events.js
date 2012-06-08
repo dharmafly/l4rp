@@ -58,22 +58,6 @@
 
             }).done(function (html, conferences) {
 
-                // Load the people widgets
-                $('.lanyrd-series-attending').each(function (i, val) {
-                    var $link   = $(this).siblings('p').children('a'),
-                        href    = $link.attr('href'),
-                        dots    = loadingDots($link[0], {reset:true,interval:600}),
-                        options = {
-                            append: true,
-                            attendeesHeadingTemplate: '<h2 class="lanyrd-attendees-title">{{amount}} attending</h2>',
-                            trackersHeadingTemplate: '<h2 class="lanyrd-trackers-title">{{amount}} tracking</h2>',
-                        };
-
-                    lanyrd.widgets.people(href, this, options).done(function () {
-                        dots.stop();
-                    });
-                });
-
                 $('.event-start-date').each(function (i, val) {
                     var datetime = $(this).attr('datetime');
                     dateIcon(datetime, this);
@@ -98,12 +82,28 @@
                         $list.append('<li><a href="' + val.web_url + '">' + val.name + '</a></li>');
                     });
                 });
+
+                // Load the people widgets
+                $('.lanyrd-series-attending').each(function (i, val) {
+                    var $link   = $(this).siblings('p').children('a'),
+                        href    = $link.attr('href'),
+                        dots    = loadingDots($link[0], {reset:true,interval:600}),
+                        options = {
+                            append: true,
+                            attendeesHeadingTemplate: '<h2 class="lanyrd-attendees-title">{{amount}} attending</h2>',
+                            trackersHeadingTemplate: '<h2 class="lanyrd-trackers-title">{{amount}} tracking</h2>',
+                        };
+
+                    lanyrd.widgets.people(href, this, options).done(function () {
+                        dots.stop();
+                    });
+                });
             });
         }
     }
 
     function dateIcon(datetime, element) {
-        var date = atomdate(datetime + "T23:59:59.000Z"),
+        var date = atomdate(datetime + "T00:00:00.000Z"),
             months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
             days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
             icon = document.createElement('time');
