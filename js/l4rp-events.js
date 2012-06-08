@@ -41,7 +41,7 @@
                     pastConference:'<section class="lanyrd-series-past-conference callout">' +
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h2><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h2>' +
-                    '<p><a href="#">More Info</a></p>' +
+                    '<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
                     '<div class="lanyrd-series-more-info"></div></section>'
                     /*past:'<div class="lanyrd-series-past"><h3>Past Events</h3><dl>{{conferences}}</dl></div>',
                     pastConference:'<dt class="lanyrd-series-past-conference">' +
@@ -127,10 +127,19 @@
             intervalDelay = options.interval || 450,
             original = element.textContent,
             reset = options.reset || false,
+            dotCount = 0,
+            dotLimit = 10,
             intervalRef;
 
         intervalRef = window.setInterval(function(){
             element.textContent += ".";
+            
+            if (dotCount > dotLimit) {
+                element.textContent = ".";
+                dotCount = 1;
+            } else {
+                dotCount++;
+            }
         }, intervalDelay);
 
         return {
