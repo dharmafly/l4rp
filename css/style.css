@@ -88,6 +88,10 @@ section.callout h1 a:hover {
 section.callout a {
     color: #fff;
 }
+section.callout a:hover {
+    background-color:#DCE5D6;
+    text-decoration:none;
+}
 section.callout p {
     margin-top:0.38em;
 }
