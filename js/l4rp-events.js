@@ -44,8 +44,7 @@
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h1><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h1>' +
                     //'<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
-                    // '<div class="lanyrd-series-more-info">' + 
-                    '</div></section>'
+                    '<div class="lanyrd-series-more-info"></div></section>'
                     
                     /*past:'<div class="lanyrd-series-past"><h3>Past Events</h3><dl>{{conferences}}</dl></div>',
                     pastConference:'<dt class="lanyrd-series-past-conference">' +
