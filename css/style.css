@@ -90,6 +90,7 @@ section.callout a {
 }
 section.callout a:hover {
     background-color:#DCE5D6;
+    color:#31442E;
     text-decoration:none;
 }
 section.callout p {
