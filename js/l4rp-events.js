@@ -24,7 +24,7 @@
 
         if (window.lanyrd && eventsWrapper) {
 
-            eventsWrapper.textContent = "Loading Events";
+            eventsWrapper.textContent = "Hold the phone. Loading...";
 
             loadingIndicator = loadingDots(eventsWrapper);
 
