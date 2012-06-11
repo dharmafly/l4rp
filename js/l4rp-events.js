@@ -42,9 +42,11 @@
                     past:'<div class="lanyrd-series-past"><h3>Past Events</h3><div>{{conferences}}</div></div>',
                     pastConference:'<section class="lanyrd-series-past-conference callout">' +
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
-                    '<h2><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h2>' +
-                    '<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
-                    '<div class="lanyrd-series-more-info"></div></section>'
+                    '<h1><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h1>' +
+                    ''
+                    //'<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
+                    //'<div class="lanyrd-series-more-info"></div></section>'
+                    
                     /*past:'<div class="lanyrd-series-past"><h3>Past Events</h3><dl>{{conferences}}</dl></div>',
                     pastConference:'<dt class="lanyrd-series-past-conference">' +
                     '<a title="{{tagline}}" href="{{web_url}}">{{name}}</a></dt>' +
