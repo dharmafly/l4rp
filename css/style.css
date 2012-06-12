@@ -82,9 +82,6 @@ section.callout h1 {
 section.callout h1 a {
     text-decoration:none;
 }
-section.callout h1 a:hover {
-    text-decoration:underline;
-}
 section.callout a {
     color: #fff;
 }
