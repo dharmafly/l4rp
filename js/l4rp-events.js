@@ -45,7 +45,7 @@
                     '<h1><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h1>' +
                     //'<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
                     '<div class="lanyrd-series-more-info"></div></section>',
-                    error:'Oops. We couldn\'t load those details just now.'
+                    error:'Oops. We couldn\'t load the details just now.'
                 }
             };
 

@@ -203,6 +203,10 @@ footer .credit .df {
 section.lanyrd-series-upcoming-conference h1 {
     font-size:1.8em;
 }
+section.lanyrd-series-past-conference h1 {
+    font-size:1.6em;
+    font-weight:normal;
+}
 .lanyrd-attendees-title a {
     text-decoration:none;
 }
