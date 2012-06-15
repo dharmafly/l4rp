@@ -24,7 +24,7 @@
 
         if (window.lanyrd && eventsWrapper) {
 
-            eventsWrapper.textContent = "Hold the phone. Loading...";
+            eventsWrapper.textContent = "Loading...";
 
             loadingIndicator = loadingDots(eventsWrapper);
 
@@ -45,8 +45,7 @@
                     '<h1><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h1>' +
                     //'<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
                     '<div class="lanyrd-series-more-info"></div></section>',
-                    error:'Widget failed to load! You can still ' +
-                    '<a href="http://lanyrd.com/series/l4rp/">view all our events on Lanyrd</a>.'
+                    error:'Oops. We couldn\'t load those details just now.'
                 }
             };
 

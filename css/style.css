@@ -81,6 +81,7 @@ section.callout h1 {
 }
 section.callout h1 a {
     text-decoration:none;
+    word-wrap: break-word;
 }
 section.callout a {
     color: #fff;
