@@ -34,6 +34,7 @@
         var nextEvent = document.getElementById('next-event'),
             nextEventLink = document.getElementById('next-event-url'),
             dataVis = document.getElementById('data-vis-attendees'),
+            gameLab = document.getElementById('game-lab-attendees'),
             dataVisEvents = [
                 'http://lanyrd.com/2012/l4rp-dv1/',
                 'http://lanyrd.com/2012/l4rp-dv2/',
@@ -42,6 +43,7 @@
 
         createEventWidget(nextEvent, nextEventLink, nextEventLink.href, true);
         createEventWidget(dataVis, dataVis, dataVisEvents, false);
+        createEventWidget(gameLab, gameLab, 'http://lanyrd.com/2012/gamelabbrighton-august/', false);
     }
 
     function createEventWidget(element, loadingElement, eventHref, append) {
@@ -110,7 +112,7 @@
     
     function setupLanyrd(){
         //cmd('js/vendor/lanyrd/lanyrd.min.js', 'js/vendor/lanyrd/lanyrd-widget.min.js', createWidgets);
-        cmd('js/vendor/lanyrd/lanyrd-jquery-ext-v0.0.1.min.js', createWidgets);
+        cmd('js/vendor/lanyrd/lanyrd-jquery-ext-v0.0.1.min.js?v2', createWidgets);
     }
     
     
