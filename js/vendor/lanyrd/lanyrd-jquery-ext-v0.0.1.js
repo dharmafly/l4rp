@@ -630,6 +630,18 @@ Example:
         var promises = [];
 
         return getJSON(yqlUrl(seriesUrl))
+        .pipe(function(data) {
+            var deferred = new lanyrd.utils.deferred(),
+                promise = deferred.promise();
+
+            if (data.query.results === null) {
+                deferred.reject(data);
+            } else {
+                deferred.resolve(data);
+            }
+
+            return promise;
+        })
         .pipe(function(data){
             if (!data.query.results){
                 // Assign an array of objects to data.query.results.a if YQL lookup
@@ -735,10 +747,11 @@ Example:
 
     lanyrd.widgets.people = function(url, elem, options) {
         var promise,
-            conference,
-            options = options || {};
-            options.all = options.all || true;
-            options.templates || (options.templates = {});
+            conference;
+            
+        options = options || {};
+        options.all = options.all || true;
+        options.templates || (options.templates = {});
 
         if(lanyrd.utils.isArray(url) && url.length > 1){
 
@@ -1116,6 +1129,7 @@ Example:
     //   - pastConference: Wraps each past conference. Expects the {{web_url}} 
     //                  and {{name}} keys. This template is included by both the 
     //                  `upcoming` and `past` templates for each conference.
+    //   - error        Template used if the widget fails to load.
     
     lanyrd.widgets.series = function (url, elem, options) {
         
@@ -1222,9 +1236,6 @@ Example:
         // Fetch each event in a series
         
         return series
-        .fail(function () {
-            console.log("JSONP Failed.");
-        })
         .pipe(function () {
             var resources = lanyrd.utils.map(arguments, function (res) {
                return res && res.length && res[0].data;
@@ -1233,6 +1244,13 @@ Example:
             return render(resources).then(function (html) {
                 if (elem) elem.innerHTML = (options.append) ? elem.innerHTML += html : html;
             });
+        })
+        .fail(function () {
+            var errorMessage = options.templates.error ||
+                '<div class="lanyrd-widget-series">Error! </div>';
+
+            if (elem) elem.innerHTML = errorMessage;
+            console.log("YQL Failed.");
         });
     };
 
