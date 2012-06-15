@@ -44,12 +44,9 @@
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h1><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h1>' +
                     //'<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
-                    '<div class="lanyrd-series-more-info"></div></section>'
-                    
-                    /*past:'<div class="lanyrd-series-past"><h3>Past Events</h3><dl>{{conferences}}</dl></div>',
-                    pastConference:'<dt class="lanyrd-series-past-conference">' +
-                    '<a title="{{tagline}}" href="{{web_url}}">{{name}}</a></dt>' +
-                    '<dd><em>{{dates}}</em> &mdash; {{tagline}}</dd>'*/
+                    '<div class="lanyrd-series-more-info"></div></section>',
+                    error:'Widget failed to load! You can still ' +
+                    '<a href="http://lanyrd.com/series/l4rp/">view all our events on Lanyrd</a>.'
                 }
             };
 
@@ -160,7 +157,7 @@
             devMode = /^\?dev[\W\/]?/.test(windowSearch),
             ext = devMode ? '.js' : '.min.js';
 
-        cmd(rootDir + 'lanyrd-jquery-ext-v0.0.1' + ext, createSeriesWidget);
+        cmd(rootDir + 'lanyrd-jquery-ext-v0.0.1' + ext + '?v2', createSeriesWidget);
     }
     
     /////
