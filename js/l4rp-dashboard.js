@@ -112,7 +112,12 @@
     
     function setupLanyrd(){
         //cmd('js/vendor/lanyrd/lanyrd.min.js', 'js/vendor/lanyrd/lanyrd-widget.min.js', createWidgets);
-        cmd('js/vendor/lanyrd/lanyrd-jquery-ext-v0.0.1.min.js?v2', createWidgets);
+        cmd(
+            'jquery/jquery-1.7.2.min.js',
+            'lanyrd/lanyrd-jquery-ext-v0.0.1.min.js?v2',
+            createWidgets,
+            {path:'js/vendor/'}
+        );
     }
     
     

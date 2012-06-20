@@ -151,12 +151,16 @@
     }
     
     function setupLanyrd(){
-        var rootDir = '../js/vendor/lanyrd/',
-            windowSearch = window.location.search,
+        var windowSearch = window.location.search,
             devMode = /^\?dev[\W\/]?/.test(windowSearch),
             ext = devMode ? '.js' : '.min.js';
 
-        cmd(rootDir + 'lanyrd-jquery-ext-v0.0.1' + ext + '?v2', createSeriesWidget);
+        cmd(
+            'jquery/jquery-1.7.2.min.js',
+            'lanyrd/lanyrd-jquery-ext-v0.0.1' + ext + '?v2',
+            createSeriesWidget,
+            {path:'../js/vendor/'}
+        );
     }
     
     /////
