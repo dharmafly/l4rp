@@ -41,9 +41,15 @@
                 'http://lanyrd.com/2012/l4rp-dv3/'
             ];
 
-        createEventWidget(nextEvent, nextEventLink, nextEventLink.href, true);
-        createEventWidget(dataVis, dataVis, dataVisEvents, false);
-        createEventWidget(gameLab, gameLab, 'http://lanyrd.com/2012/gamelabbrighton-august/', false);
+        if (nextEventLink){
+            createEventWidget(nextEvent, nextEventLink, nextEventLink.href, true);
+        }
+        if (dataVis){
+            createEventWidget(dataVis, dataVis, dataVisEvents, false); true);
+        }
+        if (gameLab){
+            createEventWidget(gameLab, gameLab, 'http://lanyrd.com/2012/gamelabbrighton-august/', false);
+        }
     }
 
     function createEventWidget(element, loadingElement, eventHref, append) {
