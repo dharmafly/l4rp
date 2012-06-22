@@ -171,6 +171,7 @@ footer .credit .df {
 /* events */
 .lanyrd-series-past .lanyrd-series-past-conference {
     background:#505A50;
+    min-height:4.6em;
 }
 .lanyrd-series-past-conference .event-start-date .month {
     background:rgb(107, 50, 50);
