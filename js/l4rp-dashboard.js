@@ -45,7 +45,7 @@
             createEventWidget(nextEvent, nextEventLink, nextEventLink.href, true);
         }
         if (dataVis){
-            createEventWidget(dataVis, dataVis, dataVisEvents, false); true);
+            createEventWidget(dataVis, dataVis, dataVisEvents, false);
         }
         if (gameLab){
             createEventWidget(gameLab, gameLab, 'http://lanyrd.com/2012/gamelabbrighton-august/', false);
