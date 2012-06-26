@@ -39,20 +39,26 @@
                 'http://lanyrd.com/2012/l4rp-dv1/',
                 'http://lanyrd.com/2012/l4rp-dv2/',
                 'http://lanyrd.com/2012/l4rp-dv3/'
-            ];
+            ],
+            dataVisOptions = {
+                append: false, 
+                templates: {
+                    attendeesHeading: '<h2 class="lanyrd-attendees-title">{{amount}} attending</h2>'
+                }
+            };
 
         if (nextEventLink){
-            createEventWidget(nextEvent, nextEventLink, nextEventLink.href, true);
+            createEventWidget(nextEvent, nextEventLink, nextEventLink.href, {append: true});
         }
         if (dataVis){
-            createEventWidget(dataVis, dataVis, dataVisEvents, false);
+            createEventWidget(dataVis, dataVis, dataVisEvents, dataVisOptions);
         }
         if (gameLab){
-            createEventWidget(gameLab, gameLab, 'http://lanyrd.com/2012/gamelabbrighton-august/', false);
+            createEventWidget(gameLab, gameLab, 'http://lanyrd.com/2012/gamelabbrighton-august/', {append: false});
         }
     }
 
-    function createEventWidget(element, loadingElement, eventHref, append) {
+    function createEventWidget(element, loadingElement, eventHref, options) {
         var intervalDelay = 618,
             intervalRef, lanyrdWidget;
 
@@ -61,7 +67,7 @@
                 loadingElement.textContent += ".";
             }, intervalDelay);
 
-            lanyrdWidget = lanyrd.widgets.people(eventHref, element, {append: append});
+            lanyrdWidget = lanyrd.widgets.people(eventHref, element, options);
                 
             lanyrdWidget
                 .always(function(){
