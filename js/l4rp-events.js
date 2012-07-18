@@ -4,7 +4,6 @@
 
     // ATOM DATE
 
-
     function atomdate(a){return typeof a=="string"?function(b){var c,d,e;return b=b.replace(/z$/i,"+00:00"),c=b.split(/[\-T:+]/),
     d=Number,c.length!==8?!1:(e=b.substr(19,1),new Date(Date.UTC(d(c[0]),d(c[1]-1),d(c[2]),d(c[3]-d(e+c[6])),d(c[4]-d(e+c[7])),
     d(c[5]))))}(a):function(b){function c(a){return String(a).length>1?a:"0"+a}function d(a){var b=0-a.getTimezoneOffset(),
@@ -157,16 +156,17 @@
 
         cmd(
             'jquery/jquery-1.7.2.min.js',
-            'lanyrd/lanyrd-jquery-ext-v0.0.1' + ext + '?v2',
+            'lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v1',
             createSeriesWidget,
             {path:'../js/vendor/'}
         );
     }
+
     
     /////
     
-    
     // ANALYTICS
+
     function setupAnalytics(){
         var _gaq = window._gaq || (window._gaq = []),
         gaUrl = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'
@@ -180,8 +180,8 @@
     
     /////
     
-    
     // GO!
+
     setupLanyrd();
     setupAnalytics();
 

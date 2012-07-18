@@ -1,4 +1,4 @@
-/*  lanyrd.js - v0.0.1 
+/*  lanyrd.js - v0.2.0 
  *  Copyright 2011-2012, Dharmafly <http://dharmafly.com> 
  *  Released under the MIT License 
  *  More Information: https://github.com/dharmafly/lanyrd.js 
@@ -6,210 +6,205 @@
 (function (_lanyrd, jQuery, module, undefined) {
     "use strict";
 
-    var config, utils, lanyrd, parseUrl;
+    var config, lanyrd, parseUrl;
 
-    // Useful utility functions for working with deferred's.
-    utils = {
-        // Cached anchor element for parsing urls. This is used by url methods
-        // like .pathname().
-        a: module.document && module.document.createElement('a'),
+    // A number of utility functions used internally by this wrapper
+    // and exposed to users for convinience.
 
-        // Check to see if the passed object is an array.
-        isArray: function (object) {
-            return Object.prototype.toString.call(object) === '[object Array]';
-        },
+    // Check to see if the passed object is an array.
+    function isArray(object) {
+        return Object.prototype.toString.call(object) === '[object Array]';
+    }
 
-        // Iterates over an array or object and calls the callback with each
-        // item.
-        each: function (items, fn, context) {
-            var index = 0, length = typeof items === 'object' && items.length, item;
-            if (typeof length === 'number') {
-                for (;index < length; index += 1) {
+    // Iterates over an array or object and calls the callback with each
+    // item.
+    function each(items, fn, context) {
+        var index = 0, length = typeof items === 'object' && items.length, item;
+        if (typeof length === 'number') {
+            for (;index < length; index += 1) {
+                item = items[index];
+                fn.call(context || item, item, index, items);
+            }
+        } else {
+            for (index in items) {
+                if (items.hasOwnProperty(index)) {
                     item = items[index];
                     fn.call(context || item, item, index, items);
                 }
-            } else {
-                for (index in items) {
-                    if (items.hasOwnProperty(index)) {
-                        item = items[index];
-                        fn.call(context || item, item, index, items);
-                    }
-                }
             }
-            return items;
-        },
-
-        // Returns the keys for the object provided in an array.
-        keys: function (object) {
-            return utils.map(object, function (value, key) {
-                return key;
-            });
-        },
-
-        // Iterates over an array or object and collects the return values of
-        // each callback function and returns it in an array.
-        map: function (items, fn, context) {
-            var collected = [];
-            utils.each(items, function (item) {
-                collected.push(fn ? fn.apply(this, arguments) : item);
-            }, context);
-            return collected;
-        },
-
-        // Iterates over an array or object and collects items where the
-        // callback returned a truthy value and returns them in an array.
-        filter: function (items, fn, context) {
-            var collected = [];
-            utils.each(items, function (item) {
-                if (fn.apply(this, arguments)) {
-                    collected.push(item);
-                }
-            }, context);
-            return collected;
-        },
-
-        // Extend the first object passed as an argument with successive ones.
-        extend: function (reciever) {
-            var target  = arguments[0],
-                objects = Array.prototype.slice.call(arguments, 1),
-                count = objects.length,
-                index = 0, object, property;
-
-            for (; index < count; index += 1) {
-                object = objects[index];
-                for (property in object) {
-                    if (object.hasOwnProperty(property)) {
-                        target[property] = object[property];
-                    }
-                }
-            }
-
-            return target;
-        },
-
-        // Calls the method on the object provided, subsequent arguments will
-        // be passed in to the method. Returns an array containing the returned
-        // values of each function.
-        invoke: function (object, method /* args */) {
-            var collected = [], args = [].slice.call(arguments, 2);
-            utils.each(object, function (item) {
-                collected.push(item[method].apply(item, args));
-            });
-            return collected;
-        },
-
-        // Extracts a single property from each object in the collection.
-        pluck: function (object, path, fallback) {
-            var args = [].slice.call(arguments, 2);
-            return utils.map(object, function (item) {
-                return utils.keypath(item, path, fallback);
-            });
-        },
-
-        // Creates a new deferred object.
-        deferred: function () {
-            if (jQuery && jQuery.Deferred) {
-                return new jQuery.Deferred();
-            }
-            return new utils._.Deferred();
-        },
-
-        // Allows you to determine when multiple promises have resolved. Each
-        // promise should be provided as an argument. Alternatively a single
-        // array of promises can be provided.
-        when: function (array) {
-            var promises = arguments.length === 1 && utils.isArray(array) ? array : arguments;
-            if (jQuery && jQuery.Deferred) {
-                return jQuery.when.apply(jQuery, promises);
-            }
-            return utils._.when.apply(utils._, promises);
-        },
-
-        // Requests a json representation from the url provided. Returns a
-        // promise object. This should be used to request resources from the
-        // lanyrd API, it includes specialised error handling for the API.
-        request: function (url) {
-            var type     = config.requestType,
-                request  = utils.rawRequest(url, type),
-                deferred = utils.deferred(),
-                promise  = deferred.promise({
-                    data: null,
-                    type: type,
-                    xhr:  type === utils.request.JSONP ? null : request
-                });
-
-            request.then(function (data) {
-                promise.data = data;
-                deferred[!data || data.error ? 'reject' : 'resolve'](promise);
-            }, function () {
-                deferred.reject(promise);
-            });
-
-            return promise;
-        },
-
-        // Request function that will use jQuery if available otherwise fall back to
-        // the built in lanyrd methods. Allows the type to be specified, this
-        // can be used by scripts to request non lanyrd methods.
-        rawRequest: function (url, type) {
-            type = type || 'json';
-            if (jQuery) {
-                return jQuery.ajax({url: url, dataType: type});
-            }
-            return lanyrd.utils[type](url);
-        },
-
-        // Escapes html entities within a string.
-        // https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content
-        escape: function (string) {
-            return ('' + string)
-            .replace(/&/g,  '&amp;')
-            .replace(/</g,  '&lt;')
-            .replace(/>/g,  '&gt;')
-            .replace(/"/g,  '&quot;')
-            .replace(/'/g,  '&#x27;')
-            .replace(/\//g, '&#x2F;');
-        },
-
-        // Function for looking up a value in an object using a key path (period
-        // delimited string).
-        // Often useful when working with large objects such as JSON data returned
-        // from a server as it allows quick navigation to only the required
-        // information.
-        keypath: function keypath(object, path, fallback, prototype) {
-            var keys = (path || '').split('.'),
-                key;
-
-            if (!path) {
-                return object;
-            }
-
-            while (object && keys.length) {
-                key = keys.shift();
-
-                if (object.hasOwnProperty(key) || (prototype === true && object[key] !== undefined)) {
-                    object = object[key];
-
-                    if (keys.length === 0 && object !== undefined) {
-                        return object;
-                    }
-                } else {
-                    break;
-                }
-            }
-
-            return (arguments.length > 2) ? fallback : null;
-        },
-
-        // Returns the pathname of a url.
-        pathname: function (url) {
-            utils.a.href = url || '/';
-            return utils.a.pathname;
         }
-    };
+        return items;
+    }
 
-    utils.request.JSON  = 'json';
-    utils.request.JSONP = 'jsonp';
+    // Returns the keys for the object provided in an array.
+    function keys(object) {
+        return map(object, function (value, key) {
+            return key;
+        });
+    }
+
+    // Iterates over an array or object and collects the return values of
+    // each callback function and returns it in an array.
+    function map(items, fn, context) {
+        var collected = [];
+        each(items, function (item) {
+            collected.push(fn ? fn.apply(this, arguments) : item);
+        }, context);
+        return collected;
+    }
+
+    // Iterates over an array or object and collects items where the
+    // callback returned a truthy value and returns them in an array.
+    function filter(items, fn, context) {
+        var collected = [];
+        each(items, function (item) {
+            if (fn.apply(this, arguments)) {
+                collected.push(item);
+            }
+        }, context);
+        return collected;
+    }
+
+    // Extend the first object passed as an argument with successive ones.
+    function extend(target) {
+        var objects = Array.prototype.slice.call(arguments, 1),
+            count = objects.length,
+            index = 0, object, property;
+
+        for (; index < count; index += 1) {
+            object = objects[index];
+            for (property in object) {
+                if (object.hasOwnProperty(property)) {
+                    target[property] = object[property];
+                }
+            }
+        }
+
+        return target;
+    }
+
+    // Calls the method on the object provided, subsequent arguments will
+    // be passed in to the method. Returns an array containing the returned
+    // values of each function.
+    function invoke(object, method /* args */) {
+        var collected = [], args = [].slice.call(arguments, 2);
+        each(object, function (item) {
+            collected.push(item[method].apply(item, args));
+        });
+        return collected;
+    }
+
+    // Extracts a single property from each object in the collection.
+    function pluck(object, path, fallback) {
+        var args = [].slice.call(arguments, 2);
+        return map(object, function (item) {
+            return keypath(item, path, fallback);
+        });
+    }
+
+    // Creates a new deferread object.
+    function deferred() {
+        if (jQuery && jQuery.Deferred) {
+            return new jQuery.Deferred();
+        }
+        return new lanyrd._.Deferred(); 
+    }
+
+    // Allows you to determine when multiple promises have resolved. Each
+    // promise should be provided as an argument. Alternatively a single
+    // array of promises can be provided.
+    function when(array) {
+        var promises = arguments.length === 1 && isArray(array) ? array : arguments;
+        if (jQuery && jQuery.Deferred) {
+            return jQuery.when.apply(jQuery, promises);
+        }
+        return lanyrd._.when.apply(lanyrd._, promises);
+    }
+
+    // Requests a json representation from the url provided. Returns a
+    // promise object. This should be used to request resources from the
+    // lanyrd API, it includes specialised error handling for the API.
+    function request(url) {
+        var type     = config.requestType,
+            request  = rawRequest(url, type),
+            deferred = lanyrd.deferred(),
+            promise  = deferred.promise({
+                data: null,
+                type: type,
+                xhr:  type === lanyrd.request.JSONP ? null : request
+            });
+
+        request.then(function (data) {
+            promise.data = data;
+            deferred[!data || data.error ? 'reject' : 'resolve'](promise);
+        }, function () {
+            deferred.reject(promise);
+        });
+
+        return promise;
+    }
+
+    // Request function that will use jQuery if available otherwise fall back to
+    // the built in lanyrd methods. Allows the type to be specified, this
+    // can be used by scripts to request non lanyrd methods.
+    function rawRequest(url, type) {
+        type = type || 'json';
+        if (jQuery) {
+            return jQuery.ajax({url: url, dataType: type});
+        }
+        return lanyrd[type](url);
+    }
+
+    // Escapes html entities within a string.
+    // https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content
+    function escape(string) {
+        return ('' + string)
+        .replace(/&/g,  '&amp;')
+        .replace(/</g,  '&lt;')
+        .replace(/>/g,  '&gt;')
+        .replace(/"/g,  '&quot;')
+        .replace(/'/g,  '&#x27;')
+        .replace(/\//g, '&#x2F;');
+    }
+
+    // Function for looking up a value in an object using a key path (period
+    // delimited string).
+    // Often useful when working with large objects such as JSON data returned
+    // from a server as it allows quick navigation to only the required
+    // information.
+    function keypath(object, path, fallback, prototype) {
+        var keys = (path || '').split('.'),
+            key;
+
+        if (!path) {
+            return object;
+        }
+
+        while (object && keys.length) {
+            key = keys.shift();
+
+            if (object.hasOwnProperty(key) || (prototype === true && object[key] !== undefined)) {
+                object = object[key];
+
+                if (keys.length === 0 && object !== undefined) {
+                    return object;
+                }
+            } else {
+                break;
+            }
+        }
+
+        return (arguments.length > 2) ? fallback : null;
+    }
+
+    // Returns the pathname of a url.
+    function pathname(url) {
+        lanyrd.a.href = url || '/';
+        return lanyrd.a.pathname;
+    }
+
+    request.JSON  = 'json';
+    request.JSONP = 'jsonp';
 
     // A Collection is simply a collection of objects, it provides support for
     // iteration as well as getting properties and related resources. It treats the
@@ -217,7 +212,7 @@
     // return just the first item. To access all children the iterator methods
     // should be used.
     function Collection(items) {
-        items = utils.isArray(items) ? items : [items];
+        items = isArray(items) ? items : [items];
         for (var index = 0, len = items.length, item; index < len; index += 1) {
             item = items[index];
             if (item instanceof Collection || item instanceof Resource) {
@@ -236,13 +231,13 @@
         // existence of each property. This method will return a single object
         // for the first item in the list.
         get: function (path, fallback) {
-            return utils.keypath(this[0], path, fallback);
+            return keypath(this[0], path, fallback);
         },
 
         // Same as #get() but path returns the property with html entities escaped
         // if it is a string, otherwise returns the coerced value.
         escape: function (path, fallback) {
-            return utils.escape(this.get(path, fallback));
+            return escape(this.get(path, fallback));
         },
 
         // Gets a related resource for the key provided. If the current resource
@@ -287,7 +282,7 @@
         // arguments, an array of completed resources and an array of request
         // (jqXHR) objects.
         fetchAllRelated: function (path, success, error) {
-            var deferred = utils.deferred();
+            var deferred = lanyrd.deferred();
 
             function iterator(item) { return item.fetchRelated(path); }
             jQuery.when.apply(jQuery, this.map(iterator)).then(function () {
@@ -310,10 +305,12 @@
         }
     };
 
-    utils.each(['each', 'map', 'filter', 'pluck', 'invoke'], function (method) {
-        Collection.prototype[method] = function () {
-            return utils[method].apply(this, [].concat.apply(this, arguments));
-        };
+    each([each, map, filter, pluck, invoke], function (method) {
+        // method.name non-standard possible alternative is:
+        // (method + "").split('function ')[1].split('()')[0]
+        Collection.prototype[method.name] = function () {
+            return method.apply(this, [].concat.apply(this, arguments));
+        }
     });
 
     // The Resource acts as a request builder for the API and provides basic
@@ -332,7 +329,7 @@
         this.url  = options.url;
         this.data = options.data || {};
 
-        var deferred = options.deferred || utils.deferred();
+        var deferred = options.deferred || lanyrd.deferred();
         if (this.url) {
             // We create the fetch method within the constructor to hide the
             // deferred object within the closure.
@@ -343,10 +340,10 @@
 
                 var url = this.url, request, resource;
 
-                if (config.requestType === utils.request.JSONP) {
+                if (config.requestType === lanyrd.request.JSONP) {
                     url += (url.indexOf('?') < 0 ? '?' : '&') + 'callback=?';
                 }
-                request  = utils.request(url);
+                request  = lanyrd.request(url);
                 resource = this;
 
                 request.done(function () {
@@ -376,8 +373,8 @@
     // request cannot be made. For example at the last page of a paginated
     // collection or if no related resource exists.
     Resource.noop = function (options) {
-        var rejected = utils.deferred(),
-            noop = new Resource(utils.extend({deferred: rejected}, options));
+        var rejected = lanyrd.deferred(),
+            noop = new Resource(extend({deferred: rejected}, options));
 
         rejected.rejectWith(noop, [noop, null]);
         return noop;
@@ -409,12 +406,12 @@
 
         // Lookup keys in the raw data object returned from the server.
         get: function (path, fallback) {
-            return utils.keypath(this.data, path, fallback);
+            return keypath(this.data, path, fallback);
         },
 
         // Gets a path for a string with html entities escaped.
         escape: function (path, fallback) {
-            return utils.escape(this.get(path, fallback));
+            return escape(this.get(path, fallback));
         },
 
         // Like #get() but wraps the resource at the end of the path in a Collection
@@ -475,7 +472,7 @@
         // Resource.
         all: function (success, error) {
             var self      = this,
-                deferred  = utils.deferred(),
+                deferred  = lanyrd.deferred(),
                 combined  = new Resource({deferred: deferred});
 
             function inner() {
@@ -559,39 +556,58 @@
             // Oh dear, here we assume that a Lanyrd API endpoint is the same as
             // the website. Ideally there should be some kind of lookup service
             // that does this for us.
-            return this.API_DOMAIN + utils.pathname(url);
+            return this.API_DOMAIN + pathname(url);
         },
         // Allows you to switch between JSON and JSONP transports.
         config: function (newer) {
-            utils.extend(config, newer);
+            extend(config, newer);
         },
-        utils: utils,
         noConflict: function () {
             module.lanyrd = _lanyrd;
             return lanyrd;
         },
         Collection: Collection,
-        Resource: Resource
+        Resource: Resource,
+
+        // Here are the exposed utility objects
+
+        // Cached anchor element for parsing urls. This is used by url methods
+        // like .pathname().
+        a: module.document && module.document.createElement('a'),
+        isArray: isArray,
+        each: each,
+        keys: keys,
+        map: map,
+        filter: filter,
+        extend: extend,
+        invoke: invoke,
+        pluck: pluck,
+        deferred: deferred,
+        when: when,
+        request: request,
+        escape: escape,
+        keypath: keypath,
+        pathname: pathname
     };
 
-    config = {requestType: utils.request.JSONP};
+    config = {requestType: request.JSONP};
 
     if (typeof module.define === 'function' && module.define.amd) {
         module.define('lanyrd', function () {
             return lanyrd;
         });
     } else if (module.exports) {
-        // Pass utils object into module factories to be augmented.
-        require('./lanyrd/deferred')(utils);
-        require('./lanyrd/request')(utils);
+        // Pass lanyrd object into module factories to be augmented.
+        require('./lanyrd/deferred')(lanyrd);
+        require('./lanyrd/request')(lanyrd);
 
         // Override pathname with node specific code.
         parseUrl = require('url').parse;
-        lanyrd.utils.pathname = function (url) {
+        lanyrd.pathname = function (url) {
             return parseUrl(url).pathname;
         };
         // Default request type is now JSON.
-        config.requestType = utils.request.JSON;
+        config.requestType = request.JSON;
 
         module.exports = lanyrd;
     } else {
@@ -600,41 +616,53 @@
 
 })(this.lanyrd, this.jQuery, typeof module !== 'undefined' ? module : this);
 /*
-A stop-gap extension until series are supported in the Lanyrd API - e.g. http://lanyrd.com/series/asyncjs/
-Example:
+A stop-gap extension until series are supported in the Lanyrd API -
+e.g. http://lanyrd.com/series/asyncjs/
+
+Usage example:
 
     lanyrd.series('http://lanyrd.com/series/asyncjs/')
         .then(fn);
+
 */
 (function (lanyrd) {
     'use strict';
-    
-    var LANYRD_WEB_ROOT = 'http://lanyrd.com',
-        getJSON = lanyrd.utils.jsonp || (window.jQuery && window.jQuery.getJSON);
-        
-    // Since this is a temporary extension, back-off if `lanyrd.series` has been integrated into the core library
+
+    var getJSON = lanyrd.jsonp || (window.jQuery && window.jQuery.getJSON);
+
+    // Since this is a temporary extension, back-off if `lanyrd.series` has
+    // been integrated into the core library
     if (lanyrd.series){
         return;
     }
-    
-    // YQL console for this command: http://developer.yahoo.com/yql/console/?q=select%20a.href%2C%20a.content%20from%20data.html.cssselect%20where%20url%3D%22http%3A%2F%2Flanyrd.com%2Fseries%2Fasyncjs%2F%22%20and%20css%3D%22.vevent%20.url%22#h=select%20href%2C%20content%20from%20html%20where%20url%3D%22http%3A//lanyrd.com/series/asyncjs/%22%20and%0A%20%20%20%20%20%20xpath%3D%27//li%5Bcontains%28@class%2C%22vevent%22%29%5D//a%5Bcontains%28@class%2C%22url%22%29%5D%27
-    
-    function yqlUrl(seriesUrl){
-        return "http://query.yahooapis.com/v1/public/yql?q=select%20href%2C%20content%20from%20html%20where%20url%3D%22" +
-            encodeURIComponent(seriesUrl) + 
-            "%22%20and%0A%20%20%20%20%20%20xpath%3D'%2F%2Fli%5Bcontains(%40class%2C%22vevent%22)%5D%2F%2Fa%5Bcontains(%40class%2C%22url%22)%5D'" +
-            "&format=json&callback=?";
+
+    function serialize(obj) {
+        var str = [];
+        for(var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join("&");
     }
-    
+
+    function nsql(seriesUrl) {
+        var data = {
+                url: seriesUrl,
+                selector: "h4 a.summary.url",
+                extract: ["href"]
+            },
+            url = 'http://dharmafly.nsql.jit.su?' + serialize(data) + '&callback=?';
+
+        return getJSON(url);
+    }
+
     lanyrd.series = function(seriesUrl, successCallback, errorCallback){
         var promises = [];
 
-        return getJSON(yqlUrl(seriesUrl))
+        return nsql(seriesUrl)
         .pipe(function(data) {
-            var deferred = new lanyrd.utils.deferred(),
+            var deferred = new lanyrd.deferred(),
                 promise = deferred.promise();
 
-            if (data.query.results === null) {
+            if (data.error || data.length == 0) {
                 deferred.reject(data);
             } else {
                 deferred.resolve(data);
@@ -643,27 +671,18 @@ Example:
             return promise;
         })
         .pipe(function(data){
-            if (!data.query.results){
-                // Assign an array of objects to data.query.results.a if YQL lookup
-                // fails and you really need to test.
-                return [];
-            }
-            
-            // Transform YQL conference results to full Lanyrd conference Resources
+            // Transform nsql conference results to full Lanyrd conference Resources
 
-            lanyrd.utils.each(data.query.results.a, function (simpleConference) {
-                promises.push(
-                    lanyrd.conference(LANYRD_WEB_ROOT + simpleConference.href).fetch()
-                );
+            lanyrd.each(data, function (item) {
+                promises.push(lanyrd.conference('http://lanyrd.com' + item.href).fetch());
             });
 
-            return lanyrd.utils.when(promises);
+            return lanyrd.when(promises);
         })
         .done(successCallback)
         .fail(errorCallback);
     };
-})(this.lanyrd);
-/*
+})(this.lanyrd);/*
     Lanyrd widget. An extension on top of the Lanyrd API.
 */
 
@@ -707,6 +726,7 @@ Example:
     // are generated internally by Premasagar's [tim](https://github.com/premasagar/tim) 
     // micro-templating library.
 
+    // ~ ~ ~ ~ >
 
     // ### people widget
     //
@@ -735,7 +755,7 @@ Example:
     //                  widget to favour instead of its defaults.
     //
     //   - attendeesHeading: For the heading above the attendees. Expects the {{amount}} and
-    //                  {{attendees_url}} keys.
+    //                       {{attendees_url}} keys.
     //
     //   - trackersHeading: For the heading above the tackers. Expects the {{amount}} key.
     //
@@ -745,155 +765,138 @@ Example:
     //   - person:      The markup for each person in the the attendees and trackers lists.
     //                  Expects the {{web_url}}, {{name}}, {{username}} & {{avatar_url}} keys.
 
-    lanyrd.widgets.people = function(url, elem, options) {
-        var promise,
-            conference;
-            
-        options = options || {};
-        options.all = options.all || true;
-        options.templates || (options.templates = {});
+    lanyrd.widgets.people = function(urls, elem, options) {
+        var conferences,
+            options = options || {};
 
-        if(lanyrd.utils.isArray(url) && url.length > 1){
+        options.all = options.all || false;
+        options.templates = options.templates || (options.templates = {});
 
-            // Get all attendees and trackers for merged lanyrd conference events
-            // 1. Convert passed urls to equivalent Lanyrd api resource objects
-            // 2. Pass merged attendees and trackers to render and return render's
-            //    promise.
 
-            url = lanyrd.utils.map(url, function(url){
-                return lanyrd.conference(url).fetch();
-            });
+        // Render html based on attendees and trackers
 
-            promise = lanyrd.mergeRelated(url, {related: ['attendees', 'trackers']})
-                      .pipe(function(merged){
-                          return render(merged.attendees, merged.trackers)
-                          .then(tryPlaceInElement);
-                      });
-        } else {
+        function render (attendees, trackers) {
+            var deferred = new lanyrd.deferred(),
+                promise  = deferred.promise(),
+                html = '',
 
-            // Get attendees and trackers for a lanyrd conference event
-            // 1. Change single item array as string
-            // 2. Fetch conference data
-            // 3. Get related attendees and trackers
-            // 4. Pass attendees and trackers to render and return render's
-            //   promise.
+            // templates
 
-            url += '';
-            promise = lanyrd.conference(url).fetch()
-                      .pipe(function(con){
-                          conference = con.get('conference');
-                          return con;
-                      })
-                      .pipe(getAttendeesTrackers)
-                      .pipe(function(attendees, trackers){
-                          return render(
-                              attendees.get('attendees'),
-                              trackers.get('trackers')
-                          )
-                          .then(tryPlaceInElement);
-                      });
-        }
+                attendeesHeading = options.templates.attendeesHeading || '<h2 class="lanyrd-attendees-title"><a target="_blank" href={{attendees_url}}>{{amount}} attending</a></h2>',
+                trackersHeading = options.templates.trackersHeading || '<h2 class="lanyrd-trackers-title">{{amount}} tracking</h2>',
+                people = options.templates.people || '<ul class="lanyrd-people {{people_type}}">{{list}}</ul>',
+                person = options.templates.person || '<li><a href="{{web_url}}"><img class="lanyrd-avatar" title="{{name}} ({{username}})" src="{{avatar_url}}"></a></li>';
 
-        // Returns a promise representing the retrieval of both the attendees
-        // and the trackers. The amount of attendees/trackers passed to the
-        // promise resolution is dependant on the options.all parameter.
-
-        function getAttendeesTrackers(con) {
-            if(options.all){
-                return lanyrd.utils.when(
-                    con.related('conference.attendees').all(),
-                    con.related('conference.trackers').all()
-                )
-            } else {
-                return lanyrd.utils.when(
-                    con.related('conference.attendees').fetch(),
-                    con.related('conference.trackers').fetch()
-                );
-            }
-        }
-
-        // Places the generated html in the supplied html dom element
-        // (if given).
-
-        function tryPlaceInElement(html) {
-            if(elem){
-                if(options.append){
-                    elem.innerHTML += html;
-                } else {
-                    elem.innerHTML = html;
+            // Pass either attendees or trackers
+            // Returns a filled `people` template with sub-templates `person`
+            function makeList (peoples, peopleType) {
+                var list = '', i = 0;
+                for(i; i < peoples.length; i++){
+                    list += tim(person, peoples[i].user);
                 }
-            }
-        }
-
-        // A render function unique to lanyrd.widget.people
-
-        function render(attendees, trackers){
-            var deferred = lanyrd.utils.deferred(),
-                promise = deferred.promise(),
-                attendeesHeadingTemplate = options.templates.attendeesHeading || '<h2 class="lanyrd-attendees-title"><a target="_blank" href={{attendees_url}}>{{amount}} attending</a></h2>',
-                trackersHeadingTemplate = options.templates.trackersHeading || '<h2 class="lanyrd-trackers-title">{{amount}} tracking</h2>',
-                peopleTemplate = options.templates.people || '<ul class="lanyrd-people {{people_type}}">{{list}}</ul>',
-                personTemplate = options.templates.person || '<li><a href="{{web_url}}"><img class="lanyrd-avatar" title="{{name}} ({{username}})" src="{{avatar_url}}"></a></li>',
-                html = '';
-
-            // returns attendees and trackers markup
-
-            var drawList = function (people, peopleType) {
-                var builtUpTemplate = '',
-                    person,
-                    i = 0;
-
-                for(i; i < people.length; i++){
-                    person = people[i].user || people[i];
-                    builtUpTemplate += tim(personTemplate, person);
-                }
-                html += tim(peopleTemplate, {list: builtUpTemplate, people_type: peopleType});
-            };
-
-            // Build the rest of the template
-            // (!) Needs cleanup!
-            // Only 'see more attendees' link supported on single conferences (no merged events)
-
-            // Attendees heading
-            html += tim(attendeesHeadingTemplate, {amount: attendees.length, attendees_url: (conference ? conference.web_url + 'attendees' : '')});
-
-            // Attendee avatars
-            drawList(attendees, 'lanyrd-attendees');
-
-            if(trackers.length > 0){
-                // Trackers heading
-                html+= tim(trackersHeadingTemplate, {amount: trackers.length});
-                // Tracker avatars
-                drawList(trackers, 'lanyrd-trackers');
+                return tim(people, {list: list, people_type: peopleType});
             }
 
-            // Encapsulating div and embedded style
-            html = '<div class="lanyrd-widget">' +
-                       '<style>' +
-                            '.lanyrd-people, .lanyrd-people li  {' +
-                                'padding: 0;' +
-                                'margin: 0;' +
-                            '}' +
-                            '.lanyrd-people, .lanyrd-people li {' +
-                               ' overflow: hidden;' +
-                            '}' +
-                            '.lanyrd-people li {' +
-                                'list-style: none;' +
-                                'float: left;' +
-                                'padding-right: 6px;' +
-                            '}' +
-                       '</style>' +
-                       html +
-                   '</div>';
-
-            // Instantly resolve and pass rendered html as promise
+            html +=  '<div class="lanyrd-widget lanyrd-widget-people">' +
+                      '<style>' +
+                        '.lanyrd-people, .lanyrd-people li {' +
+                          'padding: 0;' +
+                          'margin: 0;' +
+                        '}' +
+                        '.lanyrd-people, .lanyrd-people li {' +
+                          'overflow: hidden;' +
+                        '}' +
+                        '.lanyrd-people li {' +
+                          'list-style: none;' +
+                          'float: left;' +
+                          'padding-right: 6px;' +
+                        '}' +
+                        '.lanyrd-people li img.lanyrd-avatar {' +
+                          'width: 46px; height: 46px;border: 2px solid white;' +
+                        '}' +
+                      '</style>';
+            html +=  tim(attendeesHeading, {
+                        attendees_url: urls[0] + 'attendees',
+                        amount: attendees.length
+                     });
+            html +=  makeList(attendees, 'attendees');
+            html +=  tim(trackersHeading, {
+                        amount: trackers.length
+                     });
+            html +=  makeList(trackers, 'trackers');
+            html +=  '</div>';
 
             deferred.resolve(html);
+
             return promise;
         }
 
-        return promise;
+
+        // Transform the conference string url(s) to fetched 
+        // lanyrd Resources.
+
+        urls = (lanyrd.isArray(urls)) ? urls : [urls],
+
+        conferences = lanyrd.map(urls, function (url) {
+            return lanyrd.conference(url).fetch();
+        });
+
+        // Feed lanyrd conference resources to mergeRelated only if 
+        // there is more than one.
+        // Alternatively get _all_ the related attendees and trackers.
+        // Alternatively get just the related attendees and trackers but all are 
+        // not guaranteed.
+        return lanyrd.when(conferences)
+        .pipe(function () {
+            if (conferences.length > 1) {
+                return lanyrd.mergeRelated(conferences, {related: ['attendees', 'trackers']});
+            } else if (options.all) {
+                return lanyrd.when(
+                    conferences[0].related('conference.attendees').all(),
+                    conferences[0].related('conference.trackers').all()
+                );
+            } else {
+                return lanyrd.when(
+                    conferences[0].related('conference.attendees').fetch(),
+                    conferences[0].related('conference.trackers').fetch()
+                );
+            }
+        })
+
+        // Render the merged conference to html.
+
+        // But first handle for consistency...
+        // Juggle 3 different (!) signatures returned by the 
+        // three ifconditions above. Also transform the returned 
+        // data to a consistent parameter for render().
+        
+        .pipe(function (arg1, arg2) {
+            if(arg1.attendees){
+                return render(
+                    lanyrd.map(arg1.attendees, function (value) {
+                        return {user: value};
+                    }),
+                    lanyrd.map(arg1.trackers, function (value) {
+                        return {user: value};
+                    })
+                );
+            } else {
+                arg1 = (options.all) ? arg1 : arg1[0];
+                arg2 = (options.all) ? arg2 : arg2[0];
+                return render(arg1.data.attendees, arg2.data.trackers);
+            }
+        })
+
+        // Optionally append the rendered mark up rather than replacing the 
+        // target element.
+
+        .then(function (html) {
+            if (elem) {
+                elem.innerHTML = (options.append) ? elem.innerHTML += html : html;
+            }
+        });
     };
+
 
     // ### people.topics widget
 
@@ -934,7 +937,7 @@ Example:
         options.templates || (options.templates = {});
 
         function render(person){
-            var deferred = lanyrd.utils.deferred(),
+            var deferred = lanyrd.deferred(),
                 promise = deferred.promise(),
                 html,
                 personTemplate = options.templates.person || '<h2><a href="{{web_url}}">{{name}}</a></h2>' +
@@ -942,6 +945,7 @@ Example:
                            '<p>{{short_bio}}</p>';
 
             html = tim(personTemplate, person);
+            html = '<div class="layrd-widget lanyrd-widget-person">' + html + '</div>'
             deferred.resolve(html);
             return promise;
         }
@@ -991,7 +995,9 @@ Example:
     //
     //  - templates     Object of key value pairs specifying custom templates for the 
     //                  widget to favour instead of its defaults.
-    //                  (WIP)
+    //
+    //    - topics:     Takes in a number of {{topic}}
+    //    - topic:      Takes a topic {{name}} 
 
 
     lanyrd.widgets.person.topics = function(url, elem, options) {
@@ -1009,7 +1015,7 @@ Example:
         options.events = options.events;
 
         function render(tagMap) {
-            var deferred = new lanyrd.utils.deferred(),
+            var deferred = new lanyrd.deferred(),
                 promise = deferred.promise(),
                 topics = [],
                 lis = '',
@@ -1017,8 +1023,8 @@ Example:
 
             // Remove ignored tags from tagMap
 
-            lanyrd.utils.each(tagMap, function(val, prop){
-                lanyrd.utils.each(options.ignore, function (item) {
+            lanyrd.each(tagMap, function(val, prop){
+                lanyrd.each(options.ignore, function (item) {
                     if(prop.toLowerCase() === item.toLowerCase()){
                         delete tagMap[prop];
                     }
@@ -1027,7 +1033,7 @@ Example:
 
             // Transform tag occurance to ordered list
 
-            lanyrd.utils.each(tagMap, function (val, prop){
+            lanyrd.each(tagMap, function (val, prop){
                 if(val >= options.cutoff){
                     topics.push([prop, val]);
                 }
@@ -1037,18 +1043,18 @@ Example:
             .sort(function(a, b) {return b[1] - a[1]})
             .slice(0, options.amount);
 
-            topics = lanyrd.utils.map(topics, function (item) {
+            topics = lanyrd.map(topics, function (item) {
                 return item[0];
             });
 
             for (i = 0; i < topics.length; i++) {
-                lis += '<li>' + topics[i] + '</li>';
+                lis += tim((options.templates.topic || '<li>{{topic}}</li>'), {topic: topics[i]});
             };
 
             // Generate final template and resolve
 
             deferred.resolve(tim(
-                options.templates.topics || '<ol class="lanyrd-widget-interests">{{topics}}</ol>',
+                options.templates.topics || '<div class="lanyrd-widget lanyrd-widget-person-topics"><ol>{{topics}}</ol></div>',
                 {topics: lis}
             ), tagMap);
 
@@ -1072,7 +1078,7 @@ Example:
         // Channel it through to lanyrd.topics extension.
 
         .pipe(function (resource) {
-            var resources = lanyrd.utils.map(resource.get('conferences_attending'), function (conf) {
+            var resources = lanyrd.map(resource.get('conferences_attending'), function (conf) {
                 return lanyrd.resource({url: conf.api_urls.conference});
             });
             return lanyrd.topics(resources);
@@ -1151,7 +1157,7 @@ Example:
         options.conferences.past     = options.conferences.past || true;
         
         function render(resources) {
-            var deferred = new lanyrd.utils.deferred(),
+            var deferred = new lanyrd.deferred(),
                 promise = deferred.promise(),
                 html = "",
                 now = new Date(),
@@ -1174,7 +1180,7 @@ Example:
             
             // render each conference and sort
             
-            lanyrd.utils.each(resources, function (val, prop) {
+            lanyrd.each(resources, function (val, prop) {
                 if (val.conference.end_date + "T23:59:59.000Z" > new Date().toISOString()) {
                     conferences.upcoming.push(tim(
                         options.templates.upcomingConference || 
@@ -1224,20 +1230,20 @@ Example:
                 
             deferred.resolve(tim(
                 options.templates.wrapper || 
-                '<div class="lanyrd-widget-series">{{content}}</div>',
+                '<div class="lanyrd-widget lanyrd-widget-series">{{content}}</div>',
                 {content:html}
             ), resources);
             
             return promise;
         }
         
-        // Return a promisefor the templated html
+        // Return a promise for the templated html
         
         // Fetch each event in a series
         
         return series
         .pipe(function () {
-            var resources = lanyrd.utils.map(arguments, function (res) {
+            var resources = lanyrd.map(arguments, function (res) {
                return res && res.length && res[0].data;
             });
             
@@ -1246,11 +1252,9 @@ Example:
             });
         })
         .fail(function () {
-            var errorMessage = options.templates.error ||
-                '<div class="lanyrd-widget-series">Error! </div>';
-
-            if (elem) elem.innerHTML = errorMessage;
-            console.log("YQL Failed.");
+            var error = options.templates.error ||
+                '<div class="lanyrd-widget-series lanyrd-widget-error">Widget error!</div>';
+            if (elem) elem.innerHTML = (options.append) ? elem.innerHTML += error : error ;
         });
     };
 
@@ -1303,7 +1307,7 @@ Example:
         options.cutoff = options.cutoff || 0;
 
         function render(tagMap) {
-            var deferred = new lanyrd.utils.deferred(),
+            var deferred = new lanyrd.deferred(),
                 promise = deferred.promise(),
                 topics = [],
                 lis = '',
@@ -1311,8 +1315,8 @@ Example:
 
             // Remove ignored tags from tagMap
 
-            lanyrd.utils.each(tagMap, function(val, prop){
-                lanyrd.utils.each(options.ignore, function (item) {
+            lanyrd.each(tagMap, function(val, prop){
+                lanyrd.each(options.ignore, function (item) {
                     if(prop.toLowerCase() === item.toLowerCase()){
                         delete tagMap[prop];
                     }
@@ -1321,7 +1325,7 @@ Example:
 
             // Transform tag occurance to ordered list
 
-            lanyrd.utils.each(tagMap, function (val, prop){
+            lanyrd.each(tagMap, function (val, prop){
                 if(val >= options.cutoff){
                     topics.push([prop, val]);
                 }
@@ -1331,7 +1335,7 @@ Example:
             .sort(function(a, b) {return b[1] - a[1]})
             .slice(0, options.amount);
 
-            topics = lanyrd.utils.map(topics, function (item) {
+            topics = lanyrd.map(topics, function (item) {
                 return item[0];
             });
 
@@ -1342,7 +1346,7 @@ Example:
             // Generate final template and resolve
 
             deferred.resolve(tim(
-                options.templates.topics || '<ol class="lanyrd-widget-interests">{{topics}}</ol>',
+                options.templates.topics || '<div class="lanyrd-widget lanyrd-widget-series-topic"><ol class="lanyrd-widget lanyrd-widget-series-topic">{{topics}}</ol></div>',
                 {topics: lis}
             ), tagMap);
 
@@ -1352,7 +1356,7 @@ Example:
         // Get a number of different conference Resources from the series extension
 
         return lanyrd.series(url).pipe(function () {
-            return lanyrd.utils.map(arguments, function (res) {
+            return lanyrd.map(arguments, function (res) {
                 return res[0];
             });
         })
@@ -1371,11 +1375,10 @@ Example:
     };
 
 }(lanyrd));(function (lanyrd) {
-    var utils = lanyrd.utils,
-
+    "use strict";    
         // Related conference resources to load. We use an array to be certain
         // of ordering. These are also referred to as "groups".
-        RELATION_KEYS = ['staff', 'speakers', 'attendees', 'trackers'],
+    var RELATION_KEYS = ['staff', 'speakers', 'attendees', 'trackers'],
 
         // Each person will be sorted within their group. Weight is given
         // depending on the role.
@@ -1444,7 +1447,7 @@ Example:
         var resources, comparator, weights;
 
         options = options || {};
-        resources = utils.map(conferences, function (conference) {
+        resources = lanyrd.map(conferences, function (conference) {
             return conference.fetch();
         });
 
@@ -1453,9 +1456,9 @@ Example:
         weights = options.related || RELATION_WEIGHTS;
 
         // If an array of relations is provided then use the default weights.
-        if (utils.isArray(options.related)) {
+        if (lanyrd.isArray(options.related)) {
             weights = {};
-            utils.each(options.related, function (relation) {
+            lanyrd.each(options.related, function (relation) {
                 weights[relation] = RELATION_WEIGHTS[relation];
             });
         }
@@ -1473,10 +1476,10 @@ Example:
         // an object for each conference with an array of users for each related
         // group.
         function fetchRelated(/* conferences... */) {
-            var all = [], keys = utils.keys(weights);
+            var all = [], keys = lanyrd.keys(weights);
 
-            utils.each(arguments, function (conference) {
-                var related = utils.map(keys, function (key) {
+            lanyrd.each(arguments, function (conference) {
+                var related = lanyrd.map(keys, function (key) {
                     return conference[0].collection('conference').related(key).fetch().pipe(function (rel) {
                         return rel.get(rel.get('pagination.paginated_key'));
                     });
@@ -1484,13 +1487,13 @@ Example:
                 all = all.concat(related);
             });
 
-            return utils.when.apply(null, all).pipe(function () {
+            return lanyrd.when.apply(null, all).pipe(function () {
                 var all = [], collected = {};
 
-                utils.each(arguments, function (users, index) {
+                lanyrd.each(arguments, function (users, index) {
                     var remainder = index % keys.length;
 
-                    collected[keys[remainder]] = utils.map(users, function (speaker) {
+                    collected[keys[remainder]] = lanyrd.map(users, function (speaker) {
                         if (speaker.user) {
                             return speaker.user;
                         } else {
@@ -1555,12 +1558,12 @@ Example:
 
             // Loop through all conference relations and build a single merged
             // object with all users.
-            utils.each(RELATION_KEYS, function (key) {
+            lanyrd.each(RELATION_KEYS, function (key) {
                 // Only continue if the caller has requested this key.
                 if (weights[key]) {
-                    utils.each(allRelations, function (relations) {
+                    lanyrd.each(allRelations, function (relations) {
                         var people = relations[key];
-                        utils.each(people, function (person) {
+                        lanyrd.each(people, function (person) {
                             checkPerson(key, person);
                         });
                     });
@@ -1568,11 +1571,11 @@ Example:
             });
 
             // Now sort each array by score.
-            utils.invoke(merged, 'sort', comparator);
+            lanyrd.invoke(merged, 'sort', comparator);
             return merged;
         }
 
-        return utils.when.apply(null, resources).pipe(fetchRelated).pipe(mergeRelated);
+        return lanyrd.when.apply(null, resources).pipe(fetchRelated).pipe(mergeRelated);
     };
 })(this.lanyrd);
 /*
@@ -1588,41 +1591,46 @@ Example:
     "use strict";
 
     lanyrd.topics = function topics (resources) {
-        
-        // Check if resources have not been fetched.
-        //
-        // (!) Dangerous check. Makes assumption of all the resources
-        //     based of one resource.
+        resources = (lanyrd.isArray(resources)) ? resources : [resources];
 
-        if(!resources[0].fetched()){
-            resources = lanyrd.utils.map(resources, function (resource) {
-                return resource.fetch();
-            });
-        }
+        // Check if resources have not been fetched.
+        resources = lanyrd.map(resources, function (resource) {
+            return resource.fetched() ? resource : resource.fetch();
+        });
 
         // Return a promise. Its resolving callback is passed 
         // the tag's occurance object.
 
-        return lanyrd.utils.when(resources)
+        return lanyrd.when(resources)
         .pipe(collectTags);
     };
 
     // Create the tag's occurance object.
 
     function collectTags() {
-        var deferred = new lanyrd.utils.deferred(),
+        var deferred = new lanyrd.deferred(),
             promise = deferred.promise(),
             tagMap = {};
 
-        lanyrd.utils.each(arguments, function (item) {
-            lanyrd.utils.each(item[0].get('conference.topics'), function (topic) {
-                if (tagMap[topic.name]) {
-                    tagMap[topic.name]++;
-                } else {
-                    tagMap[topic.name] = 1;
-                }
+        function addTag(topic) {
+            if (tagMap[topic.name]) {
+                tagMap[topic.name]++;
+            } else {
+                tagMap[topic.name] = 1;
+            }
+        }
+
+        // Handle for arguments inconsistency occurring differently when 
+        // one or multiple resources are passed in.
+
+        if (lanyrd.isArray(arguments[0])) {
+            // Multiple conference resources
+            lanyrd.each(arguments, function (resource) {
+                lanyrd.each(resource[0].get('conference.topics'), addTag);
             });
-        });
+        } else {
+            lanyrd.each(arguments[0].get('conference.topics'), addTag);
+        }
 
         deferred.resolve(tagMap);
         return promise;
