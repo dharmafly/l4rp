@@ -122,7 +122,7 @@
             days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
             icon = document.createElement('time');
 
-        icon.datetime = datetime;
+        icon.setAttribute('datetime', datetime);
         icon.className = 'event-start-date';
         icon.title = days[date.getDay()] + ', ' + element.textContent;
 
