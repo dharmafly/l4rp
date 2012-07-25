@@ -35,6 +35,7 @@
                     upcomingConference:'<section class="lanyrd-series-upcoming-conference callout">' + 
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h1><a href="{{web_url}}">{{name}}</a></h1>' +
+                    '<p class="lanyrd-series-time"></p>' +
                     '<p>{{tagline}}</p><p><a href="{{web_url}}">&raquo; Read more & sign up on Lanyrd</a>' +
                     '</p><ul class="lanyrd-series-topics"></ul>' +
                     '<div class="lanyrd-series-attending"></div></section>',
@@ -56,9 +57,24 @@
 
             }).done(function (html, conferences) {
 
+                // render the date icon for each event
                 $('.event-start-date').each(function (i, val) {
                     var datetime = $(this).attr('datetime');
                     dateIcon(datetime, this);
+                });
+
+                // request the time of each event
+                $('.lanyrd-series-time').each(function (i, val) {
+                    var self = this,
+                        opts = {
+                            url: $(this).siblings('h1').find('a').attr('href'),
+                            selector: '.dtstart .time',
+                            extract: 'text'
+                        }
+
+                    $.getJSON('http://dharmafly.nsql.jit.su/?callback=?', opts, function (data) {
+                        if (data[0]) self.textContent = data[0].text.trim();
+                    });
                 });
 
                 // build and render the topics for each conference

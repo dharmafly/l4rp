@@ -198,6 +198,9 @@ footer .credit .df {
 .lanyrd-series-upcoming > h3 {
     display:none;
 }
+.lanyrd-series-time {
+    font-weight: bold;
+}
 .lanyrd-series-upcoming section:nth-child(even), .lanyrd-series-past section:nth-child(even) {
     -webkit-transform: rotate(-1deg); 
     -moz-transform: rotate(-1deg); 
