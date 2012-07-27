@@ -22,7 +22,7 @@
     }
     
     function setupLocationMap(){
-        cmd('http://code.leafletjs.com/leaflet-0.3.1/leaflet.js', createLocationMap);
+        cmd('http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.js', createLocationMap);
     }
     
     
