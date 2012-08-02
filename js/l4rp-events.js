@@ -64,16 +64,26 @@
                 });
 
                 // request the time of each event
-                $('.lanyrd-series-time').each(function (i, val) {
-                    var self = this,
-                        opts = {
-                            url: $(this).siblings('h1').find('a').attr('href'),
-                            selector: '.dtstart .time',
-                            extract: 'text'
-                        }
+                var $timeElements = $('.lanyrd-series-time'),
+                    times = [], 
+                    url;
 
-                    $.getJSON('http://dharmafly.nsql.jit.su/?callback=?', opts, function (data) {
-                        if (data[0]) self.textContent = data[0].text.trim();
+                $timeElements.each(function (i, val) {
+                    times.push({
+                        url: $(this).siblings('h1').find('a').attr('href'),
+                        selector: '.dtstart .time',
+                        extract: 'text'
+                    });
+                });
+
+                times = encodeURIComponent(JSON.stringify(times));
+                url = 'http://dharmafly.nsql.jit.su/?q=' + times + '&callback=?';
+
+                $.getJSON(url, function (data) {
+                    $timeElements.each(function (i, val) {
+                        if (data[i].results.length > 0) {
+                            $(this).text(data[i].results[0].text);
+                        }
                     });
                 });
 
