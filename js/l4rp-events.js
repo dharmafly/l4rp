@@ -182,7 +182,7 @@
 
         cmd(
             'jquery/jquery-1.7.2.min.js',
-            'lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v1',
+            'lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v2',
             createSeriesWidget,
             {path:'../js/vendor/'}
         );
