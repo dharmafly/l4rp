@@ -246,6 +246,9 @@ section.lanyrd-series-past-conference h1 {
 section.callout .event-start-date {
     font-size: 2.17em;
 }
+section.lanyrd-series-past-conference .event-start-date {
+    font-size:1.5em;
+}
 .event-start-date .month {
     background:#940000;
     color:#fff;
