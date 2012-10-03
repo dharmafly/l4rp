@@ -30,8 +30,10 @@
             options = {
                 templates: {
                     wrapper:'<div class="lanyrd-series">{{content}}</div>',
+
                     upcoming:'<section class="lanyrd-series-upcoming"><h3>Upcoming Events</h3>' +
                     '<div>{{conferences}}</div></section>',
+
                     upcomingConference:'<section class="lanyrd-series-upcoming-conference callout">' + 
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h1><a href="{{web_url}}">{{name}}</a></h1>' +
@@ -39,12 +41,16 @@
                     '<p>{{tagline}}</p><p><a href="{{web_url}}">&raquo; Read more & sign up on Lanyrd</a>' +
                     '</p><ul class="lanyrd-series-topics"></ul>' +
                     '<div class="lanyrd-series-attending"></div></section>',
-                    past:'<div class="lanyrd-series-past"><h3>Past Events</h3><div>{{conferences}}</div></div>',
+
+                    past:'<section class="lanyrd-series-past"><h3>Past Events</h3>' +
+                    '<div>{{conferences}}</div></section>',
+
                     pastConference:'<section class="lanyrd-series-past-conference callout">' +
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h1><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h1>' +
                     //'<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
                     '<div class="lanyrd-series-more-info"></div></section>',
+
                     error:'Oops. We couldn\'t load the details just now.'
                 }
             };
@@ -108,7 +114,7 @@
                 });
 
                 // Load the people widgets
-                $('.lanyrd-series-attending').each(function (i, val) {
+                $('.lanyrd-series-attending, .lanyrd-series-past').each(function (i, val) {
                     var $link   = $(this).siblings('p').children('a'),
                         href    = $link.attr('href'),
                         dots    = loadingDots($link[0], {reset:true,interval:600}),
