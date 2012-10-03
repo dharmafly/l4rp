@@ -34,7 +34,7 @@
                     upcoming:'<section class="lanyrd-series-upcoming"><h3>Upcoming Events</h3>' +
                     '<div>{{conferences}}</div></section>',
 
-                    upcomingConference:'<section class="lanyrd-series-upcoming-conference callout">' + 
+                    upcomingConference:'<section id="event-{{slug}}" class="lanyrd-series-upcoming-conference callout">' + 
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h1><a href="{{web_url}}">{{name}}</a></h1>' +
                     '<p class="lanyrd-series-time"></p>' +
@@ -53,7 +53,7 @@
                     '<div class="lanyrd-series-more-info"></div></section>',
                     */
 
-                    pastConference: '<section class="lanyrd-series-past-conference callout">' + 
+                    pastConference: '<section id="event-{{slug}}" class="lanyrd-series-past-conference callout">' + 
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h1><a href="{{web_url}}">{{name}}</a></h1>' +
                     '<p class="lanyrd-series-time"></p>' +
