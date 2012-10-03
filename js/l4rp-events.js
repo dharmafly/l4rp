@@ -45,11 +45,21 @@
                     past:'<section class="lanyrd-series-past"><h3>Past Events</h3>' +
                     '<div>{{conferences}}</div></section>',
 
+                    /*
                     pastConference:'<section class="lanyrd-series-past-conference callout">' +
                     '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
                     '<h1><a title="{{tagline}}" href="{{web_url}}">{{name}}</a></h1>' +
                     //'<p><a class="series-past-more-info" href="{{web_url}}">&raquo; More Info</a></p>' +
                     '<div class="lanyrd-series-more-info"></div></section>',
+                    */
+
+                    pastConference: '<section class="lanyrd-series-past-conference callout">' + 
+                    '<time datetime="{{start_date}}" class="event-start-date">{{dates}}</time>' +
+                    '<h1><a href="{{web_url}}">{{name}}</a></h1>' +
+                    '<p class="lanyrd-series-time"></p>' +
+                    '<p>{{tagline}}</p><p><a href="{{web_url}}">&raquo; Read more on Lanyrd</a>' +
+                    '</p><ul class="lanyrd-series-topics"></ul>' +
+                    '<div class="lanyrd-series-attending"></div></section>',
 
                     error:'Oops. We couldn\'t load the details just now.'
                 }
