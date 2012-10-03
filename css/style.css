@@ -179,13 +179,6 @@ footer .credit .df {
     font-style: normal;
 }
 /* events */
-.lanyrd-series-past .lanyrd-series-past-conference {
-    background:#505A50;
-    min-height:4.6em;
-}
-.lanyrd-series-past-conference .event-start-date .month {
-    background:rgb(107, 50, 50);
-}
 .lanyrd-series-topics {
     list-style:none;
     padding:0;
@@ -220,10 +213,6 @@ footer .credit .df {
 section.lanyrd-series-upcoming-conference h1 {
     font-size:1.8em;
 }
-section.lanyrd-series-past-conference h1 {
-    font-size:1.6em;
-    font-weight:normal;
-}
 .lanyrd-attendees-title a {
     text-decoration:none;
 }
@@ -245,9 +234,6 @@ section.lanyrd-series-past-conference h1 {
 }
 section.callout .event-start-date {
     font-size: 2.17em;
-}
-section.lanyrd-series-past-conference .event-start-date {
-    font-size:1.5em;
 }
 .event-start-date .month {
     background:#940000;
@@ -275,3 +261,21 @@ section.lanyrd-series-past-conference .event-start-date {
 time.event-start-date > * {
     display:block;
 }
+
+/* Past events */
+/*
+.lanyrd-series-past .lanyrd-series-past-conference {
+    background:#505A50;
+    min-height:4.6em;
+}
+.lanyrd-series-past-conference .event-start-date .month {
+    background:rgb(107, 50, 50);
+}
+section.lanyrd-series-past-conference h1 {
+    font-size:1.6em;
+    font-weight:normal;
+}
+section.lanyrd-series-past-conference .event-start-date {
+    font-size:1.5em;
+}
+*/
