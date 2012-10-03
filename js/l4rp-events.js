@@ -124,7 +124,7 @@
                 });
 
                 // Load the people widgets
-                $('.lanyrd-series-attending, .lanyrd-series-past').each(function (i, val) {
+                $('.lanyrd-series-attending').each(function (i, val) {
                     var $link   = $(this).siblings('p').children('a'),
                         href    = $link.attr('href'),
                         dots    = loadingDots($link[0], {reset:true,interval:600}),
