@@ -93,7 +93,7 @@
                 });
 
                 times = encodeURIComponent(JSON.stringify(times));
-                url = 'http://dharmafly.nsql.jit.su/?q=' + times + '&callback=?';
+                url = 'http://dharmafly.noodle.jit.su/?q=' + times + '&callback=?';
 
                 $.getJSON(url, function (data) {
                     $timeElements.each(function (i, val) {
