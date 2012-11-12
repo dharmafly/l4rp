@@ -305,13 +305,23 @@
         }
     };
 
-    each([each, map, filter, pluck, invoke], function (method) {
-        // method.name non-standard possible alternative is:
-        // (method + "").split('function ')[1].split('()')[0]
-        Collection.prototype[method.name] = function () {
-            return method.apply(this, [].concat.apply(this, arguments));
+    // Assign useful util methods on the collection prototype.
+
+    var utils = {
+      'each': each,
+      'map': map,
+      'pluck': pluck,
+      'filter': filter,
+      'invoke': invoke
+    };
+
+    each(utils, function (method, methodName) {
+        Collection.prototype[methodName] = function () {
+            return utils[methodName].apply(this, [].concat.apply(this, arguments));
         }
     });
+
+
 
     // The Resource acts as a request builder for the API and provides basic
     // methods for accessing the returned data. For most use cases it will be
@@ -636,13 +646,13 @@ Usage example:
         return;
     }
 
-    function nsql(seriesUrl) {
+    function noodle(seriesUrl) {
         var data = {
                 url: seriesUrl,
                 selector: "h4 a.summary.url",
                 extract: ["href"]
             },
-            url = 'http://dharmafly.nsql.jit.su?q=' + encodeURIComponent(JSON.stringify(data)) + '&callback=?';
+            url = 'http://dharmafly.noodle.jit.su?q=' + encodeURIComponent(JSON.stringify(data)) + '&callback=?';
 
         return getJSON(url);
     }
@@ -650,21 +660,21 @@ Usage example:
     lanyrd.series = function(seriesUrl, successCallback, errorCallback){
         var promises = [];
 
-        return nsql(seriesUrl)
+        return noodle(seriesUrl)
         .pipe(function(data) {
             var deferred = new lanyrd.deferred(),
                 promise = deferred.promise();
 
-            if (data.error || data.results.length == 0) {
-                deferred.reject(data);
+            if (data[0].error || data[0].results.length == 0) {
+                deferred.reject(data[0]);
             } else {
-                deferred.resolve(data);
+                deferred.resolve(data[0]);
             }
 
             return promise;
         })
         .pipe(function(data){
-            // Transform nsql conference results to full Lanyrd conference Resources
+            // Transform noodle conference results to full Lanyrd conference Resources
 
             lanyrd.each(data.results, function (item) {
                 promises.push(lanyrd.conference('http://lanyrd.com' + item.href).fetch());
