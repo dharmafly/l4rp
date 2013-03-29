@@ -1,4 +1,7 @@
 (function(window, document){
+    // 
+    document.documentElement.className += ' js';
+
     // LOCATION MAP
     function createLocationMap(){
         var cloudmadeApiKey = '2b0e47feae114fa39f72028297b0e59c',
@@ -11,10 +14,10 @@
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
                 maxZoom: 18
             }),
-            marker = new L.Marker(new L.LatLng(50.83337,-0.16400));
+            marker = new L.Marker(new L.LatLng(50.827006,-0.136063));
 
         map.addLayer(cloudmade)
-           .setView(new L.LatLng(50.83337,-0.16400), 16)
+           .setView(new L.LatLng(50.827006,-0.136063), 16)
            .addLayer(marker);
 
         // attach a given HTML content to the marker and immediately open it
@@ -143,7 +146,7 @@
         target.innerHTML = "<img alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
         
         // TEMP
-        document.write('<script id="flickr-loader" src="http://www.flickr.com/badge_code_v2.gne?count=10&size=m&layout=x&source=all_tag&tag=L4RP"><script>');
+        document.write('<script id="flickr-loader" src="http://www.flickr.com/badge_code_v2.gne?count=20&size=m&layout=x&source=all_tag&tag=L4RP"><script>');
         loader = document.getElementById('flickr-loader');
         source = loader.nextSibling;
         target.innerHTML = '';

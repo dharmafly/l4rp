@@ -5,32 +5,66 @@ body {
     margin: 0 auto;
     max-width: 40em;
     font-family: georgia, serif;
-    color: #31442e;
-    background-color: #dce5d6;
-    padding: 3% 4% 1%;
+    color: #fff;
+    background-color: #3e884c;
+    padding: 3% 4% 0;
+    line-height: 1.6em;
 }
 a {
-    color: #31442e;
+    color: #fff;
+    text-decoration: underline;
+}
+a:hover {
+    color: #3e884c;
+    background-color: #fff;
+    text-decoration: none;
 }
 a img {
     border: none;
 }
+img.l4rp {
+    float:left;
+}
 body > h1 {
-    background-color: #31442e;
-    margin-top:0;
-    color: #fff;
-    font-size:2.4em;
-                
-    -webkit-transform: rotate(-1deg); 
-    -moz-transform: rotate(-1deg); 
-    -o-transform: rotate(-1deg);
-    -ms-transform: rotate(-1deg);
+    margin:0;
+    padding:0;
 }
 body > h1 a {
-    color: #fff;
     text-decoration:none;
     display:block;
-    padding:0.38em 0.618em
+
+    /* clear floats */
+    overflow:hidden;
+    width:100%;
+}
+body > h1 img.l4rp {
+    float:left;
+}
+body > h1 span {
+    font-size: 2em;
+    line-height: 1em;
+    float:right;
+    width:5em;
+    border:5px solid #fff;
+    font-weight: normal;
+    background-color: #fff;
+    color: #3e884c;
+    margin-top:39px;
+    padding:10px;
+    display:block;
+                
+    -webkit-transform: rotate(-6deg) translate(-11px,-20px); 
+    -moz-transform: rotate(-6deg) translate(-11px,-20px); 
+    -o-transform: rotate(-6deg) translate(-11px,-20px);
+    -ms-transform: rotate(-6deg) translate(-11px,-20px);
+}
+body > h1 a:hover {
+    background-color: inherit;
+    color: inherit;
+}
+body > h1 a:hover span {
+    color: #3e884c;
+    background-color: #fff;
 }
 body > h2 {
     font-size:1.8em;
@@ -44,19 +78,30 @@ dt {
 }
 
 blockquote {
+    font-style: italic;
     padding-left:1em;
     margin-left:1.62em;
-    border-left:16px solid #CDDAC3;
+    border-left:16px solid #fff;
+    font-size: 1.2em;
 }
-blockquote, blockquote a {
-    color:#43723C;
+
+ul.theloop {
+    list-style: none;
+}
+
+section {
+    margin: 2.2em 0;
+}
+section h1 {
+    margin-top:0.38em;
+    font-size: 2em;
+    line-height:1.2em;
 }
 
 section.intro {
     font-size:1.2em;
 }
 section.intro p:first-child.note {
-    color: #31442e;
     font-weight:bold;
 }
 section.callout {
@@ -67,11 +112,10 @@ section.callout {
     background-color:rgba(255, 90, 0, 0.62);
     */
 
-    background-color: #31442e;
+    background-color: #3e884c;
                 
     color: #fff;
     padding:0.16em 1em 1em;
-    margin: 2.2em 0;
                 
     -webkit-transform: rotate(1deg); 
     -moz-transform: rotate(1deg); 
@@ -84,11 +128,6 @@ section.callout.alt {
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
 }
-
-section.callout h1 {
-    margin-top:0.38em;
-    font-size: 2em;
-}
 section.callout h1 a {
     text-decoration:none;
     word-wrap: break-word;
@@ -97,8 +136,8 @@ section.callout a {
     color: #fff;
 }
 section.callout a:hover {
-    background-color:#DCE5D6;
-    color:#31442E;
+    background-color:#fff;
+    color:#3e884c;
     text-decoration:none;
 }
 section.callout p {
@@ -118,15 +157,10 @@ section.callout p {
     border: 1px solid #fff;
     width: 32px;
 }
-.section-link {
-    position: relative;
-    margin: -0.62em 0 1.6em;
-    font-size: 1.6em;
-}
-.flickr-wrapper {
+html.js .flickr-wrapper {
     overflow-y: hidden;
 }
-#flickr-widget {
+html.js #flickr-widget {
     height: 250px;
     overflow:hidden;
     width: 2500px;
@@ -156,6 +190,9 @@ section.callout p {
     /* Gutter for smartphone scrolling */
     margin-right: 1em;
 }
+#map {
+    color:#3e884c;
+}
 body > footer {
     margin-top: 2em;
     overflow: auto;
@@ -165,12 +202,7 @@ footer .credit {
     float:right;
     font-size:0.9em;
 }
-footer .credit .df:hover {
-    color: #DCE5D6;
-    background-color: #75921b;
-}
 footer .credit .df {
-    color: #75921b;
     font-family: Calibri,Helvetica,Arial,sans-serif;
     text-decoration: none;
     text-transform: uppercase;
@@ -178,6 +210,7 @@ footer .credit .df {
     padding: 1px;
     font-style: normal;
 }
+
 /* events */
 .lanyrd-series-topics {
     list-style:none;
