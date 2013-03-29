@@ -1,5 +1,5 @@
 html {
-    background-color: #cddac3;
+    background-color: #111;
 }
 body {
     margin: 0 auto;
@@ -7,7 +7,7 @@ body {
     max-width: 40em;
     font-family: georgia, serif;
     color: #fff;
-    background-color: #111;
+    background-color: #3e884c;
     padding: 3% 4% 0;
     line-height: 1.6em;
 }
