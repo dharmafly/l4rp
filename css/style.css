@@ -3,7 +3,6 @@ html {
 }
 body {
     margin: 0 auto;
-    min-width: 379px;
     max-width: 40em;
     font-family: georgia, serif;
     color: #fff;
@@ -59,6 +58,27 @@ body > h1 span {
     -o-transform: rotate(-6deg) translate(-11px,-20px);
     -ms-transform: rotate(-6deg) translate(-11px,-20px);
 }
+
+@media only screen and (max-width: 580px) and (orientation: portrait) {
+    body > h1 img.l4rp {
+        display:none;
+    }
+    body > h1 span {
+        margin: 39px auto 0;
+        float: none;
+    }
+}
+@media only screen and (max-width: 395px) and (orientation: portrait) {
+    body > h1 span {
+        font-size: 1.6em;
+    }
+}
+@media only screen and (max-width: 320px) and (orientation: portrait) {
+    body > h1 span {
+        font-size: 1.2em;
+    }
+}
+
 body > h1 a:hover {
     background-color: inherit;
     color: inherit;
@@ -84,10 +104,6 @@ blockquote {
     margin-left:1.62em;
     border-left:16px solid #fff;
     font-size: 1.2em;
-}
-
-ul.theloop {
-    list-style: none;
 }
 
 section {
@@ -116,7 +132,7 @@ section.callout {
     background-color: #3e884c;
                 
     color: #fff;
-    padding:0.16em 1em 1em;
+    padding:0 1em 0.16em;
                 
     -webkit-transform: rotate(1deg); 
     -moz-transform: rotate(1deg); 
@@ -162,7 +178,7 @@ html.js .flickr-wrapper {
     overflow-y: hidden;
 }
 html.js #flickr-widget {
-    height: 250px;
+    height: 240px;
     overflow:hidden;
     width: 2500px;
 }
@@ -192,7 +208,7 @@ html.js #flickr-widget {
     margin-right: 1em;
 }
 #map {
-    color:#3e884c;
+    color:#0b190e;
 }
 body > footer {
     margin-top: 2em;

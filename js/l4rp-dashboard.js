@@ -5,7 +5,7 @@
     // LOCATION MAP
     function createLocationMap(){
         var cloudmadeApiKey = '2b0e47feae114fa39f72028297b0e59c',
-            popupHtml = 'Lab for the Recently Possible',
+            popupHtml = 'Lab for the Recently Possible, <br>45 Gloucester Street',
         
             /////
     
