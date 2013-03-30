@@ -110,9 +110,21 @@ section {
     margin: 2.2em 0;
 }
 section h1 {
+    padding: 0 0.16em;
     margin-top:0.38em;
     font-size: 2em;
     line-height:1.2em;
+    background-color: #fff;
+    color: #3e884c;
+    float: left;
+}
+
+section h1 a {
+    color: #3e884c;
+}
+
+section h1 + * {
+    clear:left;
 }
 
 section.intro {
@@ -123,15 +135,6 @@ section.intro p:first-child.note {
 }
 section.callout {
     font-size:1.2em;
-                
-    /*
-    background-color:#f83;
-    background-color:rgba(255, 90, 0, 0.62);
-    */
-
-    background-color: #3e884c;
-                
-    color: #fff;
     padding:0 1em 0.16em;
                 
     -webkit-transform: rotate(1deg); 
