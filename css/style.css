@@ -58,6 +58,16 @@ body > h1 span {
     -o-transform: rotate(-6deg) translate(-11px,-20px);
     -ms-transform: rotate(-6deg) translate(-11px,-20px);
 }
+body > h1 a:hover span {
+    border-style: dashed;
+    background-color: #3e884c;
+    color: #fff;
+}
+
+body > h1 a:hover {
+    background-color: inherit;
+    color: inherit;
+}
 
 @media only screen and (max-width: 580px) {
     body > h1 img.l4rp {
@@ -77,15 +87,6 @@ body > h1 span {
     body > h1 span {
         font-size: 1.2em;
     }
-}
-
-body > h1 a:hover {
-    background-color: inherit;
-    color: inherit;
-}
-body > h1 a:hover span {
-    color: #3e884c;
-    background-color: #fff;
 }
 body > h2 {
     font-size:1.8em;
@@ -132,6 +133,9 @@ section.intro {
 }
 section.intro p:first-child.note {
     font-weight:bold;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    padding: 1em 1.6em;
 }
 section.callout {
     font-size:1.2em;
@@ -151,6 +155,7 @@ section.callout.alt {
 section.callout h1 a {
     text-decoration:none;
     word-wrap: break-word;
+    color:#3e884c;
 }
 section.callout a {
     color: #fff;
@@ -251,7 +256,7 @@ footer .credit .df {
 .lanyrd-series-topics li a:hover {
     background:rgba(220, 229, 214, 0.715);
 }
-.lanyrd-series-upcoming > h3 {
+.lanyrd-series-upcoming > h1 {
     display:none;
 }
 .lanyrd-series-time {
@@ -262,6 +267,18 @@ footer .credit .df {
     -moz-transform: rotate(-1deg); 
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
+}
+.lanyrd-series section {
+    margin-top: 3em;
+}
+.lanyrd-series section h1 {
+    /* make space for date block */
+    max-width: 75%;
+    max-width: calc(100% - 3em);
+    max-width: -moz-calc(100% - 3em);
+    max-width: -webkit-calc(100% - 3em);
+    max-width: -o-calc(100% - 3em);
+    max-width: -ms-calc(100% - 3em);
 }
 section.lanyrd-series-upcoming-conference h1 {
     font-size:1.8em;
@@ -275,7 +292,7 @@ section.lanyrd-series-upcoming-conference h1 {
 .event-start-date {
     float:right;
     display:inline-block;
-    margin:0.75em 0 0.75em 0.5em;
+    margin:0.38em 0 0.75em 0.5em;
     position:relative;
     text-align:center;
     font-family:Helvetica, Arial, sans-serif;
@@ -289,7 +306,7 @@ section.callout .event-start-date {
     font-size: 2.17em;
 }
 .event-start-date .month {
-    background:#940000;
+    background:#640000;
     color:#fff;
     font-size:0.4em;
     border-top-left-radius:0.4em;

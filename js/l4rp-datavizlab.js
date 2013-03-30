@@ -51,10 +51,9 @@
             ext = devMode ? '.js' : '.min.js';
 
         cmd(
-            'jquery/jquery-1.7.2.min.js',
-            'lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v3',
-            createWidgets,
-            {path:'../js/vendor/'}
+            'http://code.jquery.com/jquery-1.7.1.min.js',
+            '../js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v3',
+            createWidgets
         );
     }
 

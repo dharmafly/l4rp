@@ -1,5 +1,5 @@
 (function(window, document){
-    // 
+    // e.g. for hiding Flickr wrapper when no JavaScript present
     document.documentElement.className += ' js';
 
     // LOCATION MAP
@@ -126,12 +126,10 @@
     }
     
     function setupLanyrd(){
-        //cmd('js/vendor/lanyrd/lanyrd.min.js', 'js/vendor/lanyrd/lanyrd-widget.min.js', createWidgets);
         cmd(
-            'jquery/jquery-1.7.2.min.js',
-            'lanyrd/lanyrd-jquery-ext-v0.2.0.min.js?v3',
-            createWidgets,
-            {path:'js/vendor/'}
+            'http://code.jquery.com/jquery-1.7.1.min.js',
+            'js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0.min.js?v3',
+            createWidgets
         );
     }
     

@@ -31,7 +31,7 @@
                 templates: {
                     wrapper:'<div class="lanyrd-series">{{content}}</div>',
 
-                    upcoming:'<section class="lanyrd-series-upcoming"><h3>Upcoming Events</h3>' +
+                    upcoming:'<section class="lanyrd-series-upcoming"><h1>Upcoming Events...</h1>' +
                     '<div>{{conferences}}</div></section>',
 
                     upcomingConference:'<section id="event-{{slug}}" class="lanyrd-series-upcoming-conference callout">' + 
@@ -42,7 +42,7 @@
                     '</p><ul class="lanyrd-series-topics"></ul>' +
                     '<div class="lanyrd-series-attending"></div></section>',
 
-                    past:'<section class="lanyrd-series-past"><h3>Past Events</h3>' +
+                    past:'<section class="lanyrd-series-past"><h1>Past Events...</h1>' +
                     '<div>{{conferences}}</div></section>',
 
                     /*
@@ -197,10 +197,9 @@
             ext = devMode ? '.js' : '.min.js';
 
         cmd(
-            'jquery/jquery-1.7.2.min.js',
-            'lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v3',
-            createSeriesWidget,
-            {path:'../js/vendor/'}
+            'http://code.jquery.com/jquery-1.7.1.min.js',
+            '../js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v3',
+            createSeriesWidget
         );
     }
 
