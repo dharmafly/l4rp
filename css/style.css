@@ -59,7 +59,7 @@ body > h1 span {
     -ms-transform: rotate(-6deg) translate(-11px,-20px);
 }
 
-@media only screen and (max-width: 580px) and (orientation: portrait) {
+@media only screen and (max-width: 580px) {
     body > h1 img.l4rp {
         display:none;
     }
@@ -68,12 +68,12 @@ body > h1 span {
         float: none;
     }
 }
-@media only screen and (max-width: 395px) and (orientation: portrait) {
+@media only screen and (max-width: 395px) {
     body > h1 span {
         font-size: 1.6em;
     }
 }
-@media only screen and (max-width: 320px) and (orientation: portrait) {
+@media only screen and (max-width: 320px) {
     body > h1 span {
         font-size: 1.2em;
     }
