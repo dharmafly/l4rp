@@ -7,7 +7,7 @@ body {
     font-family: georgia, serif;
     color: #fff;
     background-color: #3e884c;
-    padding: 3% 4% 0;
+    padding: 3% 4% 3%;
     line-height: 1.6em;
 }
 a {
@@ -29,9 +29,13 @@ body > h1 {
 body > h1 a {
     text-decoration:none;
     display:block;
-    background: url(../images/l4rp.svg) no-repeat center left;
+    background: url(../images/l4rp-bw.svg) no-repeat center left;
     background-size: 591px 909px;
+    transition: background-size 0.16s ease-out;
+    -moz-transition: background-size 0.16s ease-out;
     -webkit-transition: background-size 0.16s ease-out;
+    -o-transition: background-size 0.16s ease-out;
+    -ms-transition: background-size 0.16s ease-out;
     min-height: 256px;
 
     /* clear floats */
@@ -74,8 +78,13 @@ body > h1 a:hover {
 }
 
 @media only screen and (max-width: 580px) {
-    body > h1 img.l4rp {
-        display:none;
+    body > h1 a {
+        background: none;
+        transition: none;
+        -moz-transition: none;
+        -webkit-transition: none;
+        -o-transition: none;
+        -ms-transition: none;
     }
     body > h1 span {
         margin: 39px auto 0;
@@ -92,6 +101,7 @@ body > h1 a:hover {
         font-size: 1.2em;
     }
 }
+
 body > h2 {
     font-size:1.8em;
 }
@@ -127,7 +137,7 @@ section h1 {
 section h1 a {
     color: #3e884c;
     text-decoration: none;
-    border: 12px solid yellow;
+    border-bottom: 2px solid cyan;
 }
 
 section h1 + * {
@@ -235,6 +245,7 @@ body > footer {
 html.no-svg-image body > h1 a {
     background-image: url(../images/nodewing-vertical.png);
 }
+
 footer .credit {
     font-style: italic;
     font-size:0.9em;
@@ -243,7 +254,7 @@ footer .credit {
     right: 0;
 }
 
-/*
+/* Dharmafly Classic
 footer .credit .df {
     font-family: Calibri,Helvetica,Arial,sans-serif;
     text-decoration: none;
@@ -258,13 +269,13 @@ footer .credit .df {
     text-indent: -9999em;
     background: url(../images/dharmafly-white.svg) no-repeat;
     width: 200px;
-    height: 124px;
+    height: 128px;
     display: block;
     margin-top: 1em;
 }
 
 html.no-svg-image footer .credit .df {
-    background-image: url(../images/dharmafly-white.png);
+    background-image: url(../images/dharmafly-white-200.png);
 }
 
 /* events */
