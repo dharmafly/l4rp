@@ -1,7 +1,4 @@
 (function(window, document){
-    // e.g. for hiding Flickr wrapper when no JavaScript present
-    document.documentElement.className += ' js';
-
     // LOCATION MAP
     function createLocationMap(){
         var cloudmadeApiKey = '2b0e47feae114fa39f72028297b0e59c',

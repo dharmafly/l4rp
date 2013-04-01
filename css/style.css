@@ -22,9 +22,6 @@ a:hover {
 a img {
     border: none;
 }
-img.l4rp {
-    float:left;
-}
 body > h1 {
     margin:0;
     padding:0;
@@ -32,13 +29,20 @@ body > h1 {
 body > h1 a {
     text-decoration:none;
     display:block;
+    background: url(../images/l4rp.svg) no-repeat center left;
+    background-size: 591px 909px;
+    -webkit-transition: background-size 0.16s ease-out;
+    min-height: 256px;
 
     /* clear floats */
     overflow:hidden;
     width:100%;
 }
-body > h1 img.l4rp {
-    float:left;
+html.no-svg-image body > h1 a {
+    background-image: url(../images/l4rp.png);
+}
+body > h1 a:hover {
+    background-size: 147.75px 227.25px; 
 }
 body > h1 span {
     font-size: 2em;
@@ -52,16 +56,16 @@ body > h1 span {
     margin-top:39px;
     padding:10px;
     display:block;
-                
-    -webkit-transform: rotate(-6deg) translate(-11px,-20px); 
-    -moz-transform: rotate(-6deg) translate(-11px,-20px); 
+    transform: rotate(-6deg) translate(-11px,-20px);
+    -webkit-transform: rotate(-6deg) translate(-11px,-20px);
+    -moz-transform: rotate(-6deg) translate(-11px,-20px);
     -o-transform: rotate(-6deg) translate(-11px,-20px);
     -ms-transform: rotate(-6deg) translate(-11px,-20px);
 }
 body > h1 a:hover span {
-    border-style: dashed;
     background-color: #3e884c;
     color: #fff;
+    border-style: dashed;
 }
 
 body > h1 a:hover {
@@ -122,6 +126,8 @@ section h1 {
 
 section h1 a {
     color: #3e884c;
+    text-decoration: none;
+    border: 12px solid yellow;
 }
 
 section h1 + * {
@@ -135,20 +141,21 @@ section.intro p:first-child.note {
     font-weight:bold;
     font-size: 1.2em;
     line-height: 1.2em;
-    padding: 1em 1.6em;
+    padding: 0.38em 1.6em 0.62em;
 }
 section.callout {
     font-size:1.2em;
     padding:0 1em 0.16em;
-                
-    -webkit-transform: rotate(1deg); 
-    -moz-transform: rotate(1deg); 
+    transform: rotate(1deg);
+    -webkit-transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
     -o-transform: rotate(1deg);
     -ms-transform: rotate(1deg);
 }
 section.callout.alt {
-    -webkit-transform: rotate(-1deg); 
-    -moz-transform: rotate(-1deg); 
+    transform: rotate(-1deg);
+    -webkit-transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
 }
@@ -193,15 +200,16 @@ html.js #flickr-widget {
 .flickr_badge_image {
     float:left;
     margin:0 5px 5px 0;
-                
-    -webkit-transform: rotate(-1deg); 
-    -moz-transform: rotate(-1deg); 
+    transform: rotate(-1deg);
+    -webkit-transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
 }
 .flickr_badge_image:nth-child(even) {
-    -webkit-transform: rotate(1deg); 
-    -moz-transform: rotate(1deg); 
+    transform: rotate(1deg);
+    -webkit-transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
     -o-transform: rotate(1deg);
     -ms-transform: rotate(1deg);
 }
@@ -219,14 +227,23 @@ html.js #flickr-widget {
     color:#0b190e;
 }
 body > footer {
-    margin-top: 2em;
-    overflow: auto;
+    position: relative;
+    background: url(../images/nodewing-vertical.svg) no-repeat;
+    min-width: 430px;
+    min-height: 505px;
+}
+html.no-svg-image body > h1 a {
+    background-image: url(../images/nodewing-vertical.png);
 }
 footer .credit {
     font-style: italic;
-    float:right;
     font-size:0.9em;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
+
+/*
 footer .credit .df {
     font-family: Calibri,Helvetica,Arial,sans-serif;
     text-decoration: none;
@@ -234,6 +251,20 @@ footer .credit .df {
     font-weight: bold;
     padding: 1px;
     font-style: normal;
+}
+*/
+
+footer .credit .df {
+    text-indent: -9999em;
+    background: url(../images/dharmafly-white.svg) no-repeat;
+    width: 200px;
+    height: 124px;
+    display: block;
+    margin-top: 1em;
+}
+
+html.no-svg-image footer .credit .df {
+    background-image: url(../images/dharmafly-white.png);
 }
 
 /* events */
@@ -263,8 +294,9 @@ footer .credit .df {
     font-weight: bold;
 }
 .lanyrd-series-upcoming section:nth-child(even), .lanyrd-series-past section:nth-child(even) {
-    -webkit-transform: rotate(-1deg); 
-    -moz-transform: rotate(-1deg); 
+    transform: rotate(-1deg);
+    -webkit-transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
 }
