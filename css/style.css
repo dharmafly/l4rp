@@ -42,7 +42,7 @@ body > h1 a {
     overflow:hidden;
     width:100%;
 }
-html.no-svg-image body > h1 a {
+html.no-svg body > h1 a {
     background-image: url(../images/l4rp.png);
 }
 body > h1 a:hover {
@@ -203,18 +203,58 @@ html.js .flickr-wrapper {
     overflow-y: hidden;
 }
 html.js #flickr-widget {
-    height: 240px;
+    height: 250px;
     overflow:hidden;
     width: 2500px;
 }
 .flickr_badge_image {
     float:left;
-    margin:0 5px 5px 0;
+    margin: 5px;
     transform: rotate(-1deg);
     -webkit-transform: rotate(-1deg);
     -moz-transform: rotate(-1deg);
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
+}
+.flickr_badge_image a {
+    text-decoration: none;
+    background-color: #fff;
+    padding: 2px;
+    display:block;
+}
+.flickr_badge_image img {
+    display:block;
+    filter: saturate(20%) hue-rotate(180deg);
+    -moz-filter: saturate(20%) hue-rotate(180deg);
+    -webkit-filter: saturate(20%) hue-rotate(180deg);
+    -o-filter: saturate(20%) hue-rotate(180deg);
+    -ms-filter: saturate(20%) hue-rotate(180deg);
+
+    transition: all 0.16s ease-out;
+    -moz-transition: all 0.16s ease-out;
+    -webkit-transition: all 1s ease-in;
+    -o-transition: all 0.16s ease-out;
+    -ms-transition: all 0.16s ease-out;
+}
+.flickr_badge_image a:hover img {
+    filter: none;
+    -moz-filter: none;
+    -webkit-filter: none;
+    -o-filter: none;
+    -ms-filter: none;
+
+    transition: all 0.16s ease-out;
+    -moz-transition: all 0.16s ease-out;
+    -webkit-transition: all 0.16s ease-out;
+    -o-transition: all 0.16s ease-out;
+    -ms-transition: all 0.16s ease-out;
+}
+#map {
+    filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
+    -moz-filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
+    -webkit-filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
+    -o-filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
+    -ms-filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
 }
 .flickr_badge_image:nth-child(even) {
     transform: rotate(1deg);
@@ -242,7 +282,7 @@ body > footer {
     min-width: 430px;
     min-height: 505px;
 }
-html.no-svg-image body > h1 a {
+html.no-svg footer {
     background-image: url(../images/nodewing-vertical.png);
 }
 
@@ -264,18 +304,25 @@ footer .credit .df {
     font-style: normal;
 }
 */
-
+/* Background CSS
 footer .credit .df {
     text-indent: -9999em;
     background: url(../images/dharmafly-white.svg) no-repeat;
     width: 200px;
     height: 128px;
+
+html.no-svg footer .credit .df {
+    background-image: url(../images/dharmafly-white-200.png);
+}
+*/
+
+footer .credit .df {
     display: block;
     margin-top: 1em;
 }
 
-html.no-svg-image footer .credit .df {
-    background-image: url(../images/dharmafly-white-200.png);
+footer .credit a {
+    background-color: transparent;
 }
 
 /* events */
