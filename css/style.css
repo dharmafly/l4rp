@@ -85,13 +85,14 @@ body > h1 a:hover {
         -webkit-transition: none;
         -o-transition: none;
         -ms-transition: none;
+        min-height: 0;
     }
     body > h1 span {
         margin: 39px auto 0;
         float: none;
     }
 }
-@media only screen and (max-width: 395px) {
+@media only screen and (max-width: 400px) {
     body > h1 span {
         font-size: 1.6em;
     }
@@ -137,7 +138,7 @@ section h1 {
 section h1 a {
     color: #3e884c;
     text-decoration: none;
-    border-bottom: 2px solid cyan;
+    border-bottom: 2px solid yellow;
 }
 
 section h1 + * {
@@ -152,6 +153,12 @@ section.intro p:first-child.note {
     font-size: 1.2em;
     line-height: 1.2em;
     padding: 0.38em 1.6em 0.62em;
+}
+@media only screen and (max-width: 580px) {
+    section {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
 }
 section.callout {
     font-size:1.2em;
@@ -249,12 +256,12 @@ html.js #flickr-widget {
     -o-transition: all 0.16s ease-out;
     -ms-transition: all 0.16s ease-out;
 }
-#map {
-    filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
-    -moz-filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
-    -webkit-filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
-    -o-filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
-    -ms-filter: brightness(75%) contrast(200%) saturate(50%) hue-rotate(40deg);
+#map img {
+    filter: hue-rotate(40deg);
+    -moz-filter: hue-rotate(40deg);
+    -webkit-filter: hue-rotate(40deg);
+    -o-filter: hue-rotate(40deg);
+    -ms-filter: hue-rotate(40deg);
 }
 .flickr_badge_image:nth-child(even) {
     transform: rotate(1deg);
@@ -278,12 +285,14 @@ html.js #flickr-widget {
 }
 body > footer {
     position: relative;
-    background: url(../images/nodewing-vertical.svg) no-repeat;
-    min-width: 430px;
-    min-height: 505px;
 }
-html.no-svg footer {
-    background-image: url(../images/nodewing-vertical.png);
+body > footer:before {
+    content: url(../images/nodewing-vertical.svg);
+    width: 208px;
+    height: 484px;
+}
+html.no-svg footer:before {
+    content: url(../images/nodewing-vertical.png);
 }
 
 footer .credit {
@@ -294,7 +303,17 @@ footer .credit {
     right: 0;
 }
 
-/* Dharmafly Classic
+@media only screen and (max-width: 460px) {
+    body > footer .credit {
+        position: static;
+        text-align: center;
+    }
+    body > footer .credit .df {
+        margin: 0.5em auto 0;
+    }
+}
+
+/* Dharmafly Classic */
 footer .credit .df {
     font-family: Calibri,Helvetica,Arial,sans-serif;
     text-decoration: none;
@@ -303,18 +322,17 @@ footer .credit .df {
     padding: 1px;
     font-style: normal;
 }
-*/
-/* Background CSS
+/* Background images */
 footer .credit .df {
     text-indent: -9999em;
     background: url(../images/dharmafly-white.svg) no-repeat;
     width: 200px;
     height: 128px;
+}
 
 html.no-svg footer .credit .df {
     background-image: url(../images/dharmafly-white-200.png);
 }
-*/
 
 footer .credit .df {
     display: block;
