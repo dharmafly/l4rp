@@ -37,11 +37,6 @@ body > h1 a {
 body.home > h1 a {
     background: url(../images/l4rp-bw.svg) no-repeat center left;
     background-size: 591px 909px;
-    transition: background-size 0.16s ease-out;
-    -moz-transition: background-size 0.16s ease-out;
-    -webkit-transition: background-size 0.16s ease-out;
-    -o-transition: background-size 0.16s ease-out;
-    -ms-transition: background-size 0.16s ease-out;
     min-height: 256px;
 }
 html.no-svg body.home > h1 a {
@@ -68,14 +63,21 @@ body > h1 span {
     -o-transform: rotate(-6deg) translate(-11px,-20px);
     -ms-transform: rotate(-6deg) translate(-11px,-20px);
 }
-body.home > h1 span {
-    font-size: 2em;
-    margin-top: 39px;
+body.home > h1 a, body > h1 span {
+    transition: all 0.16s ease-out 0.1s;
+    -moz-transition: all 0.16s ease-out 0.1s;
+    -webkit-transition: all 0.16s ease-out 0.1s;
+    -o-transition: all 0.16s ease-out 0.1s;
+    -ms-transition: all 0.16s ease-out 0.1s;
 }
 body > h1 a:hover span {
     background-color: #3e884c;
     color: #fff;
     border-style: dashed;
+}
+body.home > h1 span {
+    font-size: 2em;
+    margin-top: 39px;
 }
 
 body > h1 a:hover {
