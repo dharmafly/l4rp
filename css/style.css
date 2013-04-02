@@ -94,17 +94,18 @@ body > h1 a:hover {
         min-height: 0;
     }
     body > h1 span {
-        margin: 39px auto 0;
+        margin-left: auto;
+        margin-right: auto;
         float: none;
     }
 }
 @media only screen and (max-width: 400px) {
-    body > h1 span {
+    body.home > h1 span {
         font-size: 1.6em;
     }
 }
 @media only screen and (max-width: 320px) {
-    body > h1 span {
+    body.home > h1 span {
         font-size: 1.2em;
     }
 }
