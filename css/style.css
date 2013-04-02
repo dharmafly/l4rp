@@ -230,11 +230,11 @@ html.js #flickr-widget {
     -o-filter: saturate(20%) hue-rotate(180deg);
     -ms-filter: saturate(20%) hue-rotate(180deg);
 
-    transition: all 0.16s ease-out;
-    -moz-transition: all 0.16s ease-out;
-    -webkit-transition: all 1s ease-in;
-    -o-transition: all 0.16s ease-out;
-    -ms-transition: all 0.16s ease-out;
+    transition: all 0.68s ease-out;
+    -moz-transition: all 0.68s ease-out;
+    -webkit-transition: all 0.68s ease-in;
+    -o-transition: all 0.68s ease-out;
+    -ms-transition: all 0.68s ease-out;
 }
 .flickr_badge_image a:hover img {
     filter: none;
