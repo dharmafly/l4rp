@@ -2,8 +2,7 @@
 	'use strict';
 
 	var htmlElem = document.documentElement,
-		className = htmlElem.className,
-		img;
+		className = htmlElem.className;
 
 	// Add 'js' to className
 	className = className ? className + ' ' : '';

@@ -1,11 +1,14 @@
-(function(window, document){
+(function(window, document, cmd){
+    'use strict';
+
     // LOCATION MAP
     function createLocationMap(){
         var cloudmadeApiKey = '2b0e47feae114fa39f72028297b0e59c',
             popupHtml = 'Lab for the Recently Possible, <br>45 Gloucester Street',
         
             /////
-    
+
+            L = window.L,
             map = new L.Map('map', {scrollWheelZoom: false}),
             cloudmade = new L.TileLayer('http://{s}.tile.cloudmade.com/' + cloudmadeApiKey + '/997/256/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
@@ -62,9 +65,10 @@
 
     function createEventWidget(element, loadingElement, eventHref, options) {
         var intervalDelay = 618,
-            intervalRef, lanyrdWidget;
+            intervalRef, lanyrdWidget,
+            lanyrd = window.lanyrd;
 
-        if (window.lanyrd && element && loadingElement) {
+        if (lanyrd && element && loadingElement) {
             intervalRef = window.setInterval(function(){
                 loadingElement.textContent += ".";
             }, intervalDelay);
@@ -84,6 +88,7 @@
         return lanyrdWidget;
     }
     
+    /*
     function getUpcomingEvents(profileUrl){
         var person = lanyrd.person(profileUrl),
             now  = new Date().getTime();
@@ -104,25 +109,23 @@
             
                 });
     }
-    
+    */
+
+    /*
     function enhanceLanyrdWidget(lanyrdWidget){
         lanyrdWidget.done(function(){
             if (document.querySelectorAll && document.addEventListener){
-                    lanyrd.utils.each(document.querySelectorAll('.lanyrd-people a'), function(profileLink){
-                        var profileUrl = profileLink.href;
-                        profileLink.addEventListener('click', function(event){
-                                getUpcomingEvents(profileUrl)
-                                    .done(function(conferences){
-                                        if (conferences.length){
-                                            console.log(conferences);
-                                        }
- });
-                                    event.preventDefault();
-                        }, false);
-        })
+                lanyrd.utils.each(document.querySelectorAll('.lanyrd-people a'), function(profileLink){
+                    var profileUrl = profileLink.href;
+                    profileLink.addEventListener('click', function(event){
+                        getUpcomingEvents(profileUrl);
+                        event.preventDefault();
+                    }, false);
+                });
             }
         });
     }
+    */
     
     function setupLanyrd(){
         cmd(
@@ -167,7 +170,7 @@
     // ANALYTICS
     function setupAnalytics(){
         var _gaq = window._gaq || (window._gaq = []),
-        gaUrl = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'
+        gaUrl = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         
         _gaq.push(['_setAccount', 'UA-2150808-20']);
         _gaq.push(['_trackPageview']);
@@ -179,11 +182,11 @@
     /////
 
     // CREDITS
+    /*
     function setupCredits(){
         var logo = document.getElementById('df-anchor');
 
         function listener(){
-            debugger;
             window.location.href = 'http://dharmafly.com';
         }
 
@@ -196,16 +199,17 @@
             }
         }
     }
+    */
 
     /////
     
     
     // GO!
-    setupCredits();
+    //setupCredits();
     setupLocationMap();
     setupLanyrd();
     //setupFlickr();
     setupFlickrTemp();
     setupAnalytics();
 
-}(window, document));
+}(this, this.document, this.cmd));
