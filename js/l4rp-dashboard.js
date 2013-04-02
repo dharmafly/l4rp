@@ -22,7 +22,9 @@
     }
     
     function setupLocationMap(){
-        cmd('http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.js', createLocationMap);
+        if (window.location.search.indexOf('offline') === -1){
+            cmd('http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.js', createLocationMap);
+        }
     }
     
     
@@ -134,11 +136,12 @@
     /////
     
     // FLICKR
+    /*
     function setupFlickr(){
         var target = document.getElementById('flickr-widget'),
             loader, source;
             
-        target.innerHTML = "<img alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
+        target.innerHTML = "<img class='loading' alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
         
         // TEMP
         document.write('<script id="flickr-loader" src="http://www.flickr.com/badge_code_v2.gne?count=20&size=m&layout=x&source=all_tag&tag=L4RP"><script>');
@@ -152,9 +155,10 @@
             source.parentNode.removeChild(source);
         }
     }
+    */
     function setupFlickrTemp(){
         var target = document.getElementById('flickr-widget');
-        target.innerHTML = "<img alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
+        target.innerHTML = "<img class='loading' alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
     }
     
     /////
@@ -173,9 +177,31 @@
     
     
     /////
+
+    // CREDITS
+    function setupCredits(){
+        var logo = document.getElementById('df-anchor');
+
+        function listener(){
+            debugger;
+            window.location.href = 'http://dharmafly.com';
+        }
+
+        if (logo){
+            if ('addEventListener' in logo){
+                logo.addEventListener('click', listener, true);
+            }
+            else if ('attachEvent' in logo){
+                logo.attachEvent('click', listener);
+            }
+        }
+    }
+
+    /////
     
     
     // GO!
+    setupCredits();
     setupLocationMap();
     setupLanyrd();
     //setupFlickr();

@@ -13,6 +13,7 @@ body {
 a {
     color: #fff;
     text-decoration: underline;
+    font-weight: bold;
 }
 a:hover {
     color: #3e884c;
@@ -223,6 +224,10 @@ html.js #flickr-widget {
     overflow:hidden;
     width: 2500px;
 }
+#flickr-widget img.loading {
+    padding: 10px 5px;
+    background-color: #fff;
+}
 .flickr_badge_image {
     float:left;
     margin: 5px;
@@ -310,6 +315,8 @@ footer .credit {
     position: absolute;
     bottom: 0;
     right: 0;
+    padding:0;
+    margin:0;
 }
 
 @media only screen and (max-width: 460px) {
@@ -333,23 +340,17 @@ footer .credit .df {
 }
 /* Background images */
 footer .credit .df {
-    text-indent: -9999em;
+    /*
     background: url(../images/dharmafly-white.svg) no-repeat;
-    width: 200px;
-    height: 128px;
-}
-
-html.no-svg footer .credit .df {
-    background-image: url(../images/dharmafly-white-200.png);
-}
-
-footer .credit .df {
+    */
+    background-color: transparent;
     display: block;
     margin-top: 1em;
 }
 
-footer .credit a {
-    background-color: transparent;
+footer .credit .company {
+    display: none;
+    text-indent: -9999em;
 }
 
 /* events */
