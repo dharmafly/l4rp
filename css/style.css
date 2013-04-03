@@ -237,6 +237,13 @@ html.js #flickr-widget {
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
 }
+.flickr_badge_image:nth-child(even) {
+    transform: rotate(1deg);
+    -webkit-transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
+    -o-transform: rotate(1deg);
+    -ms-transform: rotate(1deg);
+}
 .flickr_badge_image a {
     text-decoration: none;
     background-color: #fff;
@@ -251,11 +258,11 @@ html.js #flickr-widget {
     -o-filter: saturate(20%) hue-rotate(180deg);
     -ms-filter: saturate(20%) hue-rotate(180deg);
 
-    transition: all 0.68s ease-out;
-    -moz-transition: all 0.68s ease-out;
-    -webkit-transition: all 0.68s ease-in;
-    -o-transition: all 0.68s ease-out;
-    -ms-transition: all 0.68s ease-out;
+    transition: all 0.62s ease-out;
+    -moz-transition: all 0.62s ease-out;
+    -webkit-transition: all 0.62s ease-in;
+    -o-transition: all 0.62s ease-out;
+    -ms-transition: all 0.62s ease-out;
 }
 .flickr_badge_image a:hover img {
     filter: none;
@@ -266,7 +273,7 @@ html.js #flickr-widget {
 
     transition: all 0.1s ease-out;
     -moz-transition: all 0.1s ease-out;
-    -webkit-transition: all 0.1s ease-out;
+    -webkit-transition: all 1s ease-out;
     -o-transition: all 0.1s ease-out;
     -ms-transition: all 0.1s ease-out;
 }
@@ -277,15 +284,13 @@ html.js #flickr-widget {
     -o-filter: hue-rotate(40deg);
     -ms-filter: hue-rotate(40deg);
 }
-.flickr_badge_image:nth-child(even) {
-    transform: rotate(1deg);
-    -webkit-transform: rotate(1deg);
-    -moz-transform: rotate(1deg);
-    -o-transform: rotate(1deg);
-    -ms-transform: rotate(1deg);
-}
 .location-photo {
     overflow:hidden;
+}
+.location-photo img {
+    display: block;
+    background-color: #fff;
+    padding: 2px;
 }
 #map {
     height: 309px;
