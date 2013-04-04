@@ -49,23 +49,34 @@ html.no-svg body.home > h1 a {
 body.home > h1 a:hover {
     background-size: 147.75px 227.25px; 
 }
-body > h1 span {
+body > h1 a span {
     font-size: 1em;
     margin-top:30px;
     line-height: 1em;
     float:right;
     width:5em;
-    border:5px solid #fff;
+    border-width:5px;
+    border-color:#fff;
     font-weight: normal;
-    background-color: #fff;
-    color: #3e884c;
     padding:10px;
     display:block;
+
     transform: rotate(-6deg) translate(-11px,-20px);
     -webkit-transform: rotate(-6deg) translate(-11px,-20px);
     -moz-transform: rotate(-6deg) translate(-11px,-20px);
     -o-transform: rotate(-6deg) translate(-11px,-20px);
     -ms-transform: rotate(-6deg) translate(-11px,-20px);
+}
+body.home > h1 a span {
+    background-color: #fff;
+    color: #3e884c;
+    border-style: solid;
+}
+body > h1 a span,
+body.home > h1 a:hover span {
+    background-color: #3e884c;
+    color: #fff;
+    border-style: dashed;
 }
 body.home > h1 a {
     transition:         all 0.62s ease-out 0.1s;
@@ -81,27 +92,22 @@ body.home > h1 a:hover {
     -o-transition:      all 1s ease-in 0.1s;
     -ms-transition:     all 1s ease-in 0.1s;
 }
-body > h1 span {
-    transition:         all 0.38s ease-in 0.1s;
-    -moz-transition:    all 0.38s ease-in 0.1s;
-    -webkit-transition: all 0.38s ease-in 0.1s;
-    -o-transition:      all 0.38s ease-in 0.1s;
-    -ms-transition:     all 0.38s ease-in 0.1s;
-}
-body > h1 a:hover span {
-    background-color: #3e884c;
-    color: #fff;
-    border-style: dashed;
+body.home > h1 a span {
+    font-size: 2em;
+    margin-top: 39px;
 
+    transition:         all 0.16s ease-in 0.1s;
+    -moz-transition:    all 0.16s ease-in 0.1s;
+    -webkit-transition: all 0.16s ease-in 0.1s;
+    -o-transition:      all 0.16s ease-in 0.1s;
+    -ms-transition:     all 0.16s ease-in 0.1s;
+}
+body.home > h1 a:hover span {
     transition:         all 0.62s ease-out 0.1s;
     -moz-transition:    all 0.62s ease-out 0.1s;
     -webkit-transition: all 0.62s ease-out 0.1s;
     -o-transition:      all 0.62s ease-out 0.1s;
     -ms-transition:     all 0.62s ease-out 0.1s;
-}
-body.home > h1 span {
-    font-size: 2em;
-    margin-top: 39px;
 }
 
 @media only screen and (max-width: 580px) {
@@ -114,19 +120,19 @@ body.home > h1 span {
         -ms-transition: none;
         min-height: 0;
     }
-    body > h1 span {
+    body > h1 a span {
         margin-left: auto;
         margin-right: auto;
         float: none;
     }
 }
 @media only screen and (max-width: 400px) {
-    body.home > h1 span {
+    body.home > h1 a span {
         font-size: 1.6em;
     }
 }
 @media only screen and (max-width: 320px) {
-    body.home > h1 span {
+    body.home > h1 a span {
         font-size: 1.2em;
     }
 }
