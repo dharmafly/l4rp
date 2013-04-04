@@ -64,26 +64,41 @@ body > h1 span {
     -o-transform: rotate(-6deg) translate(-11px,-20px);
     -ms-transform: rotate(-6deg) translate(-11px,-20px);
 }
-body.home > h1 a, body > h1 span {
-    transition: all 0.16s ease-out 0.1s;
-    -moz-transition: all 0.16s ease-out 0.1s;
-    -webkit-transition: all 0.16s ease-out 0.1s;
-    -o-transition: all 0.16s ease-out 0.1s;
-    -ms-transition: all 0.16s ease-out 0.1s;
+body.home > h1 a {
+    transition:         all 0.62s ease-out 0.1s;
+    -moz-transition:    all 0.62s ease-out 0.1s;
+    -webkit-transition: all 0.62s ease-out 0.1s;
+    -o-transition:      all 0.62s ease-out 0.1s;
+    -ms-transition:     all 0.62s ease-out 0.1s;
+}
+body.home > h1 a:hover {
+    transition:         all 1s ease-in 0.1s;
+    -moz-transition:    all 1s ease-in 0.1s;
+    -webkit-transition: all 1s ease-in 0.1s;
+    -o-transition:      all 1s ease-in 0.1s;
+    -ms-transition:     all 1s ease-in 0.1s;
+}
+body > h1 span {
+    transition:         all 0.38s ease-in 0.1s;
+    -moz-transition:    all 0.38s ease-in 0.1s;
+    -webkit-transition: all 0.38s ease-in 0.1s;
+    -o-transition:      all 0.38s ease-in 0.1s;
+    -ms-transition:     all 0.38s ease-in 0.1s;
 }
 body > h1 a:hover span {
     background-color: #3e884c;
     color: #fff;
     border-style: dashed;
+
+    transition:         all 0.62s ease-out 0.1s;
+    -moz-transition:    all 0.62s ease-out 0.1s;
+    -webkit-transition: all 0.62s ease-out 0.1s;
+    -o-transition:      all 0.62s ease-out 0.1s;
+    -ms-transition:     all 0.62s ease-out 0.1s;
 }
 body.home > h1 span {
     font-size: 2em;
     margin-top: 39px;
-}
-
-body > h1 a:hover {
-    background-color: inherit;
-    color: inherit;
 }
 
 @media only screen and (max-width: 580px) {
