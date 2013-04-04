@@ -35,6 +35,9 @@ body > h1 a {
     overflow:hidden;
     width:100%;
 }
+body > h1 a:hover {
+    background-color: transparent;
+}
 body.home > h1 a {
     background: url(../images/l4rp-bw.svg) no-repeat center left;
     background-size: 591px 909px;
