@@ -1,14 +1,18 @@
+@import url(http://fonts.googleapis.com/css?family=Sanchez);
+@import url(http://fonts.googleapis.com/css?family=Josefin+Slab:600);
+
 html {
     background-color: #0b190e;
 }
 body {
     margin: 0 auto;
-    max-width: 40em;
-    font-family: georgia, serif;
+    max-width: 33em;
+    font-family: sanchez, georgia, serif;
     color: #fff;
     background-color: #3e884c;
     padding: 3% 4% 3%;
-    line-height: 1.6em;
+    /*line-height: 1.6em;*/
+    font-size:1.2em;
 }
 a {
     color: #fff;
@@ -25,11 +29,15 @@ a img {
 }
 body > h1 {
     margin:0;
-    padding:0;
+    font-family: 'Josefin Slab', sanchez, georgia, serif;
+    letter-spacing: -1px;
+
+    /* clean floats */
+    overflow: auto;
+    width: 100%;
 }
 body > h1 a {
     text-decoration:none;
-    display:block;
 
     /* clear floats */
     overflow:hidden;
@@ -38,10 +46,12 @@ body > h1 a {
 body > h1 a:hover {
     background-color: transparent;
 }
+/* Holy zooming logos, Batman */
 body.home > h1 a {
     background: url(../images/l4rp-bw.svg) no-repeat center left;
     background-size: 591px 909px;
     min-height: 256px;
+    display: block;
 }
 html.no-svg body.home > h1 a {
     background-image: url(../images/l4rp.png);
@@ -49,6 +59,8 @@ html.no-svg body.home > h1 a {
 body.home > h1 a:hover {
     background-size: 147.75px 227.25px; 
 }
+
+/* Lab for the Recently Possible text */
 body > h1 a span {
     font-size: 1em;
     margin-top:30px;
@@ -61,13 +73,14 @@ body > h1 a span {
     padding:10px;
     display:block;
 
-    transform: rotate(-6deg) translate(-11px,-20px);
-    -webkit-transform: rotate(-6deg) translate(-11px,-20px);
-    -moz-transform: rotate(-6deg) translate(-11px,-20px);
-    -o-transform: rotate(-6deg) translate(-11px,-20px);
-    -ms-transform: rotate(-6deg) translate(-11px,-20px);
+    transform:         rotate(-6deg) translate(-11px,-19px);
+    -webkit-transform: rotate(-6deg) translate(-11px,-19px);
+    -moz-transform:    rotate(-6deg) translate(-11px,-19px);
+    -o-transform:      rotate(-6deg) translate(-11px,-19px);
+    -ms-transform:     rotate(-6deg) translate(-11px,-19px);
 }
-body.home > h1 a span {
+body.home > h1 a span,
+body > h1 a:hover span {
     background-color: #fff;
     color: #3e884c;
     border-style: solid;
@@ -78,31 +91,34 @@ body.home > h1 a:hover span {
     color: #fff;
     border-style: dashed;
 }
-body.home > h1 a {
+body.home > h1 a span {
+    font-size: 2em;
+    margin: 39px 0 4px;
+}
+/* L4RP logo zoom */
+body > h1 a {
     transition:         all 0.62s ease-out 0.1s;
     -moz-transition:    all 0.62s ease-out 0.1s;
     -webkit-transition: all 0.62s ease-out 0.1s;
     -o-transition:      all 0.62s ease-out 0.1s;
     -ms-transition:     all 0.62s ease-out 0.1s;
 }
-body.home > h1 a:hover {
+body > h1 a:hover {
     transition:         all 1s ease-in 0.1s;
     -moz-transition:    all 1s ease-in 0.1s;
     -webkit-transition: all 1s ease-in 0.1s;
     -o-transition:      all 1s ease-in 0.1s;
     -ms-transition:     all 1s ease-in 0.1s;
 }
-body.home > h1 a span {
-    font-size: 2em;
-    margin-top: 39px;
-
-    transition:         all 0.16s ease-in 0.1s;
-    -moz-transition:    all 0.16s ease-in 0.1s;
-    -webkit-transition: all 0.16s ease-in 0.1s;
-    -o-transition:      all 0.16s ease-in 0.1s;
-    -ms-transition:     all 0.16s ease-in 0.1s;
+/* Lab for the Recently Possible text */
+body > h1 a span {
+    transition:         all 0.38s ease-in 0.1s;
+    -moz-transition:    all 0.38s ease-in 0.1s;
+    -webkit-transition: all 0.38s ease-in 0.1s;
+    -o-transition:      all 0.38s ease-in 0.1s;
+    -ms-transition:     all 0.38s ease-in 0.1s;
 }
-body.home > h1 a:hover span {
+body > h1 a:hover span {
     transition:         all 0.62s ease-out 0.1s;
     -moz-transition:    all 0.62s ease-out 0.1s;
     -webkit-transition: all 0.62s ease-out 0.1s;
@@ -139,9 +155,11 @@ body.home > h1 a:hover span {
 
 body > h2 {
     font-size:1.8em;
+    margin-bottom: 0.38em;
 }
 body > h3 {
     font-size:1.4em;
+    margin-top: 0.38em;
 }
 dt {
     margin-top:1em;
@@ -195,8 +213,8 @@ section.intro p:first-child.note {
     }
 }
 section.callout {
-    font-size:1.2em;
     padding:0 1em 0.16em;
+
     transform: rotate(1deg);
     -webkit-transform: rotate(1deg);
     -moz-transform: rotate(1deg);
@@ -209,6 +227,12 @@ section.callout.alt {
     -moz-transform: rotate(-1deg);
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
+}
+section.callout h1 ~ * {
+    -webkit-transform: rotate(-1deg);
+}
+section.callout.alt h1 ~ * {
+    -webkit-transform: rotate(1deg);
 }
 section.callout h1 a {
     text-decoration:none;
@@ -255,18 +279,18 @@ html.js #flickr-widget {
 .flickr_badge_image {
     float:left;
     margin: 5px;
-    transform: rotate(-1deg);
-    -webkit-transform: rotate(-1deg);
-    -moz-transform: rotate(-1deg);
-    -o-transform: rotate(-1deg);
-    -ms-transform: rotate(-1deg);
+    transform: rotate(-1.5deg);
+    -webkit-transform: rotate(-1.5deg);
+    -moz-transform: rotate(-1.5deg);
+    -o-transform: rotate(-1.5deg);
+    -ms-transform: rotate(-1.5deg);
 }
 .flickr_badge_image:nth-child(even) {
-    transform: rotate(1deg);
-    -webkit-transform: rotate(1deg);
-    -moz-transform: rotate(1deg);
-    -o-transform: rotate(1deg);
-    -ms-transform: rotate(1deg);
+    transform: rotate(1.5deg);
+    -webkit-transform: rotate(1.5deg);
+    -moz-transform: rotate(1.5deg);
+    -o-transform: rotate(1.5deg);
+    -ms-transform: rotate(1.5deg);
 }
 .flickr_badge_image a {
     text-decoration: none;
@@ -301,30 +325,35 @@ html.js #flickr-widget {
     -o-transition: all 0.1s ease-out;
     -ms-transition: all 0.1s ease-out;
 }
-#map img {
+body.home #map img {
     filter: hue-rotate(40deg);
     -moz-filter: hue-rotate(40deg);
     -webkit-filter: hue-rotate(40deg);
     -o-filter: hue-rotate(40deg);
     -ms-filter: hue-rotate(40deg);
 }
-.location-photo {
+body.home .location-photo {
     overflow:hidden;
 }
-.location-photo img {
+body.home .location-photo img {
     display: block;
     background-color: #fff;
     padding: 2px;
 }
-#map {
+body.home #map {
     height: 309px;
+    color:#0b190e;
     clear:both;
     
     /* Gutter for smartphone scrolling */
     margin-right: 1em;
 }
-#map {
-    color:#0b190e;
+body.home #travel {
+    background-color: #8cbf44;
+}
+body.home #travel h1 {
+    color: #3e884c;
+    background-color: transparent;
 }
 body > footer {
     position: relative;
@@ -383,6 +412,9 @@ footer .credit .company {
 }
 
 /* events */
+iframe.tickets {
+    min-width:500px;
+}
 .lanyrd-series-topics {
     list-style:none;
     padding:0;
@@ -436,7 +468,7 @@ section.lanyrd-series-upcoming-conference h1 {
 .lanyrd-attendees-title a:hover {
     text-decoration:underline;
 }
-.event-start-date {
+time.event-start-date {
     float:right;
     display:inline-block;
     margin:0.38em 0 0.75em 0.5em;
@@ -445,38 +477,32 @@ section.lanyrd-series-upcoming-conference h1 {
     font-family:Helvetica, Arial, sans-serif;
     width:1.85em;
     border-radius:0.2em;
-    border:#aaa 1px solid;
+    border:#fff 1px solid;
+    font-size: 2em;
+}
+time.event-start-date > * {
+    display:block;
+}
+time.event-start-date .month {
     background:#fff;
-    font-size: 2.6em;
-}
-section.callout .event-start-date {
-    font-size: 2.17em;
-}
-.event-start-date .month {
-    background:#640000;
-    color:#fff;
+    color:#3e884c;
     font-size:0.4em;
     border-top-left-radius:0.4em;
     border-top-right-radius:0.4em;
 }
-.event-start-date .day {
-    color:#000;
+time.event-start-date .day {
+    color:#fff;
     font-size:1.25em;
-    background:#fff;
     height:1em;
     line-height:1.1em;
 }
-.event-start-date .year {
-    background:#fff;
-    color:#aaa;
+time.event-start-date .year {
+    color:#fff;
     font-size:0.35em;
     border-bottom-left-radius:0.4em;
     border-bottom-right-radius:0.4em;
     position:relative;
     top:-0.1em;
-}
-time.event-start-date > * {
-    display:block;
 }
 
 /* Past events */
