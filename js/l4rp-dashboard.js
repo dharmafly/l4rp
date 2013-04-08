@@ -180,31 +180,9 @@
     
     
     /////
-
-    // CREDITS
-    /*
-    function setupCredits(){
-        var logo = document.getElementById('df-anchor');
-
-        function listener(){
-            window.location.href = 'http://dharmafly.com';
-        }
-
-        if (logo){
-            if ('addEventListener' in logo){
-                logo.addEventListener('click', listener, true);
-            }
-            else if ('attachEvent' in logo){
-                logo.attachEvent('click', listener);
-            }
-        }
-    }
-    */
-
-    /////
     
     
-    // GO!
+    // GO
     //setupCredits();
     setupLocationMap();
     setupLanyrd();
