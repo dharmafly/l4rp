@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 211 482">
     <style>
-        * { stroke:#2F4430; fill:none; stroke-width:8; }
-        .root { fill:#2F4430; stroke:none; }
+        svg { opacity:0.1 }
+        * { stroke:#0b190e; fill:none; stroke-width:8; }
+        .root { fill:#0b190e; stroke:none; }
         .bg { stroke-width:4; }
     </style>
     <g transform="matrix(0 -1 1 0 -1 483)">

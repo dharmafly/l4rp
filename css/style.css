@@ -1,5 +1,21 @@
+/*@import url(http://fonts.googleapis.com/css?family=Josefin+Slab:600);*/
 @import url(http://fonts.googleapis.com/css?family=Sanchez);
-@import url(http://fonts.googleapis.com/css?family=Josefin+Slab:600);
+
+
+@font-face {
+  font-family: 'Josefin Slab';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Josefin Slab SemiBold'), local('JosefinSlab-SemiBold'), url('fonts/josefinslab-semibold/josefinslab-semibold.woff') format('woff');
+}
+/*
+@font-face {
+  font-family: 'Sanchez';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sanchez'), local('Sanchez-Regular'), url(...) format('woff');
+}
+*/
 
 html {
     background-color: #0b190e;
@@ -9,10 +25,12 @@ body {
     max-width: 33em;
     font-family: sanchez, georgia, serif;
     color: #fff;
-    background-color: #3e884c;
     padding: 3% 4% 3%;
-    /*line-height: 1.6em;*/
     font-size:1.2em;
+    background: #008f4c url(../images/nodewing-shadow-flip.svg) no-repeat -14px bottom;
+}
+html.no-svg body {
+    background-image: url(../images/nodewing-shadow-flip.png);
 }
 a {
     color: #fff;
@@ -20,48 +38,49 @@ a {
     font-weight: bold;
 }
 a:hover {
-    color: #3e884c;
+    color: #008f4c;
     background-color: #fff;
     text-decoration: none;
 }
 a img {
     border: none;
 }
-body > h1 {
+body > .l4rp {
     margin:0;
     font-family: 'Josefin Slab', sanchez, georgia, serif;
+    font-size: 2em;
     letter-spacing: -1px;
 
     /* clean floats */
     overflow: auto;
     width: 100%;
 }
-body > h1 a {
+body > .l4rp a {
     text-decoration:none;
 
     /* clear floats */
     overflow:hidden;
     width:100%;
 }
-body > h1 a:hover {
+body > .l4rp a:hover {
     background-color: transparent;
 }
 /* Holy zooming logos, Batman */
-body.home > h1 a {
-    background: url(../images/l4rp-bw.svg) no-repeat center left;
-    background-size: 591px 909px;
+body.home > .l4rp a {
+    background: url(../images/l4rp.svg) no-repeat center left;
+    background-size: 635px;
     min-height: 256px;
     display: block;
 }
-html.no-svg body.home > h1 a {
+html.no-svg body.home > .l4rp a {
     background-image: url(../images/l4rp.png);
 }
-body.home > h1 a:hover {
-    background-size: 147.75px 227.25px; 
+body.home > .l4rp a:hover {
+    background-size: 147.75px; 
 }
 
 /* Lab for the Recently Possible text */
-body > h1 a span {
+body > .l4rp a span {
     font-size: 1em;
     margin-top:30px;
     line-height: 1em;
@@ -79,31 +98,31 @@ body > h1 a span {
     -o-transform:      rotate(-6deg) translate(-11px,-19px);
     -ms-transform:     rotate(-6deg) translate(-11px,-19px);
 }
-body.home > h1 a span,
-body > h1 a:hover span {
+body.home > .l4rp a span,
+body > .l4rp a:hover span {
     background-color: #fff;
-    color: #3e884c;
+    color: #008f4c;
     border-style: solid;
 }
-body > h1 a span,
-body.home > h1 a:hover span {
-    background-color: #3e884c;
+body > .l4rp a span,
+body.home > .l4rp a:hover span {
+    background-color: #008f4c;
     color: #fff;
     border-style: dashed;
 }
-body.home > h1 a span {
+body.home > .l4rp a span {
     font-size: 2em;
     margin: 39px 0 4px;
 }
 /* L4RP logo zoom */
-body > h1 a {
+body.home > .l4rp a {
     transition:         all 0.62s ease-out 0.1s;
     -moz-transition:    all 0.62s ease-out 0.1s;
     -webkit-transition: all 0.62s ease-out 0.1s;
     -o-transition:      all 0.62s ease-out 0.1s;
     -ms-transition:     all 0.62s ease-out 0.1s;
 }
-body > h1 a:hover {
+body.home > .l4rp a:hover {
     transition:         all 1s ease-in 0.1s;
     -moz-transition:    all 1s ease-in 0.1s;
     -webkit-transition: all 1s ease-in 0.1s;
@@ -111,14 +130,14 @@ body > h1 a:hover {
     -ms-transition:     all 1s ease-in 0.1s;
 }
 /* Lab for the Recently Possible text */
-body > h1 a span {
+body.home > .l4rp a span {
     transition:         all 0.38s ease-in 0.1s;
     -moz-transition:    all 0.38s ease-in 0.1s;
     -webkit-transition: all 0.38s ease-in 0.1s;
     -o-transition:      all 0.38s ease-in 0.1s;
     -ms-transition:     all 0.38s ease-in 0.1s;
 }
-body > h1 a:hover span {
+body.home > .l4rp a:hover span {
     transition:         all 0.62s ease-out 0.1s;
     -moz-transition:    all 0.62s ease-out 0.1s;
     -webkit-transition: all 0.62s ease-out 0.1s;
@@ -127,7 +146,7 @@ body > h1 a:hover span {
 }
 
 @media only screen and (max-width: 580px) {
-    body.home > h1 a {
+    body.home > .l4rp a {
         background: none;
         transition: none;
         -moz-transition: none;
@@ -136,23 +155,26 @@ body > h1 a:hover span {
         -ms-transition: none;
         min-height: 0;
     }
-    body > h1 a span {
+    body > .l4rp a span {
         margin-left: auto;
         margin-right: auto;
         float: none;
     }
 }
 @media only screen and (max-width: 400px) {
-    body.home > h1 a span {
+    body.home > .l4rp a span {
         font-size: 1.6em;
     }
 }
 @media only screen and (max-width: 320px) {
-    body.home > h1 a span {
+    body.home > .l4rp a span {
         font-size: 1.2em;
     }
 }
-
+body > h1 {
+    font-size:2em;
+    margin-bottom: 0.62em;
+}
 body > h2 {
     font-size:1.8em;
     margin-bottom: 0.38em;
@@ -170,8 +192,7 @@ blockquote {
     font-style: italic;
     padding-left:1em;
     margin-left:1.62em;
-    border-left:16px solid #fff;
-    font-size: 1.2em;
+    border-left:16px solid #8cbf44;
 }
 
 section {
@@ -183,12 +204,12 @@ section h1 {
     font-size: 2em;
     line-height:1.2em;
     background-color: #fff;
-    color: #3e884c;
+    color: #008f4c;
     float: left;
 }
 
 section h1 a {
-    color: #3e884c;
+    color: #008f4c;
     text-decoration: none;
     border-bottom: 2px solid yellow;
 }
@@ -237,14 +258,14 @@ section.callout.alt h1 ~ * {
 section.callout h1 a {
     text-decoration:none;
     word-wrap: break-word;
-    color:#3e884c;
+    color:#008f4c;
 }
 section.callout a {
     color: #fff;
 }
 section.callout a:hover {
     background-color:#fff;
-    color:#3e884c;
+    color:#008f4c;
     text-decoration:none;
 }
 section.callout p {
@@ -337,6 +358,7 @@ body.home .location-photo {
 }
 body.home .location-photo img {
     display: block;
+    float:left;
     background-color: #fff;
     padding: 2px;
 }
@@ -352,19 +374,15 @@ body.home #travel {
     background-color: #8cbf44;
 }
 body.home #travel h1 {
-    color: #3e884c;
+    color: #008f4c;
     background-color: transparent;
 }
 body > footer {
+    margin-top: 2em;
+    margin-left: -4%;
     position: relative;
-}
-body > footer:before {
-    content: url(../images/nodewing-vertical.svg);
-    width: 208px;
-    height: 484px;
-}
-html.no-svg footer:before {
-    content: url(../images/nodewing-vertical.png);
+    min-width: 211px;
+    min-height: 482px;
 }
 
 footer .credit {
@@ -376,42 +394,46 @@ footer .credit {
     padding:0;
     margin:0;
 }
+footer .credit .role {
+    display: block;
+    margin-bottom: 1em;
+}
 
-@media only screen and (max-width: 460px) {
-    body > footer .credit {
-        position: static;
-        text-align: center;
+@media only screen and (max-width: 440px) {
+    body > footer {
     }
-    body > footer .credit .df {
-        margin: 0.5em auto 0;
+    body > footer .credit {
+        position: relative;
+        right: auto;
+        text-align: center;
+        margin-left:  auto;
+        margin-right: auto;
+        padding-bottom: 520px;
     }
 }
 
 /* Dharmafly Classic */
-footer .credit .df {
-    font-family: Calibri,Helvetica,Arial,sans-serif;
+/*
+.df a {
     text-decoration: none;
+}
+.df .fn {
+    font-family: Calibri,Helvetica,Arial,sans-serif;
     text-transform: uppercase;
     font-weight: bold;
     padding: 1px;
     font-style: normal;
-}
-/* Background images */
-footer .credit .df {
-    /*
-    background: url(../images/dharmafly-white.svg) no-repeat;
-    */
     background-color: transparent;
     display: block;
-    margin-top: 1em;
 }
-
-footer .credit .company {
-    display: none;
-    text-indent: -9999em;
-}
+*/
 
 /* events */
+.track {
+    background: url(../images/lanyrd.png) no-repeat 4px center;
+    background-size: 16px; /* TODO crop */
+    padding-left: 30px;
+}
 iframe.tickets {
     min-width:500px;
 }
@@ -485,7 +507,7 @@ time.event-start-date > * {
 }
 time.event-start-date .month {
     background:#fff;
-    color:#3e884c;
+    color:#008f4c;
     font-size:0.4em;
     border-top-left-radius:0.4em;
     border-top-right-radius:0.4em;
