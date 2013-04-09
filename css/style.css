@@ -1,21 +1,4 @@
-/*@import url(http://fonts.googleapis.com/css?family=Josefin+Slab:600);*/
-@import url(http://fonts.googleapis.com/css?family=Sanchez);
-
-
-@font-face {
-  font-family: 'Josefin Slab';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Josefin Slab SemiBold'), local('JosefinSlab-SemiBold'), url('fonts/josefinslab-semibold/josefinslab-semibold.woff') format('woff');
-}
-/*
-@font-face {
-  font-family: 'Sanchez';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Sanchez'), local('Sanchez-Regular'), url(...) format('woff');
-}
-*/
+@import url(http://fonts.googleapis.com/css?family=Josefin+Slab:600|Sanchez:400italic,400|Open+Sans:300);
 
 html {
     background-color: #0b190e;
@@ -23,14 +6,23 @@ html {
 body {
     margin: 0 auto;
     max-width: 33em;
-    font-family: sanchez, georgia, serif;
-    color: #fff;
+    font-family: 'Sanchez', georgia, serif;
+    color: #bae1cf;
     padding: 3% 4% 3%;
     font-size:1.2em;
     background: #008f4c url(../images/nodewing-shadow-flip.svg) no-repeat -14px bottom;
 }
 html.no-svg body {
     background-image: url(../images/nodewing-shadow-flip.png);
+}
+body > h1,
+body > h2,
+body > h3,
+body > h4,
+body > h5,
+body > h6,
+body > header {
+    color: #fff;
 }
 a {
     color: #fff;
@@ -47,7 +39,7 @@ a img {
 }
 body > .l4rp {
     margin:0;
-    font-family: 'Josefin Slab', sanchez, georgia, serif;
+    font-family: 'Josefin Slab', georgia, serif;
     font-size: 2em;
     letter-spacing: -1px;
 
@@ -86,10 +78,9 @@ body > .l4rp a span {
     line-height: 1em;
     float:right;
     width:5em;
-    border-width:5px;
-    border-color:#fff;
+    border:2px solid #fff;
     font-weight: normal;
-    padding:10px;
+    padding:20px;
     display:block;
 
     transform:         rotate(-6deg) translate(-11px,-19px);
@@ -98,20 +89,16 @@ body > .l4rp a span {
     -o-transform:      rotate(-6deg) translate(-11px,-19px);
     -ms-transform:     rotate(-6deg) translate(-11px,-19px);
 }
-body.home > .l4rp a span,
-body > .l4rp a:hover span {
+body > .l4rp a span{
     background-color: #fff;
     color: #008f4c;
-    border-style: solid;
 }
-body > .l4rp a span,
-body.home > .l4rp a:hover span {
+body > .l4rp a:hover span {
     background-color: #008f4c;
     color: #fff;
-    border-style: dashed;
 }
 body.home > .l4rp a span {
-    font-size: 2em;
+    font-size: 1.8em;
     margin: 39px 0 4px;
 }
 /* L4RP logo zoom */
@@ -171,33 +158,90 @@ body.home > .l4rp a:hover span {
         font-size: 1.2em;
     }
 }
-body > h1 {
+body > header {
+    margin-bottom: 2em;
+}
+body > h1, body > header h1 {
     font-size:2em;
     margin-bottom: 0.62em;
 }
-body > h2 {
+body > h2, body > header h2 {
     font-size:1.8em;
-    margin-bottom: 0.38em;
+    margin: 1em 0 0.16em;
 }
-body > h3 {
+
+section.event header {
+    transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
+    -webkit-transform: rotate(-1deg);
+    -o-transform: rotate(-1deg);
+    -ms-transform: rotate(-1deg);
+}
+
+section.event .summary {
+    font-size:1.2em;
+}
+
+section.event + section.event {
+    margin-top: 3.6em;
+}
+
+body > header h1,
+body > header h2,
+section.event > header h1 {
+    background-color: #66bc94;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+}
+section.event > header h1 {
+    padding: 0;
+}
+section.event > header h1 a {
+    padding: 0 0.16em;
+}
+body > header h1, body > header h2 {
+    font-size: 1.4em;
+    padding: 0.62em;
+}
+h1.series {
+    background-color: transparent;
+    font-family: 'Sanchez', georgia, serif;
+    color: #66bc94;
+    font-size: 2em;
+    padding: 0;
+}
+body > h3, body > header h3 {
     font-size:1.4em;
     margin-top: 0.38em;
+}
+li {
+    padding: 0.5em 0;
 }
 dt {
     margin-top:1em;
     font-weight: bold;
 }
 
+hr {
+    border: 1px solid #bae1cf;
+    margin: 1.6em 0;
+}
+
 blockquote {
     font-style: italic;
     padding-left:1em;
     margin-left:1.62em;
-    border-left:16px solid #8cbf44;
+    border-left:8px solid #8cbf44;
+}
+
+blockquote + blockquote {
+    margin-top: 2em;
 }
 
 section {
-    margin: 2.2em 0;
+    margin: 1.6em 0;
 }
+
 section h1 {
     padding: 0 0.16em;
     margin-top:0.38em;
@@ -211,6 +255,9 @@ section h1 {
 section h1 a {
     color: #008f4c;
     text-decoration: none;
+    display: block;
+}
+body.home > section h1 a {
     border-bottom: 2px solid yellow;
 }
 
@@ -233,47 +280,20 @@ section.intro p:first-child.note {
         margin-bottom: 1.5em;
     }
 }
-section.callout {
+body.home > section {
     padding:0 1em 0.16em;
-
-    transform: rotate(1deg);
-    -webkit-transform: rotate(1deg);
-    -moz-transform: rotate(1deg);
-    -o-transform: rotate(1deg);
-    -ms-transform: rotate(1deg);
 }
-section.callout.alt {
+body.home > section h1 {
     transform: rotate(-1deg);
-    -webkit-transform: rotate(-1deg);
     -moz-transform: rotate(-1deg);
+    -webkit-transform: rotate(-1deg);
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
-}
-section.callout h1 ~ * {
-    -webkit-transform: rotate(-1deg);
-}
-section.callout.alt h1 ~ * {
-    -webkit-transform: rotate(1deg);
-}
-section.callout h1 a {
-    text-decoration:none;
-    word-wrap: break-word;
-    color:#008f4c;
-}
-section.callout a {
-    color: #fff;
-}
-section.callout a:hover {
-    background-color:#fff;
-    color:#008f4c;
-    text-decoration:none;
-}
-section.callout p {
-    margin-top:0.38em;
 }
 .optional-break {
     width:0;
 }
+/*
 .lanyrd-widget h2 {
     margin:0.618em 0 0.38em;
 }
@@ -285,6 +305,8 @@ section.callout p {
     border: 1px solid #fff;
     width: 32px;
 }
+*/
+
 html.js .flickr-wrapper {
     overflow-y: hidden;
 }
@@ -372,10 +394,28 @@ body.home #map {
 }
 body.home #travel {
     background-color: #8cbf44;
+    color: #fff;
+    transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
+    -webkit-transform: rotate(-1deg);
+    -o-transform: rotate(-1deg);
+    -ms-transform: rotate(-1deg);
 }
 body.home #travel h1 {
     color: #008f4c;
     background-color: transparent;
+    transform: none;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+}
+body.home #travel h1 ~ * {
+    transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
+    -webkit-transform: rotate(1deg);
+    -o-transform: rotate(1deg);
+    -ms-transform: rotate(1deg);
 }
 body > footer {
     margin-top: 2em;
@@ -395,8 +435,11 @@ footer .credit {
     margin:0;
 }
 footer .credit .role {
-    display: block;
-    margin-bottom: 1em;
+    /* temporarily removed */
+    display: none;
+
+    /* display: block;
+    margin-bottom: 1em; */
 }
 
 @media only screen and (max-width: 440px) {
@@ -429,6 +472,7 @@ footer .credit .role {
 */
 
 /* events */
+
 .track {
     background: url(../images/lanyrd.png) no-repeat 4px center;
     background-size: 16px; /* TODO crop */
@@ -462,24 +506,8 @@ iframe.tickets {
 .lanyrd-series-time {
     font-weight: bold;
 }
-.lanyrd-series-upcoming section:nth-child(even), .lanyrd-series-past section:nth-child(even) {
-    transform: rotate(-1deg);
-    -webkit-transform: rotate(-1deg);
-    -moz-transform: rotate(-1deg);
-    -o-transform: rotate(-1deg);
-    -ms-transform: rotate(-1deg);
-}
-.lanyrd-series section {
-    margin-top: 3.5em;
-}
 .lanyrd-series section h1 {
-    /* make space for date block */
-    max-width: 75%;
-    max-width: calc(100% - 3em);
-    max-width: -moz-calc(100% - 3em);
-    max-width: -webkit-calc(100% - 3em);
-    max-width: -o-calc(100% - 3em);
-    max-width: -ms-calc(100% - 3em);
+    float: none;
 }
 section.lanyrd-series-upcoming-conference h1 {
     font-size:1.8em;
@@ -493,38 +521,41 @@ section.lanyrd-series-upcoming-conference h1 {
 time.event-start-date {
     float:right;
     display:inline-block;
-    margin:0.38em 0 0.75em 0.5em;
+    margin: -0.2em 0.38em 0.62em 0.2em;
+    padding: 0.15em 0 0.2em;
     position:relative;
     text-align:center;
     font-family:Helvetica, Arial, sans-serif;
     width:1.85em;
-    border-radius:0.2em;
-    border:#fff 1px solid;
+    border-radius:13px;
+    border:#008f4c 4px solid;
     font-size: 2em;
+    background-color: #66bc94;
+    color: #fff;
+
+    transform:         rotate(6deg);
+    -moz-transform:    rotate(6deg);
+    -webkit-transform: rotate(6deg);
+    -o-transform:      rotate(6deg);
+    -ms-transform:     rotate(6deg);
+
 }
 time.event-start-date > * {
     display:block;
+    text-decoration: none;
+    border: none;
 }
 time.event-start-date .month {
-    background:#fff;
-    color:#008f4c;
     font-size:0.4em;
-    border-top-left-radius:0.4em;
-    border-top-right-radius:0.4em;
 }
 time.event-start-date .day {
-    color:#fff;
     font-size:1.25em;
     height:1em;
     line-height:1.1em;
 }
 time.event-start-date .year {
-    color:#fff;
     font-size:0.35em;
-    border-bottom-left-radius:0.4em;
-    border-bottom-right-radius:0.4em;
-    position:relative;
-    top:-0.1em;
+    margin-top: 0.2em;
 }
 
 /* Past events */
