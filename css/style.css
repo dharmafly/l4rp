@@ -10,10 +10,10 @@ body {
     color: #bae1cf;
     padding: 3% 4% 3%;
     font-size:1.2em;
-    background: #008f4c url(../images/nodewing-shadow-flip.svg) no-repeat -14px bottom;
+    background: #008f4c url(../images/nodewing-shadow.svg) no-repeat -14px bottom;
 }
 html.no-svg body {
-    background-image: url(../images/nodewing-shadow-flip.png);
+    background-image: url(../images/nodewing-shadow.png);
 }
 body > h1,
 body > h2,
