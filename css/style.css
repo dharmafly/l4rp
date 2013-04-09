@@ -99,7 +99,7 @@ body > .l4rp a:hover span {
 }
 body.home > .l4rp a span {
     font-size: 1.8em;
-    margin: 39px 0 4px;
+    margin: 39px 0 4px 0.4em;
 }
 /* L4RP logo zoom */
 body.home > .l4rp a {
@@ -153,7 +153,7 @@ body.home > .l4rp a:hover span {
         font-size: 1.6em;
     }
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 340px) {
     body.home > .l4rp a span {
         font-size: 1.2em;
     }
