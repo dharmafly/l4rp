@@ -1,6 +1,11 @@
-(function(window, document){
+(function(window, document, cmd){
+    'use strict';
+
+    var l4rpDomain = 'l4rp.com';
+
 
     /////
+
 
     // ATOM DATE
     // Source: https://github.com/premasagar/mishmash/tree/master/atomdate
@@ -16,99 +21,118 @@
     
     // LANYRD
     
-    function createSeriesWidget(){
+    function lanyrdSeriesWidget(){
         var noodleBaseUrl = 'http://dharmafly.noodle.jit.su/?q=',
             eventsWrapper = document.getElementById('events-wrapper'),
+            lanyrd = window.lanyrd,
+            $ = window.jQuery,
             lanyrdWidget, options, loadingIndicator, conferenceTemplate;
 
         function addMetadata(html, conferences) {
             // render the date icon for each event
-            $('.event-start-date').each(function (i, val) {
+            $('.event-start-date').each(function (i, el) {
                 var datetime = $(this).attr('datetime');
                 dateIcon(datetime, this);
             });
 
             // request the time of each event
-            var $timeElements = $('.lanyrd-series-time'),
-                times = [],
-                query, url;
+            (function(){
+                var $timeElements = $('.lanyrd-series-time'),
+                    times = [],
+                    query, url;
 
-            $timeElements.each(function (i, val) {
-                var url = $(this).parent().find('h1 a').attr('href');
-                if (url){
-                    times.push({
-                        url: url,
-                        selector: '.dtstart .time',
-                        extract: 'text'
-                    });
-                }
-            });
+                $timeElements.each(function (i, el) {
+                    var url = $(this).parent().find('h1 a').attr('href');
+                    if (url){
+                        times.push({
+                            url: url,
+                            selector: '.dtstart .time',
+                            extract: 'text'
+                        });
+                    }
+                });
 
-            query = encodeURIComponent(JSON.stringify(times));
-            url = noodleBaseUrl + query + '&callback=?';
+                query = encodeURIComponent(JSON.stringify(times));
+                url = noodleBaseUrl + query + '&callback=?';
 
-            $.getJSON(url, function (data) {
-                if (data){
-                    $timeElements.each(function (i, val) {
-                        if (data[i].results && data[i].results.length) {
-                            $(this).text(data[i].results[0].text);
-                        }
-                    });
-                }
-            });
+                $.getJSON(url, function (data) {
+                    if (data){
+                        $timeElements.each(function (i, el) {
+                            if (data[i].results && data[i].results.length) {
+                                $(this).text(data[i].results[0].text);
+                            }
+                        });
+                    }
+                });
+            }());
 
-            // build and render the topics for each conference
-            $('.lanyrd-series-topics').each(function (i, val) {
-                var $list = $(this),
-                    url = $list.parent().find('h1 a').eq(0).attr('href'),
-                    topicsHtml = '',
-                    conference, i, len;
+            var topAndTail = /https?:\/\/(?:www)?|\/$/g;
 
-                // get the conference object for this topics list
+            function isL4rpRootUrl(url){
+                return url
+                    .toLowerCase()
+                    .replace(topAndTail, '') === l4rpDomain;
+            }
+
+            function findConference(conferences, lanyrdUrl){
+                var i, len, conference;
+
                 for (i=0, len = conferences.length; i < len; i++) {
-                    if (conferences[i].conference.web_url === url) {
-                        conference = conferences[i].conference;
-
-                        if (conference.topics){
-                            $.each(conference.topics, function (i, val) {
-                                topicsHtml += '<li><a href="' + val.web_url + '">' + val.name + '</a></li>';
-                            });
-                        }
+                    conference = conferences[i].conference;
+                    if (conference.web_url === lanyrdUrl){
+                        return conference;
                     }
                 }
-                if (topicsHtml){
-                    $list.append(topicsHtml);
+            }
+
+            // build and render topics, etc for each conference
+            $('.lanyrd-series-topics').each(function (i, el) {
+                var $list = $(this),
+                    lanyrdUrl = $list.parent().find('h1 a').eq(0).attr('href'),
+                    topicsHtml = '',
+                    conference = findConference(conferences, lanyrdUrl);
+                
+                if (conference){
+                    $.each(conference.topics, function (i, val) {
+                        topicsHtml += '<li><a href="' + val.web_url + '">' + val.name + '</a></li>';
+                    });
+                    
+                    if (topicsHtml){
+                        $list.append(topicsHtml);
+                    }
                 }
             });
 
             // Get event description
-            var $descElements = $('.description'),
-                descs = [],
-                query, url;
+            (function(){
+                var $descElements = $('.description'),
+                    descs = [],
+                    query, url;
 
-            $descElements.each(function (i, val) {
-                var url = $(this).parent().find('h1 a').attr('href');
-                if (url){
-                    descs.push({
-                        url: url,
-                        selector: '#event-description',
-                        extract: 'html'
-                    });
-                }
-            });
+                $descElements.each(function (i, val) {
+                    var lanyrdUrl = $(this).parent().find('h1 a').attr('href');
+                    if (url){
+                        descs.push({
+                            url: lanyrdUrl,
+                            selector: '#event-description',
+                            extract: 'html'
+                        });
+                    }
+                });
 
-            query = encodeURIComponent(JSON.stringify(descs));
-            url = noodleBaseUrl + query + '&callback=?';
+                query = encodeURIComponent(JSON.stringify(descs));
+                url = noodleBaseUrl + query + '&callback=?';
 
-            $.getJSON(url, function (data) {
-                if (data){
-                    $descElements.each(function (i, val) {
-                        if (data[i].results && data[i].results.length) {
-                            $(this).append(data[i].results[0].html);
-                        }
-                    });
-                }
-            });
+                $.getJSON(url, function (data) {
+                    if (data){
+                        $descElements.each(function (i, val) {
+                            if (data[i].results && data[i].results.length) {
+                                $(this).append(data[i].results[0].html);
+                            }
+                        });
+                    }
+                });
+            }());
 
 
             // Load the people widgets
@@ -119,12 +143,22 @@
                     options = {
                         append: true,
                         attendeesHeadingTemplate: '<h2 class="lanyrd-attendees-title">{{amount}} attending</h2>',
-                        trackersHeadingTemplate: '<h2 class="lanyrd-trackers-title">{{amount}} tracking</h2>',
+                        trackersHeadingTemplate: '<h2 class="lanyrd-trackers-title">{{amount}} tracking</h2>'
                     };
 
                 lanyrd.widgets.people(href, this, options).done(function () {
                     dots.stop();
                 });
+            });
+
+            // Do this last: update links to specific site
+            $('.event header h1 a').each(function(i, el){
+                var conference = findConference(conferences, el.getAttribute('href'));
+
+                // Update URLs if more specific one available
+                if (conference && conference.url && !isL4rpRootUrl(conference.url)){
+                    el.setAttribute('href', conference.url);
+                }
             });
         }
 
@@ -177,7 +211,7 @@
     function dateIcon(datetime, element) {
         var date = atomdate(datetime + "T00:00:00.000Z"),
             months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
-            days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+            days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
             icon = document.createElement('time');
 
         icon.setAttribute('datetime', datetime);
@@ -195,8 +229,9 @@
     }
 
     function loadingDots(element, options) {
-        var options = options || {},
-            intervalDelay = options.interval || 450,
+        options = options || {};
+
+        var intervalDelay = options.interval || 450,
             original = element.textContent,
             reset = options.reset || false,
             dotCount = 0,
@@ -218,7 +253,9 @@
             stop: function () {
                 window.clearInterval(intervalRef);
                 intervalRef = null;
-                if (reset) element.textContent = original;
+                if (reset) {
+                    element.textContent = original;
+                }
             }
         }
     }
@@ -231,7 +268,7 @@
         cmd(
             'http://code.jquery.com/jquery-1.7.1.min.js',
             '../js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v3',
-            createSeriesWidget
+            lanyrdSeriesWidget
         );
     }
 
@@ -258,4 +295,4 @@
     setupLanyrd();
     setupAnalytics();
 
-}(window, document));
+}(this, this.document, this.cmd));

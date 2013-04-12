@@ -1,18 +1,19 @@
-(function(window, document){
+(function(window, document, cmd){
+    'use strict';
 
     function createWidgets () {
         var dataVis = document.getElementById('data-vis-attendees'),
-        dataVisEvents = [
-            'http://lanyrd.com/2012/l4rp-dv1/',
-            'http://lanyrd.com/2012/l4rp-dv2/',
-            'http://lanyrd.com/2012/l4rp-dv3/'
-        ],
-        dataVisOptions = {
-              append: false,
-              templates: {
-                  attendeesHeading: '<h2 class="lanyrd-attendees-title">{{amount}} attending</h2>'
-              }
-        };
+            dataVisEvents = [
+                'http://lanyrd.com/2012/l4rp-dv1/',
+                'http://lanyrd.com/2012/l4rp-dv2/',
+                'http://lanyrd.com/2012/l4rp-dv3/'
+            ],
+            dataVisOptions = {
+                  append: false,
+                  templates: {
+                      attendeesHeading: '<h2 class="lanyrd-attendees-title">{{amount}} attending</h2>'
+                  }
+            };
 
         if (dataVis){
             dataVis.textContent = "Getting Attendees...";
@@ -23,9 +24,10 @@
 
     function createEventWidget(element, loadingElement, eventHref, options) {
         var intervalDelay = 618,
+            lanyrd = window.lanyrd,
             intervalRef, lanyrdWidget;
 
-        if (window.lanyrd && element && loadingElement) {
+        if (lanyrd && element && loadingElement) {
             intervalRef = window.setInterval(function(){
                 loadingElement.textContent += ".";
             }, intervalDelay);
@@ -60,7 +62,7 @@
     // ANALYTICS
     function setupAnalytics () {
         var _gaq = window._gaq || (window._gaq = []),
-        gaUrl = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'
+        gaUrl = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         
         _gaq.push(['_setAccount', 'UA-2150808-20']);
         _gaq.push(['_trackPageview']);
@@ -76,4 +78,4 @@
     setupLanyrd();
     setupAnalytics();
     
-}(window, document));
+}(this, this.document, this.cmd));
