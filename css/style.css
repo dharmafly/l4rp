@@ -89,11 +89,11 @@ body > .l4rp a span {
     -o-transform:      rotate(-6deg) translate(-11px,-19px);
     -ms-transform:     rotate(-6deg) translate(-11px,-19px);
 }
-body > .l4rp a span{
+body > .l4rp a span {
     background-color: #fff;
     color: #008f4c;
 }
-body > .l4rp a:hover span {
+body.home > .l4rp a:hover span {
     background-color: #008f4c;
     color: #fff;
 }
