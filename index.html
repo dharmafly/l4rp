@@ -8,11 +8,11 @@
         <!-- Set viewport for different screen sizes -->
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        <!-- Feature-detect and set classname on the <html> element -->
-        <script src="js/feature-detect.js"></script>
+        <!-- Feature-detect, set <html> classname , create window.L4RP -->
+        <script src="/js/setup.js"></script>
 
         <!-- Site-wide styles -->
-        <link rel="stylesheet" href="css/style.css?v13">
+        <link rel="stylesheet" href="/css/style.css?v13">
 
         <!-- Styles for the map -->
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.css">
@@ -41,8 +41,8 @@
         <section>    
             <h1>coming up ☼</h1>
             <ul>
-                <li><a href="codingforhumans/">Coding For Humans: "Learn to Code", April 30th 2013</a></li>
-                <li><a href="events/">Programme of events</a></li>
+                <li><a href="/codingforhumans/">Coding For Humans: "Learn to Code", April 30th 2013</a></li>
+                <li><a href="/events/">Programme of events</a></li>
             </ul>
 
             <p>Join the <a href="https://groups.google.com/d/forum/l4rp">L4RP mailing list</a> and follow <a href="https://twitter.com/l4rp">@L4RP on Twitter</a> to stay in the loop. ∞</p>
@@ -173,8 +173,8 @@
         </footer>
 
         <!-- Scriptery -->
-        <script src="js/vendor/cmd.js"></script>
-        <script src="js/l4rp-dashboard.js?v7"></script>
+        <script src="/js/vendor/cmd.js"></script>
+        <script src="/js/home.js?v1"></script>
 
         <!-- Flickr dance (temporary) -->
         <script>
@@ -195,8 +195,12 @@
             flickrSource.parentNode.removeChild(flickrSource);
         </script>
 
-        <!--
-        The one rule is, if someone needs help and you know how to help them, then you have to help them.
-        -->
+        <script src="/js/vendor/cmd.js"></script>
+        <script src="/js/footer.js?v1"></script>
     </body>
+
+    <!--
+    The one rule is, if someone needs help and you know how to help them, then you have to help them.
+    -->
+
 </html>

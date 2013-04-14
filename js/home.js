@@ -1,4 +1,4 @@
-(function(window, document, cmd){
+(function(window, document, cmd, L4RP){
     'use strict';
 
     // LOCATION MAP
@@ -25,7 +25,7 @@
     }
     
     function setupLocationMap(){
-        if (window.location.search.indexOf('offline') === -1){
+        if (!L4RP.offline){
             cmd('http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.js', createLocationMap);
         }
     }
@@ -88,6 +88,14 @@
         return lanyrdWidget;
     }
     
+    function setupLanyrd(){
+        cmd(
+            'http://code.jquery.com/jquery-1.7.1.min.js',
+            'js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0.min.js?v3',
+            createWidgets
+        );
+    }
+    
     /*
     function getUpcomingEvents(profileUrl){
         var person = lanyrd.person(profileUrl),
@@ -127,18 +135,15 @@
     }
     */
     
-    function setupLanyrd(){
-        cmd(
-            'http://code.jquery.com/jquery-1.7.1.min.js',
-            'js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0.min.js?v3',
-            createWidgets
-        );
-    }
-    
     
     /////
     
     // FLICKR
+    function showFlickrLoading(){
+        var target = document.getElementById('flickr-widget');
+        target.innerHTML = "<img class='loading' alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
+    }
+
     /*
     function setupFlickr(){
         var target = document.getElementById('flickr-widget'),
@@ -159,35 +164,14 @@
         }
     }
     */
-    function setupFlickrTemp(){
-        var target = document.getElementById('flickr-widget');
-        target.innerHTML = "<img class='loading' alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
-    }
+
     
     /////
     
     
-    // ANALYTICS
-    function setupAnalytics(){
-        var _gaq = window._gaq || (window._gaq = []),
-        gaUrl = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        
-        _gaq.push(['_setAccount', 'UA-2150808-20']);
-        _gaq.push(['_trackPageview']);
-        
-        cmd(gaUrl);
-    }
-    
-    
-    /////
-    
-    
-    // GO
-    //setupCredits();
+    // Init
     setupLocationMap();
     setupLanyrd();
-    //setupFlickr();
-    setupFlickrTemp();
-    setupAnalytics();
+    showFlickrLoading();
 
-}(this, this.document, this.cmd));
+}(this, this.document, this.cmd, this.L4RP));

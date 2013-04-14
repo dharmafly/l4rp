@@ -1,6 +1,10 @@
 (function(window, document, cmd){
     'use strict';
 
+    if (!cmd){
+        return;
+    }
+
     var l4rpDomain = 'l4rp.com';
 
 
@@ -52,18 +56,20 @@
                     }
                 });
 
-                query = encodeURIComponent(JSON.stringify(times));
-                url = noodleBaseUrl + query + '&callback=?';
+                if (times.length){
+                    query = encodeURIComponent(JSON.stringify(times));
+                    url = noodleBaseUrl + query + '&callback=?';
 
-                $.getJSON(url, function (data) {
-                    if (data){
-                        $timeElements.each(function (i, el) {
-                            if (data[i].results && data[i].results.length) {
-                                $(this).text(data[i].results[0].text);
-                            }
-                        });
-                    }
-                });
+                    $.getJSON(url, function (data) {
+                        if (data){
+                            $timeElements.each(function (i, el) {
+                                if (data[i].results && data[i].results.length) {
+                                    $(this).text(data[i].results[0].text);
+                                }
+                            });
+                        }
+                    });
+                }
             }());
 
             var topAndTail = /https?:\/\/(?:www)?|\/$/g;
@@ -120,18 +126,20 @@
                     }
                 });
 
-                query = encodeURIComponent(JSON.stringify(descs));
-                url = noodleBaseUrl + query + '&callback=?';
+                if (descs.length){
+                    query = encodeURIComponent(JSON.stringify(descs));
+                    url = noodleBaseUrl + query + '&callback=?';
 
-                $.getJSON(url, function (data) {
-                    if (data){
-                        $descElements.each(function (i, val) {
-                            if (data[i].results && data[i].results.length) {
-                                $(this).append(data[i].results[0].html);
-                            }
-                        });
-                    }
-                });
+                    $.getJSON(url, function (data) {
+                        if (data){
+                            $descElements.each(function (i, val) {
+                                if (data[i].results && data[i].results.length) {
+                                    $(this).append(data[i].results[0].html);
+                                }
+                            });
+                        }
+                    });
+                }
             }());
 
 
@@ -260,39 +268,10 @@
         }
     }
     
-    function setupLanyrd(){
-        var windowSearch = window.location.search,
-            devMode = /^\?dev[\W\/]?/.test(windowSearch),
-            ext = devMode ? '.js' : '.min.js';
-
-        cmd(
-            'http://code.jquery.com/jquery-1.7.1.min.js',
-            '../js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v3',
-            lanyrdSeriesWidget
-        );
-    }
-
     
     /////
-    
-    // ANALYTICS
 
-    function setupAnalytics(){
-        var _gaq = window._gaq || (window._gaq = []),
-        gaUrl = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'
-        
-        _gaq.push(['_setAccount', 'UA-2150808-20']);
-        _gaq.push(['_trackPageview']);
-        
-        cmd(gaUrl);
-    }
-    
-    
-    /////
-    
-    // GO!
-
-    setupLanyrd();
-    setupAnalytics();
+    // Init
+    cmd(L4RP.scripts.jquery, L4RP.scripts.lanyrd, lanyrdSeriesWidget);
 
 }(this, this.document, this.cmd));

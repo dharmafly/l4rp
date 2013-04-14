@@ -1,5 +1,9 @@
-(function(window, document, cmd){
+(function(window, document, cmd, L4RP){
     'use strict';
+
+    if (!cmd){
+        return;
+    }
 
     function createWidgets () {
         var dataVis = document.getElementById('data-vis-attendees'),
@@ -47,35 +51,11 @@
         return lanyrdWidget;
     }
     
-    function setupLanyrd(){
-        var windowSearch = window.location.search,
-            devMode = /^\?dev[\W\/]?/.test(windowSearch),
-            ext = devMode ? '.js' : '.min.js';
-
-        cmd(
-            'http://code.jquery.com/jquery-1.7.1.min.js',
-            '../js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0' + ext + '?v3',
-            createWidgets
-        );
-    }
-
-    // ANALYTICS
-    function setupAnalytics () {
-        var _gaq = window._gaq || (window._gaq = []),
-        gaUrl = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        
-        _gaq.push(['_setAccount', 'UA-2150808-20']);
-        _gaq.push(['_trackPageview']);
-        
-        cmd(gaUrl);
-    }
-    
     
     /////
     
     
-    // GO!
-    setupLanyrd();
-    setupAnalytics();
+    // Init
+    cmd(L4RP.scripts.jquery, L4RP.scripts.lanyrd, createWidgets);
     
-}(this, this.document, this.cmd));
+}(this, this.document, this.cmd, window.L4RP));
