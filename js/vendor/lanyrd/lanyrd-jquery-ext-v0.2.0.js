@@ -1,5 +1,5 @@
 /*  lanyrd.js - v0.2.0 
- *  Copyright 2011-2012, Dharmafly <http://dharmafly.com> 
+ *  Copyright 2011-2013, Dharmafly <http://dharmafly.com> 
  *  Released under the MIT License 
  *  More Information: https://github.com/dharmafly/lanyrd.js 
  */
@@ -638,7 +638,8 @@ Usage example:
 (function (lanyrd) {
     'use strict';
 
-    var getJSON = lanyrd.jsonp || (window.jQuery && window.jQuery.getJSON);
+    var getJSON = (window.jQuery && window.jQuery.getJSON) ? withJquery
+                                                           : lanyrd.jsonp;
 
     // Since this is a temporary extension, back-off if `lanyrd.series` has
     // been integrated into the core library
@@ -646,15 +647,30 @@ Usage example:
         return;
     }
 
+    // Cancel out if lanyrd.jsonp or jQuery are unavailable
+    if (!getJSON) {
+        return;
+    }
+
     function noodle(seriesUrl) {
         var data = {
                 url: seriesUrl,
                 selector: "h4 a.summary.url",
-                extract: ["href"]
+                extract: "href"
             },
-            url = 'http://dharmafly.noodle.jit.su?q=' + encodeURIComponent(JSON.stringify(data)) + '&callback=?';
+            url = 'http://dharmafly.noodle.jit.su?q=' + 
+                  encodeURIComponent(JSON.stringify(data)) +
+                  '&callback=?';
 
         return getJSON(url);
+    }
+
+    function withJquery (url) {
+        return jQuery.ajax({
+            url: url,
+            timeout: 13000,
+            dataType: "json"
+        })
     }
 
     lanyrd.series = function(seriesUrl, successCallback, errorCallback){
@@ -676,8 +692,8 @@ Usage example:
         .pipe(function(data){
             // Transform noodle conference results to full Lanyrd conference Resources
 
-            lanyrd.each(data.results, function (item) {
-                promises.push(lanyrd.conference('http://lanyrd.com' + item.href).fetch());
+            lanyrd.each(data.results, function (href) {
+                promises.push(lanyrd.conference('http://lanyrd.com' + href).fetch());
             });
 
             return lanyrd.when(promises);
