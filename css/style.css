@@ -170,6 +170,10 @@ body > h2, body > header h2 {
     margin: 1em 0 0.16em;
 }
 
+section.event {
+    margin-top: 3.6em;
+}
+
 section.event header {
     transform: rotate(-1deg);
     -moz-transform: rotate(-1deg);
@@ -178,12 +182,13 @@ section.event header {
     -ms-transform: rotate(-1deg);
 }
 
-section.event .summary {
-    font-size:1.2em;
+section.event h1 {
+    float:none;
+    font-size:1.8em;
 }
 
-section.event + section.event {
-    margin-top: 3.6em;
+section.event .summary {
+    font-size:1.2em;
 }
 
 body > header h1,
@@ -198,6 +203,7 @@ section.event > header h1 {
 }
 section.event > header h1 a {
     padding: 0 0.16em;
+    min-height: 1.4em;
 }
 body > header h1, body > header h2 {
     font-size: 1.4em;
@@ -209,6 +215,15 @@ h1.series {
     color: #66bc94;
     font-size: 2em;
     padding: 0;
+}
+h1.series a {
+    background-color: transparent;
+    color: #66bc94;
+    text-decoration: none;
+}
+h1.series a:hover {
+    background-color: #fff;
+    color: #008f4c;
 }
 body > h3, body > header h3 {
     font-size:1.4em;
@@ -505,12 +520,6 @@ iframe.tickets {
 }
 .lanyrd-series-time {
     font-weight: bold;
-}
-.lanyrd-series section h1 {
-    float: none;
-}
-section.lanyrd-series-upcoming-conference h1 {
-    font-size:1.8em;
 }
 .lanyrd-attendees-title a {
     text-decoration:none;

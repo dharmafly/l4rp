@@ -7,16 +7,20 @@
         now = (new Date()).getTime(),
         cacheTime = 1000 * 60 * 60; // 1 hour
 
-    if (localStorage &&
-        localStorage.eventsHTML &&
-        localStorage.eventsHTMLVersion === eventsHTMLVersion &&
-        localStorage.eventsCacheTime &&
-        Number(localStorage.eventsCacheTime) + cacheTime > now){
-            eventsWrapper.innerHTML = localStorage.eventsHTML;
-            return;
+    function loadFromLocalStorage(force){
+        if (localStorage &&
+            localStorage.eventsHTML){
+            if (force || localStorage.eventsHTMLVersion === eventsHTMLVersion &&
+                localStorage.eventsCacheTime &&
+                Number(localStorage.eventsCacheTime) + cacheTime > now){
+                eventsWrapper.innerHTML = localStorage.eventsHTML;
+                return true;
+            }
         }
+        return false;
+    }
 
-    if (!cmd){
+    if (loadFromLocalStorage() || !cmd){
         return;
     }
 
@@ -245,9 +249,14 @@
 
             lanyrdWidget = lanyrd.widgets.series('http://lanyrd.com/series/l4rp/', eventsWrapper, options);
 
-            lanyrdWidget.always(function(){
-                loadingIndicator.stop();
-            }).done(addMetadata);
+            lanyrdWidget
+                .always(function(){
+                    loadingIndicator.stop();
+                })
+                .done(addMetadata)
+                .fail(function(){
+                    loadFromLocalStorage(true);
+                });
         }
 
         function dateIcon(datetime, element) {
