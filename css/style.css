@@ -221,11 +221,6 @@ section.event-meta p:first-child {
     -webkit-column-break-after: always;
 }
 */
-section.event-meta .buy {
-    font-size: 1.2em;
-    display: block;
-    margin-top: 0.62em;
-}
 
 body > header h1,
 body > header h2,
@@ -530,8 +525,11 @@ footer .credit .role {
 /* events */
 
 .track {
-    background: url(../images/lanyrd.png) no-repeat 4px center;
-    background-size: 16px; /* TODO crop */
+    background: url(../images/lanyrd-16.png) no-repeat 4px center;
+    padding-left: 30px;
+}
+.buy {
+    background: url(../images/eventbrite-16.png) no-repeat 4px center;
     padding-left: 30px;
 }
 iframe.tickets {
