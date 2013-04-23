@@ -206,8 +206,6 @@ section.event-meta {
 }
 section.event-meta p {
     margin-top:0;
-}
-section.event-meta p + p {
     break-inside: avoid;
     -moz-break-inside: avoid;
     -o-break-inside: avoid;
