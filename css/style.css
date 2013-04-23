@@ -191,6 +191,40 @@ section.event .summary {
     font-size:1.2em;
 }
 
+section.event-meta {
+    font-size: 0.9em;
+    column-count: 2;
+    column-gap: 1.6em;
+    -moz-column-count: 2;
+    -moz-column-gap: 1.6em;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 1.6em;
+    -o-column-count: 2;
+    -o-column-gap: 1.6em;
+    -ms-column-count: 2;
+    -ms-column-gap: 1.6em;
+}
+section.event-meta p {
+    margin-top:0;
+    break-inside: avoid;
+    -moz-break-inside: avoid;
+    -o-break-inside: avoid;
+    -ms-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+}
+section.event-meta p:first-child {
+    break-after: column;
+    -moz-break-after: column;
+    -o-break-after: column;
+    -ms-break-after: column;
+    -webkit-column-break-after: always;
+}
+section.event-meta .buy {
+    font-size: 1.2em;
+    display: block;
+    margin-top: 0.62em;
+}
+
 body > header h1,
 body > header h2,
 section.event > header h1 {
@@ -205,6 +239,10 @@ section.event > header h1 a {
     padding: 0 0.16em;
     min-height: 1.4em;
 }
+section.event + section:not(.event) {
+    margin-top: 3.6em;
+}
+
 body > header h1, body > header h2 {
     font-size: 1.4em;
     padding: 0.62em;
@@ -222,7 +260,7 @@ h1.series a {
     text-decoration: none;
 }
 h1.series a:hover {
-    background-color: #fff;
+    background-color: #66bc94;
     color: #008f4c;
 }
 body > h3, body > header h3 {
@@ -238,7 +276,8 @@ dt {
 }
 
 hr {
-    border: 1px solid #bae1cf;
+    border: none;
+    border-top: 1px solid #bae1cf;
     margin: 1.6em 0;
 }
 
