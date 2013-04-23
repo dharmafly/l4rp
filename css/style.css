@@ -206,12 +206,15 @@ section.event-meta {
 }
 section.event-meta p {
     margin-top:0;
+}
+section.event-meta p + p {
     break-inside: avoid;
     -moz-break-inside: avoid;
     -o-break-inside: avoid;
     -ms-break-inside: avoid;
     -webkit-column-break-inside: avoid;
 }
+/*
 section.event-meta p:first-child {
     break-after: column;
     -moz-break-after: column;
@@ -219,6 +222,7 @@ section.event-meta p:first-child {
     -ms-break-after: column;
     -webkit-column-break-after: always;
 }
+*/
 section.event-meta .buy {
     font-size: 1.2em;
     display: block;
