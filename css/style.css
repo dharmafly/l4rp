@@ -166,8 +166,8 @@ body > h1, body > header h1 {
     margin-bottom: 0.62em;
 }
 body > h2, body > header h2 {
-    font-size:1.8em;
-    margin: 1em 0 0.16em;
+    font-size: 1.4em;
+    margin: 1.6em 0 0;
 }
 
 section.event {
@@ -193,6 +193,11 @@ section.event .summary {
     font-size:1.2em;
 }
 
+section.event-meta .also {
+    font-size: 0.9em;
+}
+
+/*
 section.event-meta {
     font-size: 0.9em;
     column-count: 2;
@@ -214,6 +219,8 @@ section.event-meta p {
     -ms-break-inside: avoid;
     -webkit-column-break-inside: avoid;
 }
+*/
+
 /*
 section.event-meta p:first-child {
     break-after: column;
@@ -281,9 +288,10 @@ hr {
 }
 
 blockquote {
+    font-size: 0.9em;
     font-style: italic;
     padding-left:1em;
-    margin-left:1.62em;
+    margin: 1em 0 1em 1.62em;
     border-left:8px solid #8cbf44;
 }
 
