@@ -534,6 +534,10 @@ footer .credit .role {
 
 /* events */
 
+img.teachers {
+    max-height: 223px;
+    max-width: 61.8%;
+}
 .track {
     background: url(../images/lanyrd-16.png) no-repeat 4px center;
     padding-left: 30px;
