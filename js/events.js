@@ -67,7 +67,7 @@
 
                     $descElements.each(function (i, val) {
                         var lanyrdUrl = $(this).parent().find('h1 a').attr('href');
-                        if (url){
+                        if (lanyrdUrl){
                             descs.push({
                                 url: lanyrdUrl,
                                 selector: '#event-description',
@@ -78,14 +78,14 @@
 
                     if (descs.length){
                         query = encodeURIComponent(JSON.stringify(descs));
-                        url = noodleBaseUrl + query + '&callback=?';
+                        url = noodleBaseUrl + query;
 
                         promises.push(
-                            $.getJSON(url, function (data) {
+                            jasonpeewee(url, function (data) {
                                 if (data){
                                     $descElements.each(function (i, val) {
                                         if (data[i].results && data[i].results.length) {
-                                            $(this).append(data[i].results[0].html);
+                                            $(this).append(data[i].results[0]);
                                         }
                                     });
                                 }
@@ -102,10 +102,10 @@
                         query, url;
 
                     $timeElements.each(function (i, el) {
-                        var url = $(this).parent().find('h1 a').attr('href');
-                        if (url){
+                        var lanyrdUrl = $(this).parent().find('h1 a').attr('href');
+                        if (lanyrdUrl){
                             times.push({
-                                url: url,
+                                url: lanyrdUrl,
                                 selector: '.dtstart .time',
                                 extract: 'text'
                             });
@@ -114,14 +114,14 @@
 
                     if (times.length){
                         query = encodeURIComponent(JSON.stringify(times));
-                        url = noodleBaseUrl + query + '&callback=?';
+                        url = noodleBaseUrl + query;
 
                         promises.push(
-                            $.getJSON(url, function (data) {
+                            jasonpeewee(url, function (data) {
                                 if (data){
                                     $timeElements.each(function (i, el) {
                                         if (data[i].results && data[i].results.length) {
-                                            $(this).text(data[i].results[0].text);
+                                            $(this).text(data[i].results[0]);
                                         }
                                     });
                                 }
@@ -315,7 +315,7 @@
         /////
 
         // Init
-        cmd(L4RP.scripts.jquery, L4RP.scripts.lanyrd, lanyrdSeriesWidget);
+        cmd(L4RP.scripts.jquery, L4RP.scripts.lanyrd, L4RP.scripts.jasonpeewee, lanyrdSeriesWidget);
     }());
 
 }(this, this.document, this.cmd, this.L4RP));

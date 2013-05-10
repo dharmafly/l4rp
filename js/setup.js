@@ -37,7 +37,8 @@
             },
             scripts: {
                 jquery: 'http://code.jquery.com/jquery-1.7.1' + extension,
-                lanyrd: '/js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0' + extension + '?v3'
+                lanyrd: '/js/vendor/lanyrd/lanyrd-jquery-ext-v0.2.0' + extension + '?v3',
+                jasonpeewee: '/js/vendor/jasonpeewee' + extension
             }
         };
     }());

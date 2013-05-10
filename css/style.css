@@ -351,6 +351,9 @@ body.home > section h1 {
     -o-transform: rotate(-1deg);
     -ms-transform: rotate(-1deg);
 }
+body.home > section.upcoming ul {
+    list-style: none;
+}
 .optional-break {
     width:0;
 }
