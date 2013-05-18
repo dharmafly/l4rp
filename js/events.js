@@ -5,17 +5,23 @@
         localStorage = window.localStorage,
         eventsWrapper = document.getElementById('events-wrapper'),
         now = (new Date()).getTime(),
+        doSnapshot = window.location.search.indexOf('snapshot') > 0,
         cacheTime = 1000 * 60 * 60; // 1 hour
 
     function loadFromLocalStorage(force){
-        if (localStorage &&
-            localStorage.eventsHTML){
-            if (force || localStorage.eventsHTMLVersion === eventsHTMLVersion &&
+        if (
+            !doSnapshot &&
+            localStorage &&
+            localStorage.eventsHTML &&
+            (
+                force ||
+                localStorage.eventsHTMLVersion === eventsHTMLVersion &&
                 localStorage.eventsCacheTime &&
-                Number(localStorage.eventsCacheTime) + cacheTime > now){
-                eventsWrapper.innerHTML = localStorage.eventsHTML;
-                return true;
-            }
+                Number(localStorage.eventsCacheTime) + cacheTime > now
+            )
+        ){
+            eventsWrapper.innerHTML = localStorage.eventsHTML;
+            return true;
         }
         return false;
     }
@@ -27,6 +33,15 @@
     (function(){
         var l4rpDomain = 'l4rp.com',
             promises = [];
+
+        function snapshotReady(){
+            var html;
+
+            if ('console' in window && 'log' in window.console){
+                html = document.getElementById('events-wrapper').innerHTML;
+                window.console.log('snapshotReady', html);
+            }
+        }
 
 
         /////
@@ -197,15 +212,18 @@
                     }
                 });
 
-                // Cache in localStorage
-                if (localStorage){
-                    lanyrd.when(promises)
-                        .always(function(){
+                // Emit snapshot or cache in localStorage
+                lanyrd.when(promises)
+                    .always(function(){
+                        if (doSnapshot){
+                            snapshotReady();
+                        }
+                        else if (localStorage){
                             localStorage.eventsHTML = eventsWrapper.innerHTML;
                             localStorage.eventsHTMLVersion = eventsHTMLVersion;
                             localStorage.eventsCacheTime = now;
-                        });
-                }
+                        }
+                    });
             }
 
             if (!window.lanyrd || !eventsWrapper) {
