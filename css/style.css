@@ -377,7 +377,7 @@ html.js .flickr-wrapper {
 html.js #flickr-widget {
     height: 250px;
     overflow:hidden;
-    width: 2500px;
+    width: 2540px;
 }
 #flickr-widget img.loading {
     padding: 10px 5px;
