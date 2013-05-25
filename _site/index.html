@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>☄ Lab for the Recently Possible ~ l4rp.com</title>
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+
+        <!-- Set viewport for different screen sizes -->
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+        <!-- Feature-detect, set <html> classname , create window.L4RP -->
+        <script src="/js/setup.js?v1"></script>
+
+        <!-- Site-wide styles -->
+        <link rel="stylesheet" href="/css/style.css?v18">
+
+        <!-- Styles for the map -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.css">
+        <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.ie.css"><![endif]-->
+
+        <!-- Link to the events Atom feed, from Lanyrd -->
+        <link rel="alternate" type="application/atom+xml" href="http://lanyrd.com/series/l4rp/feed/">
+
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+    
+    <body class="vcard home">
+        <h1 class="l4rp fn org url"><a href="/"><span>Lab for the <br>Recently Possible</span></a></h1>
+        
+        <section class="intro">
+            <p>A space to learn, experiment, collaborate and incubate projects at the edges of technology, art, culture and society.</p>
+            <p>If you're exploring something that you haven't yet mastered, the <em>Lab for the Recently Possible</em> is there for you.</p>
+        </section>
+
+        <section class="upcoming">    
+            <h1>coming up ☼</h1>
+            <ul>
+                <li><a href="/codingforhumans/learntocode/">Learn to Code</a> - Weds 29th May <em>(future dates: 10 Jul, 7 Aug, 11 Sept)</em></li>
+                <li><a href="/d3/">Building Data Visualisations with D3</a> - Weds 3rd July <em>(future dates: 25 Sept)</em></li>
+                <li><a href="/money/">Creative With Money</a> - Thurs 4th July <em>(future dates: 1 Aug, 5 Sept)</em></li>
+                <li><a href="/codingforhumans/javascriptfromscratch/">JavaScript from Scratch</a> - Weds 24th July <em>(future dates: 18 Sept)</em></li>
+                <li><a href="http://asyncjs.com" target="_blank">Async</a> - free JavaScript meetup, twice a month</li>
+                <li><a href="/events/">Programme of events</a></li>
+                <li><a href="#contact">Follow us</a> for updates</li>
+            </ul>
+        </section>
+
+
+        <!--
+        <section>
+            <h1><a></a></h1>
+            <p><strong>Thursday, 8th November 2012</strong>. 1pm - 5pm</p>
+            
+            <p>Come to ...</p>
+            
+            <p> 
+                <a class="tickets" href="https://.eventbrite.com?ref=l4rp" target="_blank" title="Buy your ticket on Eventbrite"><img src="http://www.eventbrite.co.uk/custombutton?eid=" alt="Eventbrite" height=32></a>
+                
+                <a class="track" href="" title="Add yourself as attending, or track your interest on Lanyrd" style="margin-left:0.38em">
+                    <img src="http://l4rp.com/images/lanyrd.png" width=32 height=32 alt="Lanyrd"></a>
+            </p>
+        </section>
+        -->
+
+        <section>
+            <p><strong>We've moved!</strong> We are now at <strong>45 Gloucester Street</strong>, in <a href="https://en.wikipedia.org/wiki/Brighton">Brighton's</a> <a href="https://en.wikipedia.org/wiki/North_Laine">North Laine</a>, on the sunny south coast of England.</p>
+
+            <p>By day, the Lab is where coders and other creative people collaborate on <a href="http://dharmafly.com">Dharmafly</a> projects, developing web apps for social impact.</p>
+
+            <p>But in the evenings and weekends, breakfast times, lunchtimes and weekdays on special occasions, The Lab is available for all kinds of experimental projects, workshops and bright ideas.</p>
+
+            <p>If you'd like to hear about what's happening next at The Lab, follow <a href="https://twitter.com/l4rp">@L4RP on Twitter</a>, <a href="https://groups.google.com/d/forum/l4rp">join the mailing list</a> or subscribe to <a href="http://lanyrd.com/series/l4rp/save-to-calendar/">the calendar</a>.</p>
+
+            <p>If you might like to use the space for a workshop / film night / other kind of session, get in touch (<a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#104;&#101;&#108;&#108;&#111;&#064;&#076;&#052;&#082;&#080;&#046;&#099;&#111;&#109;">&#104;&#101;&#108;&#108;&#111;&#064;&#076;&#052;&#082;&#080;&#046;&#099;&#111;&#109;</a>) or come and have a look around.</p>
+
+            <p>And if you might like to work on a Dharmafly project (or you might have a project you'd like Dharmafly to work on), call Prem on <a class="tel" href="&#116;&#101;&#108;:+&#052;&#052;&#045;&#055;&#057;&#052;&#049;&#045;&#049;&#057;&#050;&#051;&#057;&#056;">&#048;&#055;&#057;&#052;&#049;&#032;&#049;&#057;&#050;&#051;&#057;&#056;</a> or <a class="email" href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#104;&#101;&#108;&#108;&#111;&#064;&#100;&#104;&#097;&#114;&#109;&#097;&#102;&#108;&#121;&#046;&#099;&#111;&#109;">&#104;&#101;&#108;&#108;&#111;&#064;&#100;&#104;&#097;&#114;&#109;&#097;&#102;&#108;&#121;&#046;&#099;&#111;&#109;</a>.
+</p>
+        </section>
+        
+        <!--
+        <section class="callout">
+            <h1><a href=""></a></h1>
+            <p><strong>Thursday, 8th Slovember 2013</strong>. 9am - 5pm</p>
+            
+            <p></p>
+            
+            <p> 
+                <a class="tickets" href="https://thing.eventbrite.com?ref=l4rp" target="_blank" title="Buy your ticket on Eventbrite"><img src="http://www.eventbrite.co.uk/custombutton?eid=3795103256" alt="But tickets" height="32"></a>
+                
+                <a class="track" href="http://lanyrd.com/2013/thing/" title="Add yourself as attending, or track your interest on Lanyrd" style="margin-left:0.38em">
+                    <img src="http://l4rp.com/images/lanyrd.png" width=32 height=32 alt="Lanyrd"></a>
+            </p>
+        </section>
+        -->
+        
+        
+        <!-- Flickr -->
+        <section class="photos">
+            <h1><a href="http://www.flickr.com/photos/tags/L4RP/">#L4RP</a></h1>
+            <div class="flickr-wrapper">
+                <div id="flickr-widget"></div>
+            </div>
+        </section>
+        
+        <section id="location">
+            <h1>location ⚐</h1>
+        
+            <p>We're in the heart of <a href="https://en.wikipedia.org/wiki/Brighton">Brighton</a>, on the south coast of England. It's a few minutes walk to the ocean, and London is just an hour away by train.</p>
+
+            <p>Find us at <strong>45 Gloucester Street</strong>, over the road from <a href="http://theskiff.org">The Skiff</a> coworking space.</p>
+        
+            <!--
+            <p class="location-photo">
+                <a href="http://www.flickr.com/photos/dharmasphere/8614979889/" title="45 Gloucester Street, the new Lab for the Recently Possible"><img src="https://farm9.staticflickr.com/8529/8614979889_9737b66ef3_m.jpg" width="240" height="180" alt="45 Gloucester Street, the new Lab for the Recently Possible"></a>
+            </p>
+            -->
+            
+            <div id="map">
+                <noscript><a href="http://www.openstreetmap.org/?lat=50.827006&amp;lon=-0.136063&amp;zoom=16&amp;layers=M&amp;mlat=50.827006&amp;mlon=-0.136063"><img alt="Map of The Lab for the Recently Possible, in Hove" src="http://maps.google.com/maps/api/staticmap?center=50.827006,-0.136063&amp;zoom=16&amp;markers=color:blue|50.827006,-0.136063&amp;size=500x309&amp;sensor=false"></a></noscript>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h1>keep in touch ✍</h1>
+        
+            <dl>
+                <dt>Mailing list</dt>
+                <dd><a href="https://groups.google.com/d/forum/l4rp">L4RP mailing list</a></dd>
+
+                <dt>Twitter</dt>
+                <dd class="twitter"><a href="https://twitter.com/L4RP">@L4RP</a> / <a href="https://twitter.com/search/%23L4RP">#L4RP</a></dd>
+                
+                <dt>Events calendar</dt>
+                <dd><a class="atom" href="http://lanyrd.com/series/l4rp/feed/">Atom feed</a></dd>
+                <dd><a href="http://lanyrd.com/series/l4rp/save-to-calendar/">Calendar feeds (iCal / Outlook / Google Calendar)</a></dd>
+            
+                <dt>Email</dt>
+                <dd class="email"><a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#104;&#101;&#108;&#108;&#111;&#064;&#076;&#052;&#082;&#080;&#046;&#099;&#111;&#109;">&#104;&#101;&#108;&#108;&#111;&#064;&#076;&#052;&#082;&#080;&#046;&#099;&#111;&#109;</a></dd>
+    
+                <dt>Phone</dt>
+                <dd class="tel"><a href="&#116;&#101;&#108;:+&#052;&#052;&#045;&#055;&#057;&#052;&#049;&#045;&#049;&#057;&#050;&#051;&#057;&#056;">&#048;&#055;&#057;&#052;&#049;&#032;&#049;&#057;&#050;&#051;&#057;&#056;</a></dd>
+            
+                <dt>In person</dt>
+                <dd class="adr">
+                    <a class="extended-address org url" href="/">Lab for the Recently Possible</a>, 
+                    <span class="street-address">45 Gloucester Street</span>, 
+                    <span class="locality">Brighton</span>, 
+                    <span class="postal-code">BN1 4EW</span>, 
+                    <abbr class="country-name" title="United Kingdom">UK</abbr>. (<em><a href="#location">map</a> / <a href="#directions">directions</a></em>)
+                </dd>
+            
+                <dt>Opening hours</dt>
+                <dd>Spontaneous, or by appointment.</dd>
+            </dl>
+        </section>
+        
+        <section id="travel">
+            <h1 id="directions">be here ✈</h1>
+            
+            <dl>
+                <dt>Trains</dt>
+                <dd><a href="http://www.nationalrail.co.uk/stations/BTN/details.html">Brighton station</a> is 7 minutes walk away, with trains to and from London Victoria, London Bridge, St Pancras, Gatwick Airport and the whole country.
+                    <ul>
+                        <li><a href="http://goo.gl/maps/VTSuW">Walking directions</a> from the station to the Lab</li>
+                        <li><a href="http://traintimes.org.uk/london/brighton">Live departures</a> from London to Brighton</li>
+                        <li><a href="http://traintimes.org.uk/brighton/london">...and back to London again</a></li>
+                    </ul>
+                </dd>
+            
+                <dt>Local buses</dt>
+                <dd>Many buses stop at <a href="http://goo.gl/maps/q7z4Y">St Peters Church</a>, near <a href="https://en.wikipedia.org/wiki/Brighton_Pavillion">Brighton Pavillion</a>. Or stop on <a href="http://goo.gl/maps/eZ989">North Street</a> and walk up through Pavillion Gardens.</dd>
+            </dl>
+        </section>
+        
+        <footer>
+            <p class="credit">
+                <span class="role">a social project by</span>
+                
+                <span class="df vcard">
+                    <object class="logo" width="200" height="128" type="image/svg+xml" data="/images/dharmafly-white.svg">
+                        <a class="url" href="http://dharmafly.com">
+                            <img class="fn org logo photo" title="Dharmafly" alt="Dharmafly" width="200" height="128" src="/images/dharmafly-white.png"/>
+                        </a>
+                    </object>
+                </span>
+                <!--
+                    TODO:
+                    Bug in WebKit: CSS transitions within the SVG image do not trigger if the graphical elements are wrapped inside an anchor. Perhaps native SVG animations required?
+                -->
+            </p>
+        </footer>
+
+        <!-- Scriptery -->
+        <script src="/js/vendor/cmd.js"></script>
+        <script src="/js/home.js?v1"></script>
+
+        <!-- Flickr dance (temporary) -->
+        <script>
+            var flickrTarget = document.getElementById('flickr-widget');
+            
+            flickrTarget.innerHTML = "<img alt='Loading...' src='images/flickr-spinner.gif' width='16' height='8'>";
+        </script>
+        <div id="flickr-loader" style="display:none;">
+            <!--<script id="flickr-script" src="http://www.flickr.com/badge_code_v2.gne?count=10&amp;display=latest&amp;size=m&amp;layout=x&amp;source=user_set&amp;user=54304913%40N00&amp;set=72157629504650162&amp;context=in%2Fset-72157629504650162%2F"></script>-->
+            <script id="flickr-script" src="http://www.flickr.com/badge_code_v2.gne?count=10&amp;display=latest&amp;size=m&amp;layout=x&amp;source=user_tag&amp;user=54304913%40N00&amp;tag=L4RPhome&amp;context=in%2Fset-72157629504650162%2F"></script>
+        </div>
+        <script>
+            // Move into place
+            var flickrSource = document.getElementById('flickr-loader'),
+                flickrScript = document.getElementById('flickr-script');
+
+            flickrSource.removeChild(flickrScript);
+            flickrTarget.innerHTML = flickrSource.innerHTML;
+            flickrSource.parentNode.removeChild(flickrSource);
+        </script>
+
+        <script src="/js/vendor/cmd.js"></script>
+        <script src="/js/footer.js?v1"></script>
+    </body>
+
+    <!--
+    The one rule is, if someone needs help and you know how to help them, then you have to help them.
+    -->
+
+</html>
