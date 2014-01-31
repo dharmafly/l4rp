@@ -658,7 +658,7 @@ Usage example:
                 selector: "h4 a.summary.url",
                 extract: "href"
             },
-            url = 'http://dharmafly.noodle.jit.su?q=' + 
+            url = 'http://noodle.dharmafly.com?q=' + 
                   encodeURIComponent(JSON.stringify(data)) +
                   '&callback=?';
 

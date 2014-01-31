@@ -62,7 +62,7 @@
         // LANYRD
         
         function lanyrdSeriesWidget(){
-            var noodleBaseUrl = 'http://dharmafly.noodle.jit.su/?q=',
+            var noodleBaseUrl = 'http://noodle.dharmafly.com/?q=',
                 lanyrd = window.lanyrd,
                 $ = window.jQuery,
                 lanyrdWidget, options, loadingIndicator, conferenceTemplate;
