@@ -170,7 +170,7 @@
     
     
     // Init
-    setupLocationMap();
+    //setupLocationMap();
     setupLanyrd();
     showFlickrLoading();
 
