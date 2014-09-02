@@ -454,7 +454,11 @@ body.home #map {
     clear:both;
     
     /* Gutter for smartphone scrolling */
-    margin-right: 1em;
+    /*margin-right: 1em;*/
+}
+body.home #map > a {
+    display: block;
+    overflow: hidden;
 }
 body.home #travel {
     background-color: #8cbf44;
